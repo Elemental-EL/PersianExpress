@@ -10,8 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" styleClass="background" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" styleClass="background" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.HelloController">
    <children>
       <Pane prefHeight="100.0" prefWidth="400.0" styleClass="darkblue" stylesheets="@../Style.css">
          <children>
@@ -20,18 +19,18 @@
       </Pane>
       <ChoiceBox fx:id="roleCB" layoutX="168.0" layoutY="138.0" prefHeight="35.0" prefWidth="130.0" styleClass="gray" stylesheets="@../Style.css" />
       <TextField fx:id="userText" layoutX="38.0" layoutY="202.0" prefHeight="35.0" prefWidth="260.0" promptText="username" styleClass="gray" />
-      <Label layoutX="312.0" layoutY="207.0" text="نام کاربری:">
+      <Label layoutX="308.0" layoutY="210.0" text="نام کاربری:">
          <font>
-            <Font size="13.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="316.0" layoutY="272.0" text="رمز عبور:">
+      <Label layoutX="307.0" layoutY="274.0" text="رمز عبور:">
          <font>
-            <Font name="Arial Rounded MT Bold" size="13.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <TextField fx:id="passwordText" layoutX="38.0" layoutY="265.0" prefHeight="35.0" prefWidth="260.0" promptText="password" styleClass="gray" />
-      <Button fx:id="loginBtn" layoutX="134.0" layoutY="323.0" mnemonicParsing="false" onAction="#onloginBtnClicked" prefHeight="30.0" prefWidth="114.0" styleClass="lightblue" stylesheets="@../Style.css" text="ورود" textFill="WHITE">
+      <Button fx:id="loginBtn" layoutX="143.0" layoutY="328.0" mnemonicParsing="false" onAction="#onloginBtnClicked" prefHeight="30.0" prefWidth="114.0" styleClass="lightblue" stylesheets="@../Style.css" text="ورود" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -41,14 +40,14 @@
             <Font size="17.0" />
          </font>
       </Text>
-      <Text fx:id="SigninText" layoutX="77.0" layoutY="409.0" onMouseClicked="#onSigninTextClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="حساب ایجاد کنید">
+      <Text fx:id="SigninText" layoutX="71.0" layoutY="410.0" onMouseClicked="#onSigninTextClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="حساب ایجاد کنید">
          <font>
             <Font size="17.0" />
          </font>
       </Text>
-      <Label layoutX="306.0" layoutY="146.0" text="انتخاب نقش:">
+      <Label layoutX="307.0" layoutY="146.0" text="انتخاب نقش:">
          <font>
-            <Font size="13.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
    </children>
