@@ -18,7 +18,10 @@
          </children>
       </Pane>
       <ChoiceBox fx:id="roleCB" layoutX="168.0" layoutY="138.0" prefHeight="35.0" prefWidth="130.0" styleClass="gray" stylesheets="@../Style.css" />
-      <TextField fx:id="userText" layoutX="38.0" layoutY="202.0" prefHeight="35.0" prefWidth="260.0" promptText="username" styleClass="gray" />
+      <TextField fx:id="userText" layoutX="38.0" layoutY="202.0" prefHeight="35.0" prefWidth="260.0" promptText="username" styleClass="gray">
+         <font>
+            <Font size="15.0" />
+         </font></TextField>
       <Label layoutX="308.0" layoutY="210.0" text="نام کاربری:">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -29,7 +32,10 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="passwordText" layoutX="38.0" layoutY="265.0" prefHeight="35.0" prefWidth="260.0" promptText="password" styleClass="gray" />
+      <TextField fx:id="passwordText" layoutX="38.0" layoutY="265.0" prefHeight="35.0" prefWidth="260.0" promptText="password" styleClass="gray">
+         <font>
+            <Font size="15.0" />
+         </font></TextField>
       <Button fx:id="loginBtn" layoutX="143.0" layoutY="328.0" mnemonicParsing="false" onAction="#onloginBtnClicked" prefHeight="30.0" prefWidth="114.0" styleClass="lightblue" stylesheets="@../Style.css" text="ورود" textFill="WHITE">
          <font>
             <Font size="15.0" />

@@ -1,15 +1,15 @@
 .lightblue{
--fx-background-color:#023e8a;
+    -fx-background-color:#023e8a;
 }
 .darkblue{
--fx-background-color:#11235A;
+    -fx-background-color:#11235A;
 }
 .background{
--fx-background-color:#F3F9FB;
+    -fx-background-color:#F3F9FB;
 }
 .text{
--fx-background-color:#00b4d8;
+    -fx-background-color:#00b4d8;
 }
 .gray{
--fx-background-color:#DDE6ED;
+    -fx-background-color:#DDE6ED;
 }
