@@ -56,6 +56,7 @@ public class CustomersPanelController implements Initializable {
         translateTransition.play();
     }
 
+
     public void onProfileClicked(ActionEvent event) {
     }
 
