@@ -23,7 +23,7 @@ public class CustomersPanelController implements Initializable {
         fadeTransition.setToValue(0);
         fadeTransition.play();
 
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5) , pane2);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.1) , pane2);
         translateTransition.setByX(250);
         translateTransition.play();
 
