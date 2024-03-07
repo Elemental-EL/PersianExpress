@@ -22,6 +22,12 @@ public class CreateAccountController {
     @FXML
     private ImageView logoBtn, backBtn;
 
+    public void initialize(){
+        String[] accountType = new String[]{"انتخاب کنید","قرض الحسنه جاری" , "قرض الحسنه سپرده" , "سپرده کوتاه مدت" , "سپرده مدت دار"};
+        typeSlct.getItems().addAll(accountType);
+        typeSlct.setValue(accountType[0]);
+    }
+
     @FXML
     void onLogoClicked(MouseEvent event){
 

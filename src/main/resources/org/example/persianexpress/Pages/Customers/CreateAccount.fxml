@@ -7,157 +7,166 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.Controllers.Customers.CreateAccountController">
+<AnchorPane prefHeight="720.0" prefWidth="600.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.Controllers.Customers.CreateAccountController">
    <children>
-      <Pane prefHeight="125.0" prefWidth="600.0">
+      <Pane prefHeight="80.0" prefWidth="600.0">
          <children>
-            <Label layoutX="214.0" layoutY="36.0" text="ایجاد حساب">
+            <Label layoutX="228.0" layoutY="18.0" text="ایجاد حساب">
                <font>
-                  <Font name="System Bold" size="36.0" />
+                  <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <ImageView fx:id="logoBtn" fitHeight="96.0" fitWidth="90.0" layoutX="474.0" layoutY="15.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="backBtn" fitHeight="83.0" fitWidth="98.0" layoutX="23.0" layoutY="22.0" onMouseClicked="#onBackClicked" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="logoBtn" fitHeight="80.0" fitWidth="80.0" layoutX="513.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true" />
+            <Pane layoutX="14.0" layoutY="14.0" onMouseClicked="#onBackClicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 25;" styleClass="gray">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="3.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/exit.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
          </children>
       </Pane>
-      <ChoiceBox fx:id="typeSlct" layoutX="308.0" layoutY="153.0" prefWidth="150.0" />
-      <Label layoutX="478.0" layoutY="156.0" text="نوع حساب:">
+      <Label layoutX="424.0" layoutY="106.0" text="نوع حساب:">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="478.0" layoutY="201.0" text="نام:" textAlignment="RIGHT">
+      <ChoiceBox fx:id="typeSlct" layoutX="200.0" layoutY="103.0" prefHeight="30.0" prefWidth="206.0" />
+      <Label layoutX="426.0" layoutY="145.0" text="نام:" textAlignment="RIGHT">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="478.0" layoutY="237.0" text="نام خانوادگی:" textAlignment="RIGHT">
+      <TextField fx:id="firstNameText" alignment="CENTER_RIGHT" layoutX="131.0" layoutY="143.0" prefHeight="30.0" prefWidth="280.0">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
+      <Label layoutX="426.0" layoutY="186.0" text="نام خانوادگی:" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="478.0" layoutY="273.0" text="کد ملی:" textAlignment="RIGHT">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="478.0" layoutY="309.0" text="تاریخ تولد:" textAlignment="RIGHT">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="478.0" layoutY="346.0" text="نام پدر:" textAlignment="RIGHT">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="478.0" layoutY="382.0" text="نام کاربری:" textAlignment="RIGHT">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="479.0" layoutY="418.0" text="رمز عبور:" textAlignment="RIGHT">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="478.0" layoutY="454.0" text="تکرار رمز عبور:" textAlignment="RIGHT">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="478.0" layoutY="525.0" text="آدرس:" textAlignment="RIGHT">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="477.0" layoutY="570.0" text="کد پستی:" textAlignment="RIGHT">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="477.0" layoutY="606.0" text="شماره تلفن همراه:" textAlignment="RIGHT">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="477.0" layoutY="643.0" text="شماره تلفن ثابت:" textAlignment="RIGHT">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="478.0" layoutY="489.0" text="محل تولد:" textAlignment="RIGHT">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <TextField fx:id="firstNameText" alignment="CENTER_RIGHT" layoutX="198.0" layoutY="198.0" prefHeight="26.0" prefWidth="262.0">
+      <TextField fx:id="familyNameText" alignment="CENTER_RIGHT" layoutX="131.0" layoutY="183.0" prefHeight="30.0" prefWidth="280.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <TextField fx:id="familyNameText" alignment="CENTER_RIGHT" layoutX="198.0" layoutY="234.0" prefHeight="26.0" prefWidth="262.0">
+      <Label layoutX="426.0" layoutY="226.0" text="کد ملی:" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nCodeText" layoutX="131.0" layoutY="222.0" prefHeight="30.0" prefWidth="280.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <TextField fx:id="nCodeText" layoutX="198.0" layoutY="270.0" prefHeight="26.0" prefWidth="262.0">
+      <Label layoutX="426.0" layoutY="265.0" text="تاریخ تولد:" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="bDate" layoutX="131.0" layoutY="261.0" prefHeight="30.0" prefWidth="280.0" />
+      <Label layoutX="426.0" layoutY="303.0" text="نام پدر:" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fatherNameText" alignment="CENTER_RIGHT" layoutX="131.0" layoutY="299.0" prefHeight="30.0" prefWidth="280.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <DatePicker fx:id="bDate" layoutX="198.0" layoutY="306.0" prefHeight="26.0" prefWidth="262.0" />
-      <TextField fx:id="fatherNameText" alignment="CENTER_RIGHT" layoutX="198.0" layoutY="343.0" prefHeight="26.0" prefWidth="262.0">
+      <Label layoutX="425.0" layoutY="340.0" text="نام کاربری:" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="userText" layoutX="131.0" layoutY="338.0" prefHeight="30.0" prefWidth="280.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <TextField fx:id="userText" layoutX="198.0" layoutY="379.0" prefHeight="26.0" prefWidth="262.0">
+      <Label layoutX="427.0" layoutY="379.0" text="رمز عبور:" textAlignment="RIGHT">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
-      </TextField>
-      <PasswordField fx:id="passText" layoutX="198.0" layoutY="415.0" prefHeight="26.0" prefWidth="262.0">
+      </Label>
+      <PasswordField fx:id="passText" layoutX="131.0" layoutY="377.0" prefHeight="30.0" prefWidth="280.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </PasswordField>
-      <PasswordField fx:id="passRepText" layoutX="198.0" layoutY="451.0" prefHeight="26.0" prefWidth="262.0">
+      <Label layoutX="426.0" layoutY="417.0" text="تکرار رمز عبور:" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passRepText" layoutX="131.0" layoutY="415.0" prefHeight="30.0" prefWidth="280.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </PasswordField>
-      <TextField fx:id="bPlaceText" alignment="CENTER_RIGHT" layoutX="198.0" layoutY="486.0" prefHeight="26.0" prefWidth="262.0">
+      <Label layoutX="427.0" layoutY="456.0" text="محل تولد:" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="bPlaceText" alignment="CENTER_RIGHT" layoutX="131.0" layoutY="454.0" prefHeight="30.0" prefWidth="280.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <TextArea fx:id="addressText" layoutX="198.0" layoutY="519.0" prefHeight="30.0" prefWidth="262.0">
+      <Label layoutX="426.0" layoutY="500.0" text="آدرس:" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="addressText" layoutX="132.0" layoutY="493.0" prefHeight="39.0" prefWidth="280.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextArea>
-      <TextField fx:id="codePText" layoutX="198.0" layoutY="567.0" prefHeight="26.0" prefWidth="262.0">
+      <Label layoutX="425.0" layoutY="543.0" text="کد پستی:" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="codePText" layoutX="131.0" layoutY="541.0" prefHeight="30.0" prefWidth="280.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <TextField fx:id="mPhoneText" layoutX="198.0" layoutY="603.0" prefHeight="26.0" prefWidth="262.0">
+      <Label layoutX="425.0" layoutY="583.0" text="شماره تلفن همراه:" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="mPhoneText" layoutX="131.0" layoutY="581.0" prefHeight="30.0" prefWidth="280.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <TextField fx:id="hPhoneText" layoutX="198.0" layoutY="640.0" prefHeight="26.0" prefWidth="262.0">
+      <Label layoutX="425.0" layoutY="624.0" text="شماره تلفن ثابت:" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="hPhoneText" layoutX="131.0" layoutY="621.0" prefHeight="30.0" prefWidth="280.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <Button fx:id="submitBtn" layoutX="234.0" layoutY="673.0" mnemonicParsing="false" onAction="#onSubmitClicked" text="ثبت درخواست">
+      <Button fx:id="submitBtn" layoutX="235.0" layoutY="668.0" mnemonicParsing="false" onAction="#onSubmitClicked" text="ثبت درخواست">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

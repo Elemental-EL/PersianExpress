@@ -5,7 +5,10 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -14,6 +17,10 @@ import java.util.ResourceBundle;
 public class CustomersPanelController implements Initializable {
     @FXML
     private AnchorPane pane1 , pane2;
+    @FXML
+    private ChoiceBox<String> showAccountType;
+    private Stage stage;
+    private Scene scene;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         pane1.setVisible(false);
@@ -24,7 +31,7 @@ public class CustomersPanelController implements Initializable {
         fadeTransition.play();
 
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.1) , pane2);
-        translateTransition.setByX(250);
+        translateTransition.setByX(260);
         translateTransition.play();
 
         pane1.setOnMouseClicked(event -> {
@@ -38,9 +45,13 @@ public class CustomersPanelController implements Initializable {
             });
 
             TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.5) , pane2);
-            translateTransition1.setByX(250);
+            translateTransition1.setByX(260);
             translateTransition1.play();
         });
+
+        String[] accountType = new String[]{"همه حساب ها" , "قرض الحسنه جاری" , "قرض الحسنه سپرده" , "سپرده کوتاه مدت" , "سپرده بلند مدت"};
+        showAccountType.getItems().addAll(accountType);
+        showAccountType.setValue(accountType[0]);
     }
 
     public void onSidebarClicked(ActionEvent event) {
@@ -52,7 +63,7 @@ public class CustomersPanelController implements Initializable {
         fadeTransition.play();
 
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5) , pane2);
-        translateTransition.setByX(-250);
+        translateTransition.setByX(-260);
         translateTransition.play();
     }
 
@@ -97,5 +108,26 @@ public class CustomersPanelController implements Initializable {
     }
 
     public void onAddSuggestionClicked(ActionEvent event) {
+    }
+
+    public void onCashWithdrawalClicked(ActionEvent event) {
+    }
+
+    public void onDepositClicked(ActionEvent event) {
+    }
+
+    public void onLoanRequestClicked(ActionEvent event) {
+    }
+
+    public void onPayLoanClicked(ActionEvent event) {
+    }
+
+    public void onLoanHistoryClicked(ActionEvent event) {
+    }
+
+    public void onPayBillClicked(ActionEvent event) {
+    }
+
+    public void onChargingServiceClicked(ActionEvent event) {
     }
 }
