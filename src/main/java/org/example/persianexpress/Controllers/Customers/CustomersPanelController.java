@@ -110,12 +110,6 @@ public class CustomersPanelController implements Initializable {
     public void onAddSuggestionClicked(ActionEvent event) {
     }
 
-    public void onCashWithdrawalClicked(ActionEvent event) {
-    }
-
-    public void onDepositClicked(ActionEvent event) {
-    }
-
     public void onLoanRequestClicked(ActionEvent event) {
     }
 

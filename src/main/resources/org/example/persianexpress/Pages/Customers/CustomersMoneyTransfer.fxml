@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.Controllers.Customers.CustomersMoneyTransferController">
+   <children>
+      <Pane prefHeight="100.0" prefWidth="500.0">
+         <children>
+            <Label layoutX="195.0" layoutY="45.0" text="انتقال وجه">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <Pane layoutX="14.0" layoutY="14.0" onMouseClicked="#onBackClicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 25;" styleClass="gray">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="3.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/exit.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="400.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+      <Pane layoutY="100.0" prefHeight="400.0" prefWidth="500.0">
+         <children>
+            <Label layoutX="331.0" layoutY="23.0" text="شماره حساب مبدا :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="originAccNumTxt" layoutX="127.0" layoutY="60.0" prefHeight="35.0" prefWidth="270.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Label layoutX="314.0" layoutY="126.0" text="شماره حساب مقصد :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="destAccNumTxt" layoutX="127.0" layoutY="162.0" prefHeight="35.0" prefWidth="270.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Label layoutX="379.0" layoutY="224.0" text="مبلغ : (ریال)">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="amountTxt" layoutX="127.0" layoutY="260.0" prefHeight="35.0" prefWidth="270.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Button layoutX="202.0" layoutY="337.0" mnemonicParsing="false" onAction="#onConfirmClicked" prefHeight="35.0" prefWidth="120.0" text="تایید">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
