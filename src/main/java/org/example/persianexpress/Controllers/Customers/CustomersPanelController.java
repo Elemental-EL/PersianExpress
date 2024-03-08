@@ -19,8 +19,6 @@ public class CustomersPanelController implements Initializable {
     private AnchorPane pane1 , pane2;
     @FXML
     private ChoiceBox<String> showAccountType;
-    private Stage stage;
-    private Scene scene;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         pane1.setVisible(false);
