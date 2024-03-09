@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="500.0" styleClass="backgroundColor" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.Controllers.Customers.ChequeIssuingController">
+<AnchorPane prefHeight="500.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.ChequeIssuingController">
    <children>
       <Pane prefHeight="100.0" prefWidth="500.0" styleClass="darkblue">
          <children>
@@ -36,13 +36,13 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="97.0" layoutY="120.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray" />
+      <TextField layoutX="97.0" layoutY="120.0" prefHeight="35.0" prefWidth="240.0" />
       <Label layoutX="345.0" layoutY="183.0" text="کد ملی گیرنده:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="95.0" layoutY="179.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray" />
+      <TextField layoutX="95.0" layoutY="179.0" prefHeight="35.0" prefWidth="240.0" />
       <Label layoutX="345.0" layoutY="241.0" text="مبلغ:">
          <font>
             <Font name="System Bold" size="18.0" />

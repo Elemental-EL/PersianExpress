@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="634.0" prefWidth="700.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.Controllers.Customers.CustomersPanelController">
+<AnchorPane prefHeight="634.0" prefWidth="700.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.CustomersPanelController">
    <children>
       <Pane prefHeight="75.0" prefWidth="700.0" styleClass="darkblue">
          <children>
@@ -127,7 +127,7 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Button>
-                              <Button alignment="BASELINE_RIGHT" mnemonicParsing="false" onAction="#onHistoryChequeClicked" prefHeight="35.0" prefWidth="240.0" styleClass="lightblue" text="مدیریت چک های صادر شده" textFill="WHITE">
+                              <Button alignment="BASELINE_RIGHT" mnemonicParsing="false" onAction="#onManagementChequeClicked" prefHeight="35.0" prefWidth="240.0" styleClass="lightblue" text="مدیریت چک های صادر شده" textFill="WHITE">
                                  <VBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
@@ -183,7 +183,7 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Button>
-                              <Button alignment="BASELINE_RIGHT" mnemonicParsing="false" onAction="#onPayBillClicked" prefHeight="35.0" prefWidth="240.0" styleClass="lightblue" text="پرداخت قبوض" textFill="WHITE">
+                              <Button alignment="BASELINE_RIGHT" mnemonicParsing="false" onAction="#onPayingBillsClicked" prefHeight="35.0" prefWidth="240.0" styleClass="lightblue" text="پرداخت قبوض" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>

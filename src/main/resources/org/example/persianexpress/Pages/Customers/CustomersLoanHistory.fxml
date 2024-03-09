@@ -10,34 +10,34 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.CustomersActiveCardsController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.CustomersLoanHistoryController">
    <children>
-      <Pane prefHeight="100.0" prefWidth="800.0" styleClass="darkblue">
+      <Pane prefHeight="100.0" prefWidth="700.0">
          <children>
             <Pane layoutX="14.0" layoutY="14.0" onMouseClicked="#onBackClicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 25;" styleClass="gray">
                <children>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="3.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="2.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../Images/exit.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="700.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="295.0" layoutY="50.0" text="کارت های بانکی فعال" textFill="WHITE">
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="600.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="228.0" layoutY="47.0" text="تاریخچه وام های دریافتی">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Pane layoutY="100.0" prefHeight="500.0" prefWidth="800.0" styleClass="backgroundColor">
+      <Pane layoutY="100.0" prefHeight="500.0" prefWidth="700.0">
          <children>
-            <ScrollPane layoutX="15.0" layoutY="20.0" prefHeight="460.0" prefWidth="770.0">
+            <ScrollPane layoutX="10.0" layoutY="10.0" prefHeight="480.0" prefWidth="680.0">
               <content>
-                <AnchorPane fx:id="MainAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="460.0" prefWidth="755.0">
+                <AnchorPane fx:id="mainAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="664.0">
                      <children>
-                        <VBox fx:id="MainVBox" prefHeight="460.0" prefWidth="755.0" styleClass="gray" />
+                        <VBox fx:id="mainVBox" prefHeight="480.0" prefWidth="664.0" />
                      </children>
                   </AnchorPane>
               </content>
