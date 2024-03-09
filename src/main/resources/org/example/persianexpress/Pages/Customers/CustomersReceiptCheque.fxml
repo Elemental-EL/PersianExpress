@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -13,7 +14,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.CustomersReceiptChequeController">
    <children>
-      <Pane prefHeight="100.0" prefWidth="500.0">
+      <Pane prefHeight="100.0" prefWidth="500.0" styleClass="darkblue">
          <children>
             <Pane layoutX="14.0" layoutY="14.0" onMouseClicked="#onBackClicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 25;" styleClass="gray">
                <children>
@@ -25,14 +26,14 @@
                </children>
             </Pane>
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="400.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="188.0" layoutY="46.0" text="وصول چک">
+            <Label layoutX="188.0" layoutY="46.0" text="وصول چک" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Pane layoutY="100.0" prefHeight="500.0" prefWidth="500.0">
+      <Pane layoutY="100.0" prefHeight="500.0" prefWidth="500.0" styleClass="backgroundColor">
          <children>
             <Label layoutX="368.0" layoutY="200.0" text="شماره سریال چک :">
                <font>
@@ -59,12 +60,12 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="firstName" layoutX="94.0" layoutY="22.0" prefHeight="35.0" prefWidth="270.0" />
-            <TextField fx:id="nationalCode" layoutX="94.0" layoutY="137.0" prefHeight="35.0" prefWidth="270.0" />
-            <TextField fx:id="chequeSerialNumber" layoutX="94.0" layoutY="195.0" prefHeight="35.0" prefWidth="270.0" />
+            <TextField fx:id="firstName" layoutX="94.0" layoutY="22.0" prefHeight="35.0" prefWidth="270.0" styleClass="gray" />
+            <TextField fx:id="nationalCode" layoutX="94.0" layoutY="137.0" prefHeight="35.0" prefWidth="270.0" styleClass="gray" />
+            <TextField fx:id="chequeSerialNumber" layoutX="94.0" layoutY="195.0" prefHeight="35.0" prefWidth="270.0" styleClass="gray" />
             <DatePicker fx:id="chequeDate" layoutX="94.0" layoutY="253.0" prefHeight="35.0" prefWidth="270.0" />
-            <TextField fx:id="chequeAmount" layoutX="94.0" layoutY="311.0" prefHeight="35.0" prefWidth="270.0" />
-            <TextField fx:id="lastName" layoutX="94.0" layoutY="79.0" prefHeight="35.0" prefWidth="270.0" />
+            <TextField fx:id="chequeAmount" layoutX="94.0" layoutY="311.0" prefHeight="35.0" prefWidth="270.0" styleClass="gray" />
+            <TextField fx:id="lastName" layoutX="94.0" layoutY="79.0" prefHeight="35.0" prefWidth="270.0" styleClass="gray" />
             <Label layoutX="371.0" layoutY="84.0" text="نام خانوادگی :">
                <font>
                   <Font name="System Bold" size="16.0" />
@@ -75,11 +76,17 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="selectedAccount" layoutX="115.0" layoutY="398.0" prefHeight="35.0" prefWidth="270.0" />
-            <Button layoutX="189.0" layoutY="449.0" mnemonicParsing="false" onAction="#onSumbitClicked" prefHeight="36.0" prefWidth="122.0" text="ثبت درخواست">
+            <ChoiceBox fx:id="selectedAccount" layoutX="115.0" layoutY="398.0" prefHeight="35.0" prefWidth="270.0" styleClass="gray" />
+            <Button layoutX="189.0" layoutY="449.0" mnemonicParsing="false" onAction="#onSumbitClicked" prefHeight="36.0" prefWidth="122.0" text="ثبت درخواست" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
+               <styleClass>
+                  <String fx:value="lightblue" />
+                  <String fx:value="zoom" />
+                  <String fx:value="hover" />
+                  <String fx:value="pressed" />
+               </styleClass>
             </Button>
          </children>
       </Pane>

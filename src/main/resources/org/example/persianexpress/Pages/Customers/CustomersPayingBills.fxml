@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -9,10 +10,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="450.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.CustomersPayingBillsController">
    <children>
-      <Pane prefHeight="100.0" prefWidth="500.0">
+      <Pane prefHeight="100.0" prefWidth="500.0" styleClass="darkblue">
          <children>
             <Pane layoutX="14.0" layoutY="14.0" onMouseClicked="#onBackclicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 25;" styleClass="gray">
                <children>
@@ -24,21 +24,21 @@
                </children>
             </Pane>
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="400.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="180.0" layoutY="40.0" text="پرداخت قبوض">
+            <Label layoutX="180.0" layoutY="40.0" text="پرداخت قبوض" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Pane layoutY="100.0" prefHeight="350.0" prefWidth="500.0">
+      <Pane layoutY="100.0" prefHeight="350.0" prefWidth="500.0" styleClass="backgroundColor">
          <children>
             <Label layoutX="346.0" layoutY="24.0" text="شناسه قبض :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="billEarmark" layoutX="115.0" layoutY="60.0" prefHeight="35.0" prefWidth="270.0">
+            <TextField fx:id="billEarmark" layoutX="115.0" layoutY="60.0" prefHeight="35.0" prefWidth="270.0" styleClass="gray">
                <font>
                   <Font size="16.0" />
                </font>
@@ -48,22 +48,28 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="paymentEarmark" layoutX="115.0" layoutY="145.0" prefHeight="35.0" prefWidth="270.0">
+            <TextField fx:id="paymentEarmark" layoutX="115.0" layoutY="145.0" prefHeight="35.0" prefWidth="270.0" styleClass="gray">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <Button layoutX="200.0" layoutY="296.0" mnemonicParsing="false" onAction="#onPaymentClicked" prefHeight="40.0" prefWidth="100.0" text="پرداخت">
+            <Button layoutX="200.0" layoutY="296.0" mnemonicParsing="false" onAction="#onPaymentClicked" prefHeight="40.0" prefWidth="100.0" text="پرداخت" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
+               <styleClass>
+                  <String fx:value="lightblue" />
+                  <String fx:value="hover" />
+                  <String fx:value="pressed" />
+                  <String fx:value="zoom" />
+               </styleClass>
             </Button>
             <Label layoutX="346.0" layoutY="195.0" text="مبلغ قبض :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="billAmount" layoutX="115.0" layoutY="231.0" prefHeight="35.0" prefWidth="270.0">
+            <TextField fx:id="billAmount" layoutX="115.0" layoutY="231.0" prefHeight="35.0" prefWidth="270.0" styleClass="gray">
                <font>
                   <Font size="16.0" />
                </font>
