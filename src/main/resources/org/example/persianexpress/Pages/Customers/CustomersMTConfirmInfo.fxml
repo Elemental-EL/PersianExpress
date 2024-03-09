@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -9,12 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.Controllers.Customers.CustomersMTConfirmInfoController">
    <children>
-      <Pane prefHeight="100.0" prefWidth="500.0">
+      <Pane prefHeight="100.0" prefWidth="500.0" styleClass="darkblue">
          <children>
-            <Label layoutX="175.0" layoutY="45.0" text="تایید انتقال وجه">
+            <Label layoutX="175.0" layoutY="45.0" text="تایید انتقال وجه" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -31,42 +31,48 @@
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="400.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <Pane layoutY="100.0" prefHeight="500.0" prefWidth="500.0">
+      <Pane layoutY="100.0" prefHeight="500.0" prefWidth="500.0" styleClass="backgroundColor">
          <children>
             <Label layoutX="283.0" layoutY="16.0" text="شماره حساب مبدا :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="originAccNumTxt" layoutX="102.0" layoutY="52.0" prefHeight="30.0" prefWidth="280.0" />
+            <TextField fx:id="originAccNumTxt" layoutX="102.0" layoutY="52.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray" />
             <Label layoutX="280.0" layoutY="102.0" text="صاحب حساب مبدا :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="originAccHolderTxt" layoutX="102.0" layoutY="140.0" prefHeight="30.0" prefWidth="280.0" />
+            <TextField fx:id="originAccHolderTxt" layoutX="102.0" layoutY="140.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray" />
             <Label layoutX="382.0" layoutY="184.0" text="مبلغ :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="amountTxt" layoutX="102.0" layoutY="222.0" prefHeight="30.0" prefWidth="280.0" />
+            <TextField fx:id="amountTxt" layoutX="102.0" layoutY="222.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray" />
             <Label layoutX="274.0" layoutY="273.0" text="شماره حساب مقصد :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="destAccNumTxt" layoutX="102.0" layoutY="309.0" prefHeight="30.0" prefWidth="280.0" />
+            <TextField fx:id="destAccNumTxt" layoutX="102.0" layoutY="309.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray" />
             <Label layoutX="272.0" layoutY="358.0" text="صاحب حساب مقصد :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="destAccHolderTxt" layoutX="102.0" layoutY="395.0" prefHeight="30.0" prefWidth="280.0" />
-            <Button layoutX="200.0" layoutY="449.0" mnemonicParsing="false" onAction="#onConfirmClicked" prefHeight="36.0" prefWidth="100.0" text="تایید">
+            <TextField fx:id="destAccHolderTxt" layoutX="102.0" layoutY="395.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray" />
+            <Button layoutX="200.0" layoutY="449.0" mnemonicParsing="false" onAction="#onConfirmClicked" prefHeight="36.0" prefWidth="100.0" text="تایید" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
+               <styleClass>
+                  <String fx:value="lightblue" />
+                  <String fx:value="pressed" />
+                  <String fx:value="hover" />
+                  <String fx:value="zoom" />
+               </styleClass>
             </Button>
          </children>
       </Pane>

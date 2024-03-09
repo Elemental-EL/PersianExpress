@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -8,12 +9,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.Controllers.Customers.ReceiptViewController">
+<AnchorPane prefHeight="500.0" prefWidth="500.0" styleClass="backgroundColor" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.Controllers.Customers.ReceiptViewController">
    <children>
-      <Pane prefHeight="100.0" prefWidth="500.0">
+      <Pane prefHeight="100.0" prefWidth="500.0" styleClass="darkblue">
          <children>
             <ImageView fx:id="logoBtn" fitHeight="72.0" fitWidth="73.0" layoutX="401.0" layoutY="14.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="156.0" layoutY="24.0" text="رسید تراکنش">
+            <Label layoutX="156.0" layoutY="24.0" text="رسید تراکنش" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
@@ -64,45 +65,50 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="originAccNumTxt" layoutX="70.0" layoutY="120.0" prefHeight="30.0" prefWidth="225.0">
+      <Label fx:id="originAccNumTxt" layoutX="70.0" layoutY="120.0" prefHeight="30.0" prefWidth="225.0" styleClass="gray">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="originAccHolderTxt" layoutX="70.0" layoutY="161.0" prefHeight="30.0" prefWidth="225.0">
+      <Label fx:id="originAccHolderTxt" layoutX="70.0" layoutY="161.0" prefHeight="30.0" prefWidth="225.0" styleClass="gray">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="destAccNumTxt" layoutX="70.0" layoutY="205.0" prefHeight="30.0" prefWidth="225.0">
+      <Label fx:id="destAccNumTxt" layoutX="70.0" layoutY="205.0" prefHeight="30.0" prefWidth="225.0" styleClass="gray">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="destAccHolderTxt" layoutX="70.0" layoutY="249.0" prefHeight="30.0" prefWidth="225.0">
+      <Label fx:id="destAccHolderTxt" layoutX="70.0" layoutY="249.0" prefHeight="30.0" prefWidth="225.0" styleClass="gray">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="amountTxt" layoutX="70.0" layoutY="292.0" prefHeight="30.0" prefWidth="225.0">
+      <Label fx:id="amountTxt" layoutX="70.0" layoutY="292.0" prefHeight="30.0" prefWidth="225.0" styleClass="gray">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="dateTxt" layoutX="70.0" layoutY="340.0" prefHeight="30.0" prefWidth="225.0">
+      <Label fx:id="dateTxt" layoutX="70.0" layoutY="340.0" prefHeight="30.0" prefWidth="225.0" styleClass="gray">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="trackCode" layoutX="70.0" layoutY="384.0" prefHeight="30.0" prefWidth="225.0">
+      <Label fx:id="trackCode" layoutX="70.0" layoutY="384.0" prefHeight="30.0" prefWidth="225.0" styleClass="gray">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="198.0" layoutY="440.0" mnemonicParsing="false" onMouseClicked="#onPrintReceipt" prefHeight="30.0" prefWidth="104.0" text="چاپ رسید">
+      <Button layoutX="198.0" layoutY="440.0" mnemonicParsing="false" onMouseClicked="#onPrintReceipt" prefHeight="30.0" prefWidth="104.0" style="-fx-background-radius: 5;" text="چاپ رسید" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
+         <styleClass>
+            <String fx:value="lightblue" />
+            <String fx:value="hover" />
+            <String fx:value="zoom" />
+         </styleClass>
       </Button>
    </children>
 </AnchorPane>
