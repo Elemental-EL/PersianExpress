@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="450.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.Controllers.Customers.CustomersPayingBillsController">
+<AnchorPane prefHeight="450.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.CustomersPayingBillsController">
    <children>
       <Pane prefHeight="100.0" prefWidth="500.0">
          <children>
@@ -63,7 +63,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id=" " layoutX="115.0" layoutY="231.0" prefHeight="35.0" prefWidth="270.0">
+            <TextField fx:id="billAmount" layoutX="115.0" layoutY="231.0" prefHeight="35.0" prefWidth="270.0">
                <font>
                   <Font size="16.0" />
                </font>

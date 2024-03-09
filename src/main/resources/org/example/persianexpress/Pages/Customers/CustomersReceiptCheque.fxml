@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.Controllers.Customers.CustomersReceiptChequeController">
+<AnchorPane prefHeight="600.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.CustomersReceiptChequeController">
    <children>
       <Pane prefHeight="100.0" prefWidth="500.0">
          <children>

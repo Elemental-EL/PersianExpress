@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.Controllers.Customers.CustomersSuggestionController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.CustomersSuggestionController">
    <children>
       <Pane prefHeight="100.0" prefWidth="700.0">
          <children>
@@ -33,7 +33,7 @@
       </Pane>
       <Pane layoutY="100.0" prefHeight="500.0" prefWidth="700.0">
          <children>
-            <TextArea fx:id="suggestionTXT" layoutX="44.0" layoutY="43.0" prefHeight="350.0" prefWidth="600.0">
+            <TextArea fx:id="suggestionTXT" layoutX="44.0" layoutY="43.0" prefHeight="350.0" prefWidth="600.0" styleClass="text-area">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>

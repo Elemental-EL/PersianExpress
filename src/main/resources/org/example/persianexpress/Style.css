@@ -13,3 +13,6 @@
 .gray{
     -fx-background-color:#DDE6ED;
 }
+.text-area .scroll-pane .content .text{
+    -fx-text-alignment:right;
+}
