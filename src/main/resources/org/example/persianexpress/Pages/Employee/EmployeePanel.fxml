@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="700.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.EmployeePanelController">
+   <children>
+      <Pane prefHeight="75.0" prefWidth="500.0" />
+      <Pane layoutY="75.0" prefHeight="75.0" prefWidth="500.0">
+         <children>
+            <Label fx:id="empName" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="301.0" layoutY="24.0" prefHeight="27.0" prefWidth="187.0" textAlignment="RIGHT">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="empRole" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="107.0" layoutY="25.0" prefHeight="27.0" prefWidth="129.0" textAlignment="RIGHT">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="logOut" layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#onLogOutClicked" text="خروج">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="242.0" layoutY="24.0" text="سمت:">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutY="150.0" prefHeight="550.0" prefWidth="500.0">
+         <children>
+            <Button fx:id="seeUsers" layoutX="100.0" layoutY="40.0" mnemonicParsing="false" onAction="#onSeeUsersClicked" prefHeight="50.0" prefWidth="300.0" text="مشاهده کاربران">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="seeAccs" layoutX="100.0" layoutY="100.0" mnemonicParsing="false" onAction="#onSeeAccsClicked" prefHeight="50.0" prefWidth="300.0" text="مشاهده حساب ها">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="seeReqs" layoutX="100.0" layoutY="160.0" mnemonicParsing="false" onAction="#onSeeReqsClicked" prefHeight="50.0" prefWidth="300.0" text="مشاهده درخواست ها">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="reqsHistory" layoutX="100.0" layoutY="220.0" mnemonicParsing="false" onAction="#onReqsHistoryClicked" prefHeight="50.0" prefWidth="300.0" text="تاریخچه درخواست ها">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="sendMessage" layoutX="100.0" layoutY="280.0" mnemonicParsing="false" onAction="#onSendMessageClicked" prefHeight="50.0" prefWidth="300.0" text="ارسال پیام">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="inbox" layoutX="100.0" layoutY="340.0" mnemonicParsing="false" onAction="#onInboxClicked" prefHeight="50.0" prefWidth="300.0" text="پیام های دریافتی">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="suggestions" layoutX="100.0" layoutY="400.0" mnemonicParsing="false" onAction="#onSuggestionsClicked" prefHeight="50.0" prefWidth="300.0" text="انتقادات و پیشنهاد ها">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="messagesHistory" layoutX="100.0" layoutY="460.0" mnemonicParsing="false" onAction="#onMessagesHistoryClicked" prefHeight="50.0" prefWidth="300.0" text="تاریخچه پیام ها">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
