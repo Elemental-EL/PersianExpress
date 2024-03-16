@@ -109,6 +109,7 @@ public class EmployeePanelController {
         stage.setResizable(false);
         stage.show();
         stage.centerOnScreen();
+        HelloController.userID = 100;
     }
 
 }

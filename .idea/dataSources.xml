@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="PersianExpress" uuid="6e5131ee-6b85-455b-816d-a37db60ee3a2">
+    <data-source source="LOCAL" name="PersianExpressDB" uuid="4d89639c-1f76-474f-9911-483681d2ce31">
       <driver-ref>sqlserver.ms</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
-      <jdbc-url>jdbc:sqlserver://DESKTOP-98DDBT0\MYSQLSERVER;database=PersianExpress7</jdbc-url>
+      <jdbc-url>jdbc:sqlserver://DESKTOP-98DDBT0\MYSQLSERVER;database=PersianExpressDB</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

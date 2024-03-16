@@ -100,6 +100,7 @@ public class CustomersPanelController implements Initializable {
         stage.setResizable(false);
         stage.show();
         stage.centerOnScreen();
+        HelloController.userID = 100;
     }
 
     public void onCreateNewAcountClicked(ActionEvent event) throws IOException {
@@ -194,7 +195,7 @@ public class CustomersPanelController implements Initializable {
     }
 
     public void onHistoryClicked(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersTransationHistory.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersTransactionHistory.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

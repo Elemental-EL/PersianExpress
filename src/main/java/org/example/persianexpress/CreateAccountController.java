@@ -43,13 +43,40 @@ public class CreateAccountController {
     }
     @FXML
     void onBackClicked(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersPanel.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-        stage.centerOnScreen();
+        if (HelloController.userID == 100){
+            Parent root = FXMLLoader.load(getClass().getResource("Pages/hello-view.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+            stage.centerOnScreen();
+        }else if (HelloController.post == null){
+            Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersPanel.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+            stage.centerOnScreen();
+        }else if (HelloController.post.equals("کارمند")){
+            Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/EmployeePanel.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+            stage.centerOnScreen();
+        }else if (HelloController.post.equals("مدیر")){
+            Parent root = FXMLLoader.load(getClass().getResource("Pages/Boss/BossPanel.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+            stage.centerOnScreen();
+        }
+
     }
     @FXML
     void onSubmitClicked(ActionEvent event){
