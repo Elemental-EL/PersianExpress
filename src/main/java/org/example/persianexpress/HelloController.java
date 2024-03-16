@@ -110,6 +110,8 @@ public class HelloController {
                         stage.setResizable(false);
                         stage.show();
                         stage.centerOnScreen();
+                    } else if (!post.equals(role)) {
+                        errorTXT.setText("نقش انتخاب شده اشتباه است");
                     }
 
                 }else if (!Objects.equals(CustomerPassword, password)){
