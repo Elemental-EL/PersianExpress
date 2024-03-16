@@ -2,7 +2,9 @@ package org.example.persianexpress;
 
 import java.util.Date;
 
+
 public class Person {
+    private int uID;
     private String userName;
     private String password;
     private String fName;
@@ -14,6 +16,15 @@ public class Person {
     private long hPhNumber;
     private String hAddress;
     private long pCode;
+
+    public int getuID() {
+        return uID;
+    }
+
+    public void setuID(int uID) {
+        this.uID = uID;
+    }
+
     public String getUserName() {
         return userName;
     }
