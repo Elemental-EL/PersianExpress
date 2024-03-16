@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.BossSeeEmployeeController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.BossSeeEmployeeController">
     <children>
-        <Pane prefHeight="100.0" prefWidth="700.0">
+        <Pane prefHeight="100.0" prefWidth="700.0" styleClass="darkblue">
             <children>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="600.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
-                <Label layoutX="244.0" layoutY="41.0" text="مشاهده کارمندان">
+                <Label layoutX="244.0" layoutY="41.0" text="مشاهده کارمندان" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="30.0" />
                     </font>
@@ -31,21 +27,27 @@
                 </Pane>
             </children>
         </Pane>
-        <Pane layoutY="100.0" prefHeight="500.0" prefWidth="700.0">
+        <Pane layoutY="100.0" prefHeight="500.0" prefWidth="700.0" styleClass="gray">
             <children>
-                <ScrollPane layoutX="10.0" layoutY="14.0" prefHeight="422.0" prefWidth="680.0">
+                <ScrollPane layoutX="10.0" layoutY="14.0" prefHeight="422.0" prefWidth="680.0" styleClass="backgroundColor">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="422.0" prefWidth="664.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="422.0" prefWidth="664.0" styleClass="backgroundColor">
                             <children>
                                 <VBox prefHeight="422.0" prefWidth="664.0" />
                             </children>
                         </AnchorPane>
                     </content>
                 </ScrollPane>
-                <Button fx:id="addEmployee" layoutX="281.0" layoutY="443.0" mnemonicParsing="false" onAction="#onAddEmployeeClicked" text="افزودن کارمند">
+                <Button fx:id="addEmployee" layoutX="281.0" layoutY="443.0" mnemonicParsing="false" onAction="#onAddEmployeeClicked" text="افزودن کارمند" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="20.0" />
                     </font>
+               <styleClass>
+                  <String fx:value="hover" />
+                  <String fx:value="lightblue" />
+                  <String fx:value="pressed" />
+                  <String fx:value="zoom" />
+               </styleClass>
                 </Button>
             </children>
         </Pane>

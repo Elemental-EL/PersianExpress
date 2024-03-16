@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.EmployeeSeeMessagesController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.EmployeeSeeMessagesController">
    <children>
-      <Pane prefHeight="100.0" prefWidth="700.0">
+      <Pane prefHeight="100.0" prefWidth="700.0" styleClass="darkblue">
          <children>
             <ImageView fx:id="backBtn" fitHeight="100.0" fitWidth="100.0" layoutX="600.0" onMouseClicked="#onBackBtnClicked" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="245.0" layoutY="38.0" text="پیام های دریافتی">
+            <Label layoutX="245.0" layoutY="38.0" text="پیام های دریافتی" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
@@ -30,11 +26,11 @@
             </Pane>
          </children>
       </Pane>
-      <Pane layoutY="100.0" prefHeight="500.0" prefWidth="700.0">
+      <Pane layoutY="100.0" prefHeight="500.0" prefWidth="700.0" styleClass="gray">
          <children>
             <ScrollPane layoutX="10.0" layoutY="10.0" prefHeight="480.0" prefWidth="680.0">
                <content>
-                  <AnchorPane fx:id="mainPane" minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="664.0">
+                  <AnchorPane fx:id="mainPane" minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="664.0" styleClass="backgroundColor">
                      <children>
                         <VBox fx:id="mainVBox" prefHeight="480.0" prefWidth="664.0" />
                      </children>

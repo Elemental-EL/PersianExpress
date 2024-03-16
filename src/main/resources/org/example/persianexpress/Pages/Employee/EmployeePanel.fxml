@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="725.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.EmployeePanelController">
+<AnchorPane prefHeight="725.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.EmployeePanelController">
    <children>
-      <Pane prefHeight="100.0" prefWidth="500.0">
+      <Pane prefHeight="100.0" prefWidth="500.0" styleClass="darkblue">
          <children>
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="400.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="200.0" layoutY="41.0" text="پنل کاربری">
+            <Label layoutX="200.0" layoutY="41.0" text="پنل کاربری" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
          </children></Pane>
-      <Pane layoutY="100.0" prefHeight="75.0" prefWidth="500.0">
+      <Pane layoutY="100.0" prefHeight="75.0" prefWidth="500.0" styleClass="gray">
          <children>
-            <Label fx:id="empName" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="301.0" layoutY="24.0" prefHeight="27.0" prefWidth="187.0" textAlignment="RIGHT">
+            <Label fx:id="empName" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="301.0" layoutY="24.0" prefHeight="27.0" prefWidth="187.0" textAlignment="RIGHT" textFill="#242323">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="empRole" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="305.0" layoutY="25.0" prefHeight="27.0" prefWidth="129.0" textAlignment="RIGHT">
+            <Label fx:id="empRole" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="305.0" layoutY="25.0" prefHeight="27.0" prefWidth="129.0" textAlignment="RIGHT" textFill="#191818">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="logOut" layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#onLogOutClicked" text="خروج">
+            <Button fx:id="logOut" layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#onLogOutClicked" text="خروج" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
+               <styleClass>
+                  <String fx:value="lightblue" />
+                  <String fx:value="pressed" />
+                  <String fx:value="hover" />
+                  <String fx:value="zoom" />
+               </styleClass>
             </Button>
             <Label layoutX="440.0" layoutY="24.0" text="سمت:">
                <font>
@@ -42,47 +47,95 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutY="175.0" prefHeight="550.0" prefWidth="500.0">
+      <Pane layoutY="175.0" prefHeight="550.0" prefWidth="500.0" styleClass="backgroundColor">
          <children>
-            <Button fx:id="seeUsers" layoutX="100.0" layoutY="40.0" mnemonicParsing="false" onAction="#onSeeUsersClicked" prefHeight="50.0" prefWidth="300.0" text="مشاهده کاربران">
+            <Button fx:id="seeUsers" layoutX="100.0" layoutY="40.0" mnemonicParsing="false" onAction="#onSeeUsersClicked" prefHeight="50.0" prefWidth="300.0" text="مشاهده کاربران" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
+               <styleClass>
+                  <String fx:value="lightblue" />
+                  <String fx:value="hover" />
+                  <String fx:value="pressed" />
+                  <String fx:value="zoom" />
+               </styleClass>
             </Button>
-            <Button fx:id="seeAccs" layoutX="100.0" layoutY="100.0" mnemonicParsing="false" onAction="#onSeeAccsClicked" prefHeight="50.0" prefWidth="300.0" text="مشاهده حساب ها">
+            <Button fx:id="seeAccs" layoutX="100.0" layoutY="100.0" mnemonicParsing="false" onAction="#onSeeAccsClicked" prefHeight="50.0" prefWidth="300.0" text="مشاهده حساب ها" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
+               <styleClass>
+                  <String fx:value="lightblue" />
+                  <String fx:value="hover" />
+                  <String fx:value="pressed" />
+                  <String fx:value="zoom" />
+               </styleClass>
             </Button>
-            <Button fx:id="seeReqs" layoutX="100.0" layoutY="160.0" mnemonicParsing="false" onAction="#onSeeReqsClicked" prefHeight="50.0" prefWidth="300.0" text="مشاهده درخواست ها">
+            <Button fx:id="seeReqs" layoutX="100.0" layoutY="160.0" mnemonicParsing="false" onAction="#onSeeReqsClicked" prefHeight="50.0" prefWidth="300.0" text="مشاهده درخواست ها" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
+               <styleClass>
+                  <String fx:value="lightblue" />
+                  <String fx:value="hover" />
+                  <String fx:value="pressed" />
+                  <String fx:value="zoom" />
+               </styleClass>
             </Button>
-            <Button fx:id="reqsHistory" layoutX="100.0" layoutY="220.0" mnemonicParsing="false" onAction="#onReqsHistoryClicked" prefHeight="50.0" prefWidth="300.0" text="تاریخچه درخواست ها">
+            <Button fx:id="reqsHistory" layoutX="100.0" layoutY="220.0" mnemonicParsing="false" onAction="#onReqsHistoryClicked" prefHeight="50.0" prefWidth="300.0" text="تاریخچه درخواست ها" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
+               <styleClass>
+                  <String fx:value="lightblue" />
+                  <String fx:value="hover" />
+                  <String fx:value="pressed" />
+                  <String fx:value="zoom" />
+               </styleClass>
             </Button>
-            <Button fx:id="sendMessage" layoutX="100.0" layoutY="280.0" mnemonicParsing="false" onAction="#onSendMessageClicked" prefHeight="50.0" prefWidth="300.0" text="ارسال پیام">
+            <Button fx:id="sendMessage" layoutX="100.0" layoutY="280.0" mnemonicParsing="false" onAction="#onSendMessageClicked" prefHeight="50.0" prefWidth="300.0" text="ارسال پیام" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
+               <styleClass>
+                  <String fx:value="lightblue" />
+                  <String fx:value="hover" />
+                  <String fx:value="pressed" />
+                  <String fx:value="zoom" />
+               </styleClass>
             </Button>
-            <Button fx:id="inbox" layoutX="100.0" layoutY="340.0" mnemonicParsing="false" onAction="#onInboxClicked" prefHeight="50.0" prefWidth="300.0" text="پیام های دریافتی">
+            <Button fx:id="inbox" layoutX="100.0" layoutY="340.0" mnemonicParsing="false" onAction="#onInboxClicked" prefHeight="50.0" prefWidth="300.0" text="پیام های دریافتی" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
+               <styleClass>
+                  <String fx:value="lightblue" />
+                  <String fx:value="hover" />
+                  <String fx:value="pressed" />
+                  <String fx:value="zoom" />
+               </styleClass>
             </Button>
-            <Button fx:id="suggestions" layoutX="100.0" layoutY="400.0" mnemonicParsing="false" onAction="#onSuggestionsClicked" prefHeight="50.0" prefWidth="300.0" text="انتقادات و پیشنهاد ها">
+            <Button fx:id="suggestions" layoutX="100.0" layoutY="400.0" mnemonicParsing="false" onAction="#onSuggestionsClicked" prefHeight="50.0" prefWidth="300.0" text="انتقادات و پیشنهاد ها" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
+               <styleClass>
+                  <String fx:value="lightblue" />
+                  <String fx:value="hover" />
+                  <String fx:value="pressed" />
+                  <String fx:value="zoom" />
+               </styleClass>
             </Button>
-            <Button fx:id="messagesHistory" layoutX="100.0" layoutY="460.0" mnemonicParsing="false" onAction="#onMessagesHistoryClicked" prefHeight="50.0" prefWidth="300.0" text="تاریخچه پیام ها">
+            <Button fx:id="messagesHistory" layoutX="100.0" layoutY="460.0" mnemonicParsing="false" onAction="#onMessagesHistoryClicked" prefHeight="50.0" prefWidth="300.0" text="تاریخچه پیام ها" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
+               <styleClass>
+                  <String fx:value="lightblue" />
+                  <String fx:value="hover" />
+                  <String fx:value="pressed" />
+                  <String fx:value="zoom" />
+               </styleClass>
             </Button>
          </children>
       </Pane>
