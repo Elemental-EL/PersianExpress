@@ -1,8 +1,10 @@
-package org.example.persianexpress;
+package org.example.persianexpress.Objects;
+
+import org.example.persianexpress.Objects.GharzolH;
 
 import java.util.Date;
 
-public class Sepordeh extends GharzolH{
+public class Sepordeh extends GharzolH {
     private int accInterest;
     private Date accTerminationDate;
 

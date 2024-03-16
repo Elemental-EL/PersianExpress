@@ -1,6 +1,6 @@
-package org.example.persianexpress;
+package org.example.persianexpress.Objects;
 
-public class Employee extends Person{
+public class Employee extends Person {
     private String employeePost;
     private boolean access;
 

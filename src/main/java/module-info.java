@@ -6,4 +6,6 @@ module org.example.persianexpress {
 
     opens org.example.persianexpress to javafx.fxml;
     exports org.example.persianexpress;
+    exports org.example.persianexpress.Objects;
+    opens org.example.persianexpress.Objects to javafx.fxml;
 }

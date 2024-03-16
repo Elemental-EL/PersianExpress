@@ -1,4 +1,4 @@
-package org.example.persianexpress;
+package org.example.persianexpress.Objects;
 
 import java.util.Date;
 

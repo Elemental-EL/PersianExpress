@@ -1,6 +1,8 @@
-package org.example.persianexpress;
+package org.example.persianexpress.Objects;
 
-public class User extends Person{
+import org.example.persianexpress.Objects.Person;
+
+public class User extends Person {
     private boolean access;
 
     private User(){
