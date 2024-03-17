@@ -80,25 +80,27 @@ public class CustomersPanelController implements Initializable {
             PreparedStatement statement = connection.prepareStatement("select *from BankAccounts");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
-                String accType = resultSet.getNString("AccountType");
-                if (Objects.equals(accType, "قرض الحسنه جاری") || Objects.equals(accType, "قرض الحسنه سپرده")){
-                    GharzolH account1 = new GharzolH();
-                    account1.setAccNumber(resultSet.getNString("AccountNumber"));
-                    account1.setAccType(resultSet.getNString("AccountType"));
-                    account1.setAccBalance(resultSet.getLong("AccountStock"));
-                    account1.setAccAccess(resultSet.getBoolean("AccountAccess"));
-                    gharzolHSAcc.add(account1);
-                    i++;
-                } else if (Objects.equals(accType, "سپرده کوتاه مدت") || Objects.equals(accType, "سپرده بلند مدت")) {
-                    Sepordeh account2 = new Sepordeh();
-                    account2.setAccNumber(resultSet.getNString("AccountNumber"));
-                    account2.setAccType(resultSet.getNString("AccountType"));
-                    account2.setAccBalance(resultSet.getLong("AccountStock"));
-                    account2.setAccInterest(resultSet.getInt("AccountProfit"));
-                    account2.setAccTerminationDate(resultSet.getDate("AccountTerm"));
-                    account2.setAccAccess(resultSet.getBoolean("AccountAccess"));
-                    sepordehAcc.add(account2);
-                    i++;
+                if (resultSet.getInt("CustomerID") == HelloController.userID){
+                    String accType = resultSet.getNString("AccountType");
+                    if (Objects.equals(accType, "قرض الحسنه جاری") || Objects.equals(accType, "قرض الحسنه سپرده")){
+                        GharzolH account1 = new GharzolH();
+                        account1.setAccNumber(resultSet.getNString("AccountNumber"));
+                        account1.setAccType(resultSet.getNString("AccountType"));
+                        account1.setAccBalance(resultSet.getLong("AccountStock"));
+                        account1.setAccAccess(resultSet.getBoolean("AccountAccess"));
+                        gharzolHSAcc.add(account1);
+                        i++;
+                    } else if (Objects.equals(accType, "سپرده کوتاه مدت") || Objects.equals(accType, "سپرده بلند مدت")) {
+                        Sepordeh account2 = new Sepordeh();
+                        account2.setAccNumber(resultSet.getNString("AccountNumber"));
+                        account2.setAccType(resultSet.getNString("AccountType"));
+                        account2.setAccBalance(resultSet.getLong("AccountStock"));
+                        account2.setAccInterest(resultSet.getInt("AccountProfit"));
+                        account2.setAccTerminationDate(resultSet.getDate("AccountTerm"));
+                        account2.setAccAccess(resultSet.getBoolean("AccountAccess"));
+                        sepordehAcc.add(account2);
+                        i++;
+                    }
                 }
             }
         } catch (SQLException e) {
