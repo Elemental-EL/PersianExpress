@@ -50,7 +50,7 @@ public class CreateAccountController {
         typeSlct.getItems().addAll(accountType);
         typeSlct.setValue(accountType[0]);
         if (CustomersPanelController.loggedIn){
-            Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
             user = User.createUserObj(connection,HelloController.userID);
             firstNameText.setText(user.getfName());
             firstNameText.setEditable(false);
@@ -66,7 +66,7 @@ public class CreateAccountController {
             passText.setEditable(false);
             passRepText.setText(user.getPassword());
             passRepText.setEditable(false);
-            bDate.setValue(LocalDate.parse(user.getbDate()));
+            bDate.setValue(LocalDate.parse((CharSequence) user.getbDate()));
             bDate.setEditable(false);
             bPlaceText.setText(user.getbPlace());
             bPlaceText.setEditable(false);
@@ -162,7 +162,7 @@ public class CreateAccountController {
         }
         else {
             String CustomerUserName = userText.getText();
-            Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
             PreparedStatement statement0 = connection.prepareStatement("SELECT CustomerUN FROM CustomersInfo");
             ResultSet resultSet0 = statement0.executeQuery();
             while (resultSet0.next()){
@@ -200,9 +200,6 @@ public class CreateAccountController {
                 }
             }
         }
+        }
     }
 
-
-
-
-}

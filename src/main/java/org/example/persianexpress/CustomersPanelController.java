@@ -78,7 +78,7 @@ public class CustomersPanelController implements Initializable {
         int i = 0;
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
+            connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
             PreparedStatement statement = connection.prepareStatement("select *from BankAccounts");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
@@ -105,6 +105,8 @@ public class CustomersPanelController implements Initializable {
                     }
                 }
             }
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             System.out.println("Error");
         }
@@ -571,7 +573,7 @@ public class CustomersPanelController implements Initializable {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.setResizable(false);
+         stage.setResizable(false);
         stage.show();
         stage.centerOnScreen();
     }

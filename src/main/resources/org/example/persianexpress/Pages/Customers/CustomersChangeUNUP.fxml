@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.CustomersChangeUNUPController">
+<AnchorPane prefHeight="625.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.CustomersChangeUNUPController">
    <children>
       <Pane prefHeight="100.0" prefWidth="500.0" styleClass="darkblue">
          <children>
@@ -31,36 +31,36 @@
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="400.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <Pane layoutY="100.0" prefHeight="400.0" prefWidth="500.0" styleClass="backgroundColor">
+      <Pane layoutY="100.0" prefHeight="525.0" prefWidth="500.0" styleClass="backgroundColor">
          <children>
-            <Label alignment="BASELINE_RIGHT" layoutX="295.0" layoutY="29.0" prefHeight="30.0" prefWidth="154.0" text="نام کاربری:">
+            <Label alignment="BASELINE_RIGHT" layoutX="295.0" layoutY="7.0" prefHeight="30.0" prefWidth="154.0" text="نام کاربری:(فعلی)">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label alignment="BASELINE_RIGHT" layoutX="295.0" layoutY="125.0" prefHeight="30.0" prefWidth="154.0" text="رمز عبور :">
+            <Label alignment="BASELINE_RIGHT" layoutX="302.0" layoutY="277.0" prefHeight="30.0" prefWidth="154.0" text="رمز عبور :(جدید)">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label alignment="BASELINE_RIGHT" layoutX="303.0" layoutY="225.0" prefHeight="30.0" prefWidth="154.0" text="تکرار رمز عبور :">
+            <Label alignment="BASELINE_RIGHT" layoutX="310.0" layoutY="363.0" prefHeight="30.0" prefWidth="154.0" text="تکرار رمز عبور جدید :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="UserNameTXT" layoutX="120.0" layoutY="65.0" prefHeight="40.0" prefWidth="260.0" styleClass="gray">
+            <TextField fx:id="UserNameTXT" layoutX="120.0" layoutY="45.0" prefHeight="40.0" prefWidth="260.0" styleClass="gray">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></TextField>
-            <TextField fx:id="PasswordTXT" layoutX="120.0" layoutY="160.0" prefHeight="40.0" prefWidth="260.0" styleClass="gray">
+            <TextField fx:id="newPasswordTXT" layoutX="127.0" layoutY="316.0" prefHeight="40.0" prefWidth="260.0" styleClass="gray">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></TextField>
-            <TextField fx:id="RepeatPasswordTXT" layoutX="120.0" layoutY="265.0" prefHeight="40.0" prefWidth="260.0" styleClass="gray">
+            <TextField fx:id="newRepeatPasswordTXT" layoutX="127.0" layoutY="400.0" prefHeight="40.0" prefWidth="260.0" styleClass="gray">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></TextField>
-            <Button layoutX="183.0" layoutY="339.0" mnemonicParsing="false" onAction="#onRecordChangesClicked" prefHeight="40.0" prefWidth="135.0" style="-fx-background-radius: 5;" text="ثبت تغییرات" textFill="WHITE">
+            <Button layoutX="184.0" layoutY="472.0" mnemonicParsing="false" onAction="#onRecordChangesClicked" prefHeight="40.0" prefWidth="135.0" style="-fx-background-radius: 5;" text="ثبت تغییرات" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -71,6 +71,31 @@
                   <String fx:value="pressed" />
                </styleClass>
             </Button>
+            <Label alignment="BASELINE_RIGHT" layoutX="295.0" layoutY="88.0" prefHeight="30.0" prefWidth="154.0" text="نام کاربری:(جدید)">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="newUserNameTXT" layoutX="120.0" layoutY="136.0" prefHeight="40.0" prefWidth="260.0" styleClass="gray">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </TextField>
+            <Label alignment="BASELINE_RIGHT" layoutX="302.0" layoutY="186.0" prefHeight="30.0" prefWidth="154.0" text="رمز عبور :(فعلی)">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="PasswordTXT" layoutX="121.0" layoutY="227.0" prefHeight="40.0" prefWidth="260.0" styleClass="gray">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </TextField>
+            <Label fx:id="errorTXT" alignment="BASELINE_RIGHT" layoutX="132.0" layoutY="447.0" prefHeight="20.0" prefWidth="300.0" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

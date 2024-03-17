@@ -8,21 +8,14 @@ public class Person {
     private String fName;
     private String lastname;
     private String nationalCode;
+    private String fatherName;
     private String bDate;
     private String bPlace;
     private String phNumber;
     private String hPhNumber;
     private String hAddress;
     private String pCode;
-    private String fatherName;
 
-    public String getFatherName() {
-        return fatherName;
-    }
-
-    public void setFatherName(String fatherName) {
-        this.fatherName = fatherName;
-    }
 
     public int getuID() {
         return uID;
@@ -67,6 +60,8 @@ public class Person {
     public String getNationalCode() {
         return nationalCode;
     }
+    public String getFatherName(){ return  fatherName;}
+    public void setFatherName(String fatherName){this.fatherName = fatherName;}
 
     public void setNationalCode(String nationalCode) {
         this.nationalCode = nationalCode;
