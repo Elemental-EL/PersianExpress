@@ -1,5 +1,10 @@
 package org.example.persianexpress.Objects;
 
+import javafx.scene.control.*;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Date;
 
 public class CreateAccReq extends Request{
@@ -118,5 +123,25 @@ public class CreateAccReq extends Request{
 
     public void setpCode(long pCode) {
         this.pCode = pCode;
+    }
+
+    public static void insert2DB(Connection connection, java.sql.Date currentDate, ChoiceBox<String> typeSlct, TextField userText, PasswordField passText, TextField firstNameText, TextField familyNameText, TextField nCodeText, DatePicker bDate, TextField bPlaceText, TextField mPhoneText, TextField hPhoneText, TextArea addressText, TextField codePText, TextField fatherNameText) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO CreateAccountREQ (AccountType,CustomerUN,CustomerPassword,FirstName,LastName,NationalCode,FatherName,BirthDate,BirthPlace,PhoneNumber,HomePhoneNumber,HomeAddress,PostCode,RequestDate,RequestStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        statement.setString(1, typeSlct.getValue());
+        statement.setString(2, userText.getText());
+        statement.setString(3, passText.getText());
+        statement.setString(4, firstNameText.getText());
+        statement.setString(5, familyNameText.getText());
+        statement.setString(6, nCodeText.getText());
+        statement.setString(7, fatherNameText.getText());
+        statement.setDate(8, java.sql.Date.valueOf(bDate.getValue()));
+        statement.setString(9, bPlaceText.getText());
+        statement.setString(10, mPhoneText.getText());
+        statement.setString(11, hPhoneText.getText());
+        statement.setString(12, addressText.getText());
+        statement.setString(13, codePText.getText());
+        statement.setDate(14, currentDate);
+        statement.setBoolean(15,false);
+        int resultSet = statement.executeUpdate();
     }
 }

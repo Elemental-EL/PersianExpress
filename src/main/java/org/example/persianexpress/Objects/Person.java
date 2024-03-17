@@ -1,7 +1,5 @@
 package org.example.persianexpress.Objects;
 
-import java.util.Date;
-
 
 public class Person {
     private int uID;
@@ -9,13 +7,22 @@ public class Person {
     private String password;
     private String fName;
     private String lastname;
-    private long nationalCode;
-    private Date bDate;
+    private String nationalCode;
+    private String bDate;
     private String bPlace;
-    private long phNumber;
-    private long hPhNumber;
+    private String phNumber;
+    private String hPhNumber;
     private String hAddress;
-    private long pCode;
+    private String pCode;
+    private String fatherName;
+
+    public String getFatherName() {
+        return fatherName;
+    }
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
+    }
 
     public int getuID() {
         return uID;
@@ -57,19 +64,19 @@ public class Person {
         this.lastname = lastname;
     }
 
-    public long getNationalCode() {
+    public String getNationalCode() {
         return nationalCode;
     }
 
-    public void setNationalCode(long nationalCode) {
+    public void setNationalCode(String nationalCode) {
         this.nationalCode = nationalCode;
     }
 
-    public Date getbDate() {
+    public String getbDate() {
         return bDate;
     }
 
-    public void setbDate(Date bDate) {
+    public void setbDate(String bDate) {
         this.bDate = bDate;
     }
 
@@ -81,19 +88,19 @@ public class Person {
         this.bPlace = bPlace;
     }
 
-    public long getPhNumber() {
+    public String getPhNumber() {
         return phNumber;
     }
 
-    public void setPhNumber(long phNumber) {
+    public void setPhNumber(String phNumber) {
         this.phNumber = phNumber;
     }
 
-    public long gethPhNumber() {
+    public String gethPhNumber() {
         return hPhNumber;
     }
 
-    public void sethPhNumber(long hPhNumber) {
+    public void sethPhNumber(String hPhNumber) {
         this.hPhNumber = hPhNumber;
     }
 
@@ -105,11 +112,11 @@ public class Person {
         this.hAddress = hAddress;
     }
 
-    public long getpCode() {
+    public String getpCode() {
         return pCode;
     }
 
-    public void setpCode(long pCode) {
+    public void setpCode(String pCode) {
         this.pCode = pCode;
     }
 }

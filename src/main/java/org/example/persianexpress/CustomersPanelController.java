@@ -39,8 +39,10 @@ public class CustomersPanelController implements Initializable {
     private AnchorPane showAcountsPane;
     @FXML
     private VBox showAcountsVBox;
+    public static boolean loggedIn = false;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        loggedIn = true;
         pane1.setVisible(false);
 
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), pane1);
@@ -76,7 +78,7 @@ public class CustomersPanelController implements Initializable {
         int i = 0;
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
+            connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
             PreparedStatement statement = connection.prepareStatement("select *from BankAccounts");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
@@ -402,6 +404,7 @@ public class CustomersPanelController implements Initializable {
     }
 
     public void onExitClicked(ActionEvent event) throws IOException {
+        loggedIn = false;
         Parent root = FXMLLoader.load(getClass().getResource("Pages/hello-view.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

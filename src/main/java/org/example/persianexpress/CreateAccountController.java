@@ -11,6 +11,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.example.persianexpress.Objects.CreateAccReq;
+import org.example.persianexpress.Objects.GharzolH;
+import org.example.persianexpress.Objects.User;
 
 
 import java.io.IOException;
@@ -38,11 +41,44 @@ public class CreateAccountController {
     private ImageView logoBtn, backBtn;
     @FXML
     private Text errorText;
+    private User user;
+    private java.sql.Date currentDate = Date.valueOf(LocalDate.now());
+    private LocalDate nowsDate = LocalDate.now();
 
-    public void initialize(){
+    public void initialize() throws SQLException {
         String[] accountType = new String[]{"انتخاب کنید","قرض الحسنه جاری" , "قرض الحسنه سپرده" , "سپرده کوتاه مدت" , "سپرده مدت دار"};
         typeSlct.getItems().addAll(accountType);
         typeSlct.setValue(accountType[0]);
+        if (CustomersPanelController.loggedIn){
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
+            user = User.createUserObj(connection,HelloController.userID);
+            firstNameText.setText(user.getfName());
+            firstNameText.setEditable(false);
+            familyNameText.setText(user.getLastname());
+            familyNameText.setEditable(false);
+            nCodeText.setText(user.getNationalCode());
+            nCodeText.setEditable(false);
+            fatherNameText.setText(user.getFatherName());
+            fatherNameText.setEditable(false);
+            userText.setText(user.getUserName());
+            userText.setEditable(false);
+            passText.setText(user.getPassword());
+            passText.setEditable(false);
+            passRepText.setText(user.getPassword());
+            passRepText.setEditable(false);
+            bDate.setValue(LocalDate.parse(user.getbDate()));
+            bDate.setEditable(false);
+            bPlaceText.setText(user.getbPlace());
+            bPlaceText.setEditable(false);
+            codePText.setText(user.getpCode());
+            codePText.setEditable(false);
+            mPhoneText.setText(user.getPhNumber());
+            mPhoneText.setEditable(false);
+            hPhoneText.setText(user.gethPhNumber());
+            hPhoneText.setEditable(false);
+            addressText.setText(user.gethAddress());
+            addressText.setEditable(false);
+        }
     }
 
     @FXML
@@ -88,9 +124,10 @@ public class CreateAccountController {
     }
     @FXML
     void onSubmitClicked(ActionEvent event) throws SQLException {
+        String typeSlctd = typeSlct.getSelectionModel().getSelectedItem();
         errorText.setText("");
         boolean isUnique = true;
-        if (Objects.equals(typeSlct,"انتخاب کنید")||firstNameText.getText().trim().isEmpty() ||familyNameText.getText().trim().isEmpty() || nCodeText.getText().trim().isEmpty() || fatherNameText.getText().trim().isEmpty() || userText.getText().trim().isEmpty() || passText.getText().trim().isEmpty() || passRepText.getText().trim().isEmpty() || bPlaceText.getText().trim().isEmpty() || addressText.getText().trim().isEmpty() || codePText.getText().trim().isEmpty() || mPhoneText.getText().trim().isEmpty() || hPhoneText.getText().trim().isEmpty() || bDate.getValue()==null){
+        if (Objects.equals(typeSlctd,"انتخاب کنید")||firstNameText.getText().trim().isEmpty() ||familyNameText.getText().trim().isEmpty() || nCodeText.getText().trim().isEmpty() || fatherNameText.getText().trim().isEmpty() || userText.getText().trim().isEmpty() || passText.getText().trim().isEmpty() || passRepText.getText().trim().isEmpty() || bPlaceText.getText().trim().isEmpty() || addressText.getText().trim().isEmpty() || codePText.getText().trim().isEmpty() || mPhoneText.getText().trim().isEmpty() || hPhoneText.getText().trim().isEmpty() || bDate.getValue()==null){
             errorText.setText("*پر کردن تمامی فیلد ها الزامی است.");
         }
         else if (passText.getText().length()<8){
@@ -103,13 +140,13 @@ public class CreateAccountController {
             errorText.setText("*کد پستی باید تنها شامل عدد باشد.");
         }
         else if (!nCodeText.getText().matches("\\d+")){
-            errorText.setText("*کد پستی باید تنها شامل عدد باشد.");
+            errorText.setText("*کد ملی باید تنها شامل عدد باشد.");
         }
         else if (!mPhoneText.getText().matches("\\d+")){
-            errorText.setText("*کد پستی باید تنها شامل عدد باشد.");
+            errorText.setText("*شماره موبایل باید تنها شامل عدد باشد.");
         }
         else if (!hPhoneText.getText().matches("\\d+")){
-            errorText.setText("*کد پستی باید تنها شامل عدد باشد.");
+            errorText.setText("*شماره تلفن ثابت باید تنها شامل عدد باشد.");
         }
         else if (!codePText.getText().matches("\\d{10}")){
             errorText.setText("*کد پستی باید ده رقمی باشد.");
@@ -133,34 +170,39 @@ public class CreateAccountController {
                     isUnique = false;
                 }
             }
-            if (!isUnique){
-                errorText.setText("*این نام کاربری قبلا استفاده شده است.");
-            }
-            else {
-                Calendar calendar = Calendar.getInstance();
-//                Date currentDate = calendar.getTime();
-//                String currentDateTime = currentDate.toString();
-                java.sql.Date currentDate = Date.valueOf(LocalDate.now());
-                if (HelloController.post==null){
-                    PreparedStatement statement1 = connection.prepareStatement("INSERT INTO CreateAccountREQ (RequestID,AccountType,CustomerUN,CustomerPassword,FirstName,LastName,NationalCode,BirthDate,BirthPlace,PhoneNumber,HomePhoneNumber,HomeAddress,PostCode,RequestDate,RequestStatus) VALUES (100003,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-                    statement1.setString(1,typeSlct.getValue());
-                    statement1.setString(2,userText.getText());
-                    statement1.setString(3,passText.getText());
-                    statement1.setString(4,firstNameText.getText());
-                    statement1.setString(5,familyNameText.getText());
-                    statement1.setString(6,nCodeText.getText());
-                    statement1.setDate(7, java.sql.Date.valueOf(bDate.getValue()));
-                    statement1.setString(8,bPlaceText.getText());
-                    statement1.setString(9,mPhoneText.getText());
-                    statement1.setString(10,hPhoneText.getText());
-                    statement1.setString(11,addressText.getText());
-                    statement1.setString(12,codePText.getText());
-                    statement1.setDate(13, currentDate);
-                    statement1.setBoolean(14,false);
-                    int resultSet1 = statement1.executeUpdate();
-                    errorText.setText("SUCCESSFULL!!!");
+            if (!CustomersPanelController.loggedIn){
+                if(HelloController.post==null){
+                    if (!isUnique){
+                        errorText.setText("*این نام کاربری قبلا استفاده شده است.");
+                    }
+                    else {
+                        CreateAccReq.insert2DB(connection, currentDate, typeSlct, userText, passText, firstNameText, familyNameText, nCodeText, bDate, bPlaceText, mPhoneText, hPhoneText, addressText, codePText, fatherNameText);
+                    }
+                }
+                else {
+                    if (isUnique){
+                        int uID = User.createUser(connection, userText, passText, firstNameText, familyNameText, nCodeText, fatherNameText, bDate, bPlaceText, mPhoneText, hPhoneText, addressText, codePText);
+                        String accnum = GharzolH.generateAccNum(connection,typeSlctd);
+                        GharzolH.createBankAcc(connection, uID, accnum, typeSlctd, nowsDate);
+                    }
+                    else {
+                        String accnum = GharzolH.generateAccNum(connection,typeSlctd);
+                        GharzolH.createBankAcc(connection, HelloController.userID, accnum, typeSlctd, nowsDate);
+                    }
                 }
             }
+            else {
+                if (Objects.equals(typeSlctd,"انتخاب کنید")){
+                    errorText.setText("*انتخاب نوع حساب الزامی است.");
+                }
+                else {
+                    CreateAccReq.insert2DB(connection, currentDate, typeSlct, userText, passText, firstNameText, familyNameText, nCodeText, bDate, bPlaceText, mPhoneText, hPhoneText, addressText, codePText, fatherNameText);
+                }
             }
+        }
     }
+
+
+
+
 }

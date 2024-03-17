@@ -1,6 +1,9 @@
 package org.example.persianexpress.Objects;
 
-import java.util.Date;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Random;
 
 public class GharzolH {
     private int accUID;
@@ -64,5 +67,61 @@ public class GharzolH {
 
     public void setAccAccess(boolean accAccess) {
         this.accAccess = accAccess;
+    }
+
+    public static String generateAccNum(Connection connection,String type) throws SQLException {
+        boolean isNew=true;
+        boolean canContinue=true;
+        String accNum="";
+        int prefix=1000;
+        switch (type){
+            case "قرض الحسنه جاری":
+                prefix = 3891;
+                break;
+            case "قرض الحسنه سپرده":
+                prefix = 3892;
+                break;
+            case "سپرده کوتاه مدت":
+                prefix = 3893;
+                break;
+            case "سپرده بلند مدت":
+                prefix = 3894;
+                break;
+        }
+        while (canContinue){
+            isNew = true;
+        Random random = new Random();
+        accNum = String.valueOf(prefix * 10000 + random.nextInt(10000));
+        PreparedStatement statement = connection.prepareStatement("SELECT AccountNumber FROM BankAccounts");
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()){
+            if (accNum.equals(resultSet.getNString("AccountNumber"))){
+                isNew = false;
+            }
+        }
+        if (isNew) {
+            canContinue = false;
+        }
+        }
+        return accNum;
+    }
+    public static void createBankAcc(Connection connection, int uID, String accnum, String typeSlctd, LocalDate currentDate) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO BankAccounts (CustomerID,AccountNumber,AccountType,AccountStock,AccountProfit,AccountTerm,AccountAccess) VALUES (?,?,?,?,?,?,?)");
+        statement.setInt(1, uID);
+        statement.setString(2, accnum);
+        statement.setString(3, typeSlctd);
+        statement.setLong(4,10000000);
+        if (typeSlctd.equals("سپرده کوتاه مدت")|| typeSlctd.equals("سپرده مدت دار")){
+            if (typeSlctd.equals("سپرده کوتاه مدت")){
+                statement.setInt(5,5);
+                statement.setDate(6, java.sql.Date.valueOf(currentDate.plusYears(4)));
+            }
+            else {
+                statement.setInt(5,23);
+                statement.setDate(6, Date.valueOf(currentDate.plusYears(1)));
+            }
+        }
+        statement.setBoolean(7,true);
+        int resultSet = statement.executeUpdate();
     }
 }
