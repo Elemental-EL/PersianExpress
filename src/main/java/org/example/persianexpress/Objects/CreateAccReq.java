@@ -125,8 +125,8 @@ public class CreateAccReq extends Request{
         this.pCode = pCode;
     }
 
-    public static void insert2DB(Connection connection, java.sql.Date currentDate, ChoiceBox<String> typeSlct, TextField userText, PasswordField passText, TextField firstNameText, TextField familyNameText, TextField nCodeText, DatePicker bDate, TextField bPlaceText, TextField mPhoneText, TextField hPhoneText, TextArea addressText, TextField codePText, TextField fatherNameText) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO CreateAccountREQ (AccountType,CustomerUN,CustomerPassword,FirstName,LastName,NationalCode,FatherName,BirthDate,BirthPlace,PhoneNumber,HomePhoneNumber,HomeAddress,PostCode,RequestDate,RequestStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    public static void insert2DB(Connection connection, java.sql.Date currentDate, ChoiceBox<String> typeSlct, TextField userText, PasswordField passText, TextField firstNameText, TextField familyNameText, TextField nCodeText, DatePicker bDate, TextField bPlaceText, TextField mPhoneText, TextField hPhoneText, TextArea addressText, TextField codePText, TextField fatherNameText, int CustomerID) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO CreateAccountREQ (AccountType,CustomerUN,CustomerPassword,FirstName,LastName,NationalCode,FatherName,BirthDate,BirthPlace,PhoneNumber,HomePhoneNumber,HomeAddress,PostCode,RequestDate,RequestStatus,CustomerID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         statement.setString(1, typeSlct.getValue());
         statement.setString(2, userText.getText());
         statement.setString(3, passText.getText());
@@ -141,7 +141,10 @@ public class CreateAccReq extends Request{
         statement.setString(12, addressText.getText());
         statement.setString(13, codePText.getText());
         statement.setDate(14, currentDate);
-        statement.setBoolean(15,false);
+        statement.setBoolean(15 ,false);
+        if (CustomerID!=100) {
+            statement.setInt(16, CustomerID);
+        }
         int resultSet = statement.executeUpdate();
     }
 }
