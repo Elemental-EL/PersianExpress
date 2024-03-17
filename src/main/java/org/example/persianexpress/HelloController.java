@@ -137,7 +137,7 @@ public class HelloController {
 
 
 //    Hamed Sql server Connection
-//    "jdbc:sqlserver://DESKTOP-98DDBT0\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt"
+//    "jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt"
 
 //    Elyar sql server Connection
 //

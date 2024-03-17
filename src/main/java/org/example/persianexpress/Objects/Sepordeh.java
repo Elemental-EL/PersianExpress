@@ -12,6 +12,11 @@ public class Sepordeh extends GharzolH {
         super(accUID, accHolderUID);
     }
 
+    public Sepordeh() {
+
+    }
+
+
     public int getAccInterest() {
         return accInterest;
     }

@@ -56,8 +56,14 @@
             </Label>
             <ChoiceBox fx:id="selectedAccount" layoutX="125.0" layoutY="53.0" prefHeight="35.0" prefWidth="250.0" styleClass="gray" />
             <ChoiceBox fx:id="Operator" layoutX="125.0" layoutY="141.0" prefHeight="35.0" prefWidth="250.0" styleClass="gray" />
-            <TextField fx:id="phoneNumber" layoutX="150.0" layoutY="203.0" prefHeight="35.0" prefWidth="200.0" styleClass="gray" />
-            <TextField fx:id="chargeAmount" layoutX="150.0" layoutY="258.0" prefHeight="35.0" prefWidth="200.0" styleClass="gray" />
+            <TextField fx:id="phoneNumber" layoutX="150.0" layoutY="203.0" prefHeight="35.0" prefWidth="200.0" styleClass="gray">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></TextField>
+            <TextField fx:id="chargeAmount" layoutX="150.0" layoutY="258.0" prefHeight="35.0" prefWidth="200.0" styleClass="gray">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></TextField>
             <Button layoutX="202.0" layoutY="323.0" mnemonicParsing="false" onAction="#onBuyChargeClicked" style="-fx-background-radius: 5;" text="خرید شارژ" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />

@@ -5,7 +5,7 @@ import java.util.Date;
 public class GharzolH {
     private int accUID;
     private int accHolderUID;
-    private long accNumber;
+    private String accNumber;
     private String accType;
     private long accBalance;
     private boolean accAccess;
@@ -34,11 +34,11 @@ public class GharzolH {
         this.accHolderUID = accHolderUID;
     }
 
-    public long getAccNumber() {
+    public String getAccNumber() {
         return accNumber;
     }
 
-    public void setAccNumber(long accNumber) {
+    public void setAccNumber(String accNumber) {
         this.accNumber = accNumber;
     }
 

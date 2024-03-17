@@ -36,13 +36,19 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="97.0" layoutY="120.0" prefHeight="35.0" prefWidth="240.0" />
+      <TextField layoutX="97.0" layoutY="120.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray">
+         <font>
+            <Font size="17.0" />
+         </font></TextField>
       <Label layoutX="345.0" layoutY="183.0" text="کد ملی گیرنده:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="95.0" layoutY="179.0" prefHeight="35.0" prefWidth="240.0" />
+      <TextField layoutX="95.0" layoutY="179.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray">
+         <font>
+            <Font size="17.0" />
+         </font></TextField>
       <Label layoutX="345.0" layoutY="241.0" text="مبلغ:">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -69,8 +75,17 @@
             <String fx:value="zoom" />
          </styleClass>
       </Button>
-      <TextField layoutX="95.0" layoutY="238.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray" />
-      <TextField layoutX="95.0" layoutY="299.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray" />
-      <TextField layoutX="95.0" layoutY="360.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray" />
+      <TextField layoutX="95.0" layoutY="238.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray">
+         <font>
+            <Font size="17.0" />
+         </font></TextField>
+      <TextField layoutX="95.0" layoutY="299.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray">
+         <font>
+            <Font size="17.0" />
+         </font></TextField>
+      <TextField layoutX="95.0" layoutY="360.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray">
+         <font>
+            <Font size="17.0" />
+         </font></TextField>
    </children>
 </AnchorPane>

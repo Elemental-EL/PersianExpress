@@ -41,3 +41,10 @@
             -fx-scale-x 0.5s ease,
             -fx-scale-y 0.5s ease;
 }
+.labels{
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+.CPBorderPane1{
+    -fx-padding: 8;
+}
