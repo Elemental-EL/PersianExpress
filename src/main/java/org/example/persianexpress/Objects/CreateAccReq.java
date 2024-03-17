@@ -3,6 +3,7 @@ package org.example.persianexpress.Objects;
 import java.util.Date;
 
 public class CreateAccReq extends Request{
+    private String accType;
     private String uName;
     private String pass;
     private String fName;
@@ -21,6 +22,14 @@ public class CreateAccReq extends Request{
     public CreateAccReq(int reqID, int reqerID){
         setReqID(reqID);
         setReqerID(reqerID);
+    }
+
+    public String getAccType() {
+        return accType;
+    }
+
+    public void setAccType(String accType) {
+        this.accType = accType;
     }
 
     public String getuName() {
