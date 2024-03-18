@@ -50,7 +50,7 @@ public class CreateAccountController {
         typeSlct.getItems().addAll(accountType);
         typeSlct.setValue(accountType[0]);
         if (CustomersPanelController.loggedIn){
-            Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
             user = User.createUserObj(connection,HelloController.userID);
             firstNameText.setText(user.getfName());
             firstNameText.setEditable(false);
@@ -123,7 +123,7 @@ public class CreateAccountController {
 
     }
     @FXML
-    void onSubmitClicked(ActionEvent event) throws SQLException {
+    void onSubmitClicked(ActionEvent event) throws SQLException, IOException {
         String typeSlctd = typeSlct.getSelectionModel().getSelectedItem();
         errorText.setText("");
         boolean isUnique = true;
@@ -162,7 +162,7 @@ public class CreateAccountController {
         }
         else {
             String CustomerUserName = userText.getText();
-            Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
             PreparedStatement statement0 = connection.prepareStatement("SELECT CustomerUN FROM CustomersInfo");
             ResultSet resultSet0 = statement0.executeQuery();
             while (resultSet0.next()){
@@ -177,6 +177,14 @@ public class CreateAccountController {
                     }
                     else {
                         CreateAccReq.insert2DB(connection, currentDate, typeSlct, userText, passText, firstNameText, familyNameText, nCodeText, bDate, bPlaceText, mPhoneText, hPhoneText, addressText, codePText, fatherNameText,HelloController.userID);
+                        Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/hello-view.fxml"));
+                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setTitle("Persian Express");
+                        stage.setScene(scene);
+                        stage.setResizable(false);
+                        stage.show();
+                        stage.centerOnScreen();
                     }
                 }
                 else {
@@ -184,10 +192,44 @@ public class CreateAccountController {
                         int uID = User.createUser(connection, userText, passText, firstNameText, familyNameText, nCodeText, fatherNameText, bDate, bPlaceText, mPhoneText, hPhoneText, addressText, codePText);
                         String accnum = GharzolH.generateAccNum(connection,typeSlctd);
                         GharzolH.createBankAcc(connection, uID, accnum, typeSlctd, nowsDate);
+                        if (HelloController.post.equals("کارمند")){
+                            Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/EmployeePanel.fxml"));
+                            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.setResizable(false);
+                            stage.show();
+                            stage.centerOnScreen();
+                        }else if (HelloController.post.equals("مدیر")){
+                            Parent root = FXMLLoader.load(getClass().getResource("Pages/Boss/BossPanel.fxml"));
+                            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.setResizable(false);
+                            stage.show();
+                            stage.centerOnScreen();
+                        }
                     }
                     else {
                         String accnum = GharzolH.generateAccNum(connection,typeSlctd);
                         GharzolH.createBankAcc(connection, HelloController.userID, accnum, typeSlctd, nowsDate);
+                        if (HelloController.post.equals("کارمند")){
+                            Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/EmployeePanel.fxml"));
+                            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.setResizable(false);
+                            stage.show();
+                            stage.centerOnScreen();
+                        }else if (HelloController.post.equals("مدیر")){
+                            Parent root = FXMLLoader.load(getClass().getResource("Pages/Boss/BossPanel.fxml"));
+                            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.setResizable(false);
+                            stage.show();
+                            stage.centerOnScreen();
+                        }
                     }
                 }
             }
@@ -197,6 +239,14 @@ public class CreateAccountController {
                 }
                 else {
                     CreateAccReq.insert2DB(connection, currentDate, typeSlct, userText, passText, firstNameText, familyNameText, nCodeText, bDate, bPlaceText, mPhoneText, hPhoneText, addressText, codePText, fatherNameText,HelloController.userID);
+                    Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/CustomersPanel.fxml"));
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.setResizable(false);
+                    stage.show();
+                    stage.centerOnScreen();
+
                 }
             }
         }

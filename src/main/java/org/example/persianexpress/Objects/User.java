@@ -73,4 +73,30 @@ public class User extends Person {
         }
         return uID;
     }
+
+    public static int createUser(Connection connection, ResultSet resultSet) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO CustomersInfo (CustomerUN,CustomerPassword,FirstName,LastName,NationalCode,FatherName,BirthDate,BirthPlace,PhoneNumber,HomePhoneNumber,HomeAddress,PostCode,Access) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        statement.setString(1, resultSet.getNString("CustomerUN"));
+        statement.setString(2, resultSet.getNString("CustomerPassword"));
+        statement.setString(3, resultSet.getNString("FirstName"));
+        statement.setString(4, resultSet.getNString("LastName"));
+        statement.setString(5, resultSet.getString("NationalCode"));
+        statement.setString(6, resultSet.getNString("FatherName"));
+        statement.setDate(7, resultSet.getDate("BirthDate"));
+        statement.setString(8, resultSet.getNString("BirthPlace"));
+        statement.setString(9, resultSet.getNString("PhoneNumber"));
+        statement.setString(10, resultSet.getNString("HomePhoneNumber"));
+        statement.setString(11, resultSet.getNString("HomeAddress"));
+        statement.setString(12, resultSet.getNString("PostCode"));
+        statement.setBoolean(13, true);
+        int resultSetN = statement.executeUpdate();
+        int uID = 100;
+        PreparedStatement statement1 = connection.prepareStatement("SELECT CustomerID FROM CustomersInfo WHERE CustomerUN=?");
+        statement1.setString(1,resultSet.getNString("CustomerUN"));
+        ResultSet resultSet1 = statement1.executeQuery();
+        while (resultSet1.next()){
+            uID = resultSet1.getInt("CustomerID");
+        }
+        return uID;
+    }
 }

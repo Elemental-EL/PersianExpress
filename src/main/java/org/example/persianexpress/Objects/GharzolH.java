@@ -74,19 +74,14 @@ public class GharzolH {
         boolean canContinue=true;
         String accNum="";
         int prefix=1000;
-        switch (type){
-            case "قرض الحسنه جاری":
-                prefix = 3891;
-                break;
-            case "قرض الحسنه سپرده":
-                prefix = 3892;
-                break;
-            case "سپرده کوتاه مدت":
-                prefix = 3893;
-                break;
-            case "سپرده بلند مدت":
-                prefix = 3894;
-                break;
+        if (type.equals("قرض الحسنه جاری")){
+            prefix = 3891;
+        } else if (type.equals("قرض الحسنه سپرده")){
+            prefix = 3892;
+        } else if (type.equals("سپرده کوتاه مدت")){
+            prefix = 3893;
+        } else if (type.equals("سپرده بلند مدت")){
+            prefix = 3894;
         }
         while (canContinue){
             isNew = true;
@@ -120,6 +115,10 @@ public class GharzolH {
                 statement.setInt(5,23);
                 statement.setDate(6, Date.valueOf(currentDate.plusYears(1)));
             }
+        }
+        else {
+            statement.setInt(5,0);
+            statement.setDate(6,null);
         }
         statement.setBoolean(7,true);
         int resultSet = statement.executeUpdate();

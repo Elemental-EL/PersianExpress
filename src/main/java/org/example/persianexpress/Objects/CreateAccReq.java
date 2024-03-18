@@ -142,9 +142,7 @@ public class CreateAccReq extends Request{
         statement.setString(13, codePText.getText());
         statement.setDate(14, currentDate);
         statement.setBoolean(15 ,false);
-        if (CustomerID!=100) {
-            statement.setInt(16, CustomerID);
-        }
+        statement.setInt(16, CustomerID);
         int resultSet = statement.executeUpdate();
     }
 }

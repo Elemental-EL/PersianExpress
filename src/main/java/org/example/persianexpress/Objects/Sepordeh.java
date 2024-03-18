@@ -12,7 +12,7 @@ public class Sepordeh extends GharzolH {
         super(accUID, accHolderUID);
     }
 
-    public Sepordeh() {
+    private Sepordeh() {
 
     }
 

@@ -78,7 +78,7 @@ public class CustomersPanelController implements Initializable {
         int i = 0;
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
+            connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
             PreparedStatement statement = connection.prepareStatement("select *from BankAccounts");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
@@ -93,7 +93,7 @@ public class CustomersPanelController implements Initializable {
                         gharzolHSAcc.add(account1);
                         i++;
                     } else if (Objects.equals(accType, "سپرده کوتاه مدت") || Objects.equals(accType, "سپرده بلند مدت")) {
-                        Sepordeh account2 = new Sepordeh();
+                        Sepordeh account2 = new Sepordeh(resultSet.getInt("AccountID"),resultSet.getInt("CustomerID"));
                         account2.setAccNumber(resultSet.getNString("AccountNumber"));
                         account2.setAccType(resultSet.getNString("AccountType"));
                         account2.setAccBalance(resultSet.getLong("AccountStock"));
