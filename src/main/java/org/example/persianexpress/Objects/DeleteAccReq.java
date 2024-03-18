@@ -2,7 +2,7 @@ package org.example.persianexpress.Objects;
 
 public class DeleteAccReq extends Request{
     private int accID;
-    private long substituteAccID;
+    private String substituteAccID;
 
     private DeleteAccReq(){
     }
@@ -20,11 +20,11 @@ public class DeleteAccReq extends Request{
         this.accID = accID;
     }
 
-    public long getSubstituteAccID() {
+    public String getSubstituteAccID() {
         return substituteAccID;
     }
 
-    public void setSubstituteAccID(long substituteAccID) {
+    public void setSubstituteAccID(String substituteAccID) {
         this.substituteAccID = substituteAccID;
     }
 }

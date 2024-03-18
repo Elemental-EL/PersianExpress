@@ -12,7 +12,7 @@ public class LoanReq extends Request{
     private String sFatherName;
     private String sBPlace;
     private Date sBDate;
-    private long sPhNumber;
+    private String sPhNumber;
     private String sDiploma;
     private String sJob;
     private String loanType;
@@ -97,11 +97,11 @@ public class LoanReq extends Request{
         this.sBDate = sBDate;
     }
 
-    public long getsPhNumber() {
+    public String getsPhNumber() {
         return sPhNumber;
     }
 
-    public void setsPhNumber(long sPhNumber) {
+    public void setsPhNumber(String sPhNumber) {
         this.sPhNumber = sPhNumber;
     }
 

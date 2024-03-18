@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="700.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.EmployeeSeeRequestsController">
+<AnchorPane prefHeight="700.0" prefWidth="800.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.EmployeeSeeRequestsController">
    <children>
-      <Pane prefHeight="100.0" prefWidth="700.0" styleClass="darkblue">
+      <Pane prefHeight="100.0" prefWidth="800.0" styleClass="darkblue">
          <children>
-            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="600.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="227.0" layoutY="41.0" text="درخواست ها (فعال)" textFill="WHITE">
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="700.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="277.0" layoutY="41.0" text="درخواست ها (فعال)" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
@@ -26,17 +31,23 @@
             </Pane>
          </children>
       </Pane>
-      <Pane layoutY="100.0" prefHeight="600.0" prefWidth="700.0" styleClass="gray">
+      <Pane layoutY="100.0" prefHeight="600.0" prefWidth="800.0" styleClass="gray">
          <children>
-            <ScrollPane layoutX="10.0" layoutY="10.0" prefHeight="580.0" prefWidth="680.0">
+            <ScrollPane layoutX="10.0" layoutY="80.0" prefHeight="500.0" prefWidth="780.0">
               <content>
-                <AnchorPane fx:id="mainPane" minHeight="0.0" minWidth="0.0" prefHeight="580.0" prefWidth="664.0" styleClass="backgroundColor">
+                <AnchorPane fx:id="mainPane" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="764.0" styleClass="backgroundColor">
                      <children>
-                        <VBox fx:id="mainVBox" prefHeight="580.0" prefWidth="664.0" />
+                        <VBox fx:id="mainVBox" prefHeight="500.0" prefWidth="764.0" />
                      </children>
                   </AnchorPane>
               </content>
             </ScrollPane>
+            <Label layoutX="660.0" layoutY="21.0" text="فیلتر بر اساس :">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="RequestTypeBox" layoutX="400.0" layoutY="19.0" prefHeight="35.0" prefWidth="250.0" />
          </children>
       </Pane>
    </children>

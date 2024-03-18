@@ -13,11 +13,11 @@ public class CreateAccReq extends Request{
     private String pass;
     private String fName;
     private String lName;
-    private long nCode;
+    private String nCode;
     private Date bDate;
     private String bPlace;
-    private long phNumber;
-    private long hPhNumber;
+    private String phNumber;
+    private String hPhNumber;
     private String hAdress;
     private long pCode;
 
@@ -69,11 +69,11 @@ public class CreateAccReq extends Request{
         this.lName = lName;
     }
 
-    public long getnCode() {
+    public String getnCode() {
         return nCode;
     }
 
-    public void setnCode(long nCode) {
+    public void setnCode(String nCode) {
         this.nCode = nCode;
     }
 
@@ -93,19 +93,19 @@ public class CreateAccReq extends Request{
         this.bPlace = bPlace;
     }
 
-    public long getPhNumber() {
+    public String getPhNumber() {
         return phNumber;
     }
 
-    public void setPhNumber(long phNumber) {
+    public void setPhNumber(String phNumber) {
         this.phNumber = phNumber;
     }
 
-    public long gethPhNumber() {
+    public String gethPhNumber() {
         return hPhNumber;
     }
 
-    public void sethPhNumber(long hPhNumber) {
+    public void sethPhNumber(String hPhNumber) {
         this.hPhNumber = hPhNumber;
     }
 
