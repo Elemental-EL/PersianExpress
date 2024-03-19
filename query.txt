@@ -1,0 +1,569 @@
+USE [PersianExpressDB]
+GO
+/****** Object:  Table [dbo].[BankAccounts]    Script Date: 3/19/2024 10:30:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BankAccounts](
+	[AccountID] [int] IDENTITY(1,1) NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[AccountNumber] [nchar](8) NOT NULL,
+	[AccountType] [nvarchar](50) NOT NULL,
+	[AccountStock] [bigint] NOT NULL,
+	[AccountProfit] [int] NULL,
+	[AccountTerm] [date] NULL,
+	[AccountAccess] [bit] NOT NULL,
+ CONSTRAINT [PK_BankAccounts] PRIMARY KEY CLUSTERED 
+(
+	[AccountID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[BankCardREQ]    Script Date: 3/19/2024 10:30:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BankCardREQ](
+	[RequestID] [int] IDENTITY(300001,1) NOT NULL,
+	[CustomerId] [int] NOT NULL,
+	[SelectedAccountID] [int] NOT NULL,
+	[RequestDate] [date] NOT NULL,
+	[RequestStatus] [bit] NOT NULL,
+ CONSTRAINT [PK_BankCardREQ] PRIMARY KEY CLUSTERED 
+(
+	[RequestID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[BankCards]    Script Date: 3/19/2024 10:30:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BankCards](
+	[CardID] [int] NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[AccountID] [int] NOT NULL,
+	[CardNumber] [nchar](16) NOT NULL,
+	[CVV2] [nchar](3) NOT NULL,
+	[CardTerm] [date] NOT NULL,
+	[CardAccess] [bit] NOT NULL,
+ CONSTRAINT [PK_BankCards] PRIMARY KEY CLUSTERED 
+(
+	[CardID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ChargingHistory]    Script Date: 3/19/2024 10:30:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ChargingHistory](
+	[ChargingID] [int] NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[AccountID] [int] NOT NULL,
+	[Operator] [nvarchar](50) NOT NULL,
+	[PhoneNumber] [char](11) NOT NULL,
+	[ChargAmount] [bigint] NOT NULL,
+	[ChargingDate] [date] NOT NULL,
+ CONSTRAINT [PK_ChargingHistory] PRIMARY KEY CLUSTERED 
+(
+	[ChargingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CheckBookREQ]    Script Date: 3/19/2024 10:30:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CheckBookREQ](
+	[RequestID] [int] IDENTITY(500001,1) NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[AccountID] [int] NOT NULL,
+	[CheckNum] [int] NOT NULL,
+	[RequestDate] [date] NOT NULL,
+	[RequestStatus] [bit] NOT NULL,
+ CONSTRAINT [PK_CheckBookREQ] PRIMARY KEY CLUSTERED 
+(
+	[RequestID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ChequeHistory]    Script Date: 3/19/2024 10:30:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ChequeHistory](
+	[ChequeID] [int] NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[AccountID] [int] NOT NULL,
+	[ChequeSerialNum] [bigint] NOT NULL,
+	[ChequeAmount] [bigint] NOT NULL,
+	[ChequeDate] [date] NOT NULL,
+	[ChequeStatus] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_ChequeHistory] PRIMARY KEY CLUSTERED 
+(
+	[ChequeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CreateAccountREQ]    Script Date: 3/19/2024 10:30:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CreateAccountREQ](
+	[RequestID] [int] IDENTITY(100001,1) NOT NULL,
+	[CustomerID] [int] NULL,
+	[AccountType] [nvarchar](50) NOT NULL,
+	[CustomerUN] [nvarchar](50) NOT NULL,
+	[CustomerPassword] [nvarchar](50) NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](50) NOT NULL,
+	[NationalCode] [char](10) NOT NULL,
+	[FatherName] [nvarchar](50) NOT NULL,
+	[BirthDate] [date] NOT NULL,
+	[BirthPlace] [nvarchar](50) NOT NULL,
+	[PhoneNumber] [nchar](11) NOT NULL,
+	[HomePhoneNumber] [nchar](11) NOT NULL,
+	[HomeAddress] [nvarchar](max) NOT NULL,
+	[PostCode] [nchar](10) NOT NULL,
+	[RequestDate] [date] NOT NULL,
+	[RequestStatus] [bit] NOT NULL,
+ CONSTRAINT [PK_CreateAccountREQ] PRIMARY KEY CLUSTERED 
+(
+	[RequestID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CustomersInfo]    Script Date: 3/19/2024 10:30:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CustomersInfo](
+	[CustomerID] [int] IDENTITY(1,1) NOT NULL,
+	[CustomerUN] [nvarchar](50) NOT NULL,
+	[CustomerPassword] [nvarchar](50) NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](50) NOT NULL,
+	[NationalCode] [char](10) NOT NULL,
+	[FatherName] [nvarchar](50) NOT NULL,
+	[BirthDate] [date] NOT NULL,
+	[BirthPlace] [nvarchar](50) NOT NULL,
+	[PhoneNumber] [nchar](11) NOT NULL,
+	[HomePhoneNumber] [nchar](11) NOT NULL,
+	[HomeAddress] [nvarchar](max) NOT NULL,
+	[PostCode] [nchar](10) NOT NULL,
+	[Access] [bit] NOT NULL,
+ CONSTRAINT [PK_CustomersInfo] PRIMARY KEY CLUSTERED 
+(
+	[CustomerID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[DeleteAccountREQ]    Script Date: 3/19/2024 10:30:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DeleteAccountREQ](
+	[RequestID] [int] IDENTITY(200001,1) NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[AccountID] [int] NOT NULL,
+	[SubstituteAccount] [nchar](8) NOT NULL,
+	[RequestDate] [date] NOT NULL,
+	[RequestStatus] [bit] NOT NULL,
+ CONSTRAINT [PK_DeleteAccountREQ] PRIMARY KEY CLUSTERED 
+(
+	[RequestID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[EmployeesInfo]    Script Date: 3/19/2024 10:30:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[EmployeesInfo](
+	[EmployeeID] [int] IDENTITY(1,1) NOT NULL,
+	[EmployeeUN] [nvarchar](50) NOT NULL,
+	[EmployeePassword] [nvarchar](50) NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](50) NOT NULL,
+	[NationalCode] [char](10) NOT NULL,
+	[BirthDate] [date] NOT NULL,
+	[BirthPlace] [nvarchar](50) NOT NULL,
+	[PhoneNumber] [char](11) NOT NULL,
+	[HomePhoneNumber] [char](11) NOT NULL,
+	[HomeAddress] [nvarchar](max) NOT NULL,
+	[PostCode] [nchar](10) NOT NULL,
+	[EmployeePost] [nvarchar](50) NOT NULL,
+	[Access] [bit] NOT NULL,
+ CONSTRAINT [PK_EmployeesInfo] PRIMARY KEY CLUSTERED 
+(
+	[EmployeeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LoanREQ]    Script Date: 3/19/2024 10:30:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LoanREQ](
+	[RequestID] [int] IDENTITY(400001,1) NOT NULL,
+	[CutomerID] [int] NOT NULL,
+	[SelectedAccountID] [int] NOT NULL,
+	[CustomerDiploma] [nvarchar](50) NOT NULL,
+	[CustomerJob] [nvarchar](50) NOT NULL,
+	[SuretyFirstName] [nvarchar](50) NOT NULL,
+	[SuretyLastName] [nvarchar](50) NOT NULL,
+	[SuretyNationalCode] [char](10) NOT NULL,
+	[SuretyFatherName] [nvarchar](50) NOT NULL,
+	[SuretyBirthPlace] [nvarchar](50) NOT NULL,
+	[SuretyBirthDate] [date] NOT NULL,
+	[SuretyPhoneNumber] [char](11) NOT NULL,
+	[SuretyDiploma] [nvarchar](50) NOT NULL,
+	[SuretyJob] [nvarchar](50) NOT NULL,
+	[LoanType] [nvarchar](50) NOT NULL,
+	[RequestDate] [date] NOT NULL,
+	[RequestStatus] [bit] NOT NULL,
+ CONSTRAINT [PK_LoanREQ] PRIMARY KEY CLUSTERED 
+(
+	[RequestID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LoansHistory]    Script Date: 3/19/2024 10:30:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LoansHistory](
+	[LoanID] [int] NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[AccountID] [int] NOT NULL,
+	[LoanType] [nvarchar](50) NOT NULL,
+	[LoanAmount] [bigint] NOT NULL,
+	[LoanDate] [date] NOT NULL,
+	[LoanInstalments] [int] NOT NULL,
+	[RemainingAmount] [bigint] NOT NULL,
+ CONSTRAINT [PK_LoansHistory] PRIMARY KEY CLUSTERED 
+(
+	[LoanID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Messages]    Script Date: 3/19/2024 10:30:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Messages](
+	[MessageID] [int] NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[Message] [nvarchar](max) NOT NULL,
+	[PostageDate] [date] NOT NULL,
+	[MessageStatus] [bit] NOT NULL,
+ CONSTRAINT [PK_Messages] PRIMARY KEY CLUSTERED 
+(
+	[MessageID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PayingBills]    Script Date: 3/19/2024 10:30:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PayingBills](
+	[PayingID] [int] NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[SelectAccountID] [int] NOT NULL,
+	[BillID] [nchar](10) NOT NULL,
+	[PayId] [nchar](10) NOT NULL,
+	[BillAmount] [bigint] NOT NULL,
+	[PayingDate] [date] NOT NULL,
+ CONSTRAINT [PK_PayingBills] PRIMARY KEY CLUSTERED 
+(
+	[PayingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ReceiptChequeREQ]    Script Date: 3/19/2024 10:30:35 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ReceiptChequeREQ](
+	[RequestID] [int] IDENTITY(600001,1) NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[AccountID] [int] NOT NULL,
+	[RequestDate] [date] NOT NULL,
+	[ChequeSerialNum] [bigint] NOT NULL,
+	[ChequeDate] [date] NOT NULL,
+	[ChequeAmount] [bigint] NOT NULL,
+	[ReceiptChequeStatus] [bit] NOT NULL,
+ CONSTRAINT [PK_ReceiptChequeREQ] PRIMARY KEY CLUSTERED 
+(
+	[RequestID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RequestsHistory]    Script Date: 3/19/2024 10:30:35 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RequestsHistory](
+	[RequestID] [int] NOT NULL,
+	[CustomerID] [int] NULL,
+	[RequestDate] [date] NOT NULL,
+	[RequestStatus] [bit] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[StockCheque]    Script Date: 3/19/2024 10:30:35 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[StockCheque](
+	[StockChequeID] [int] NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[AccountID] [int] NOT NULL,
+	[StockCheque] [int] NOT NULL,
+ CONSTRAINT [PK_StockCheque] PRIMARY KEY CLUSTERED 
+(
+	[StockChequeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Suggestions]    Script Date: 3/19/2024 10:30:35 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Suggestions](
+	[SuggestionID] [int] NOT NULL,
+	[SuggestionDate] [date] NOT NULL,
+	[Suggestion] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_Suggestions] PRIMARY KEY CLUSTERED 
+(
+	[SuggestionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Transactions]    Script Date: 3/19/2024 10:30:35 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Transactions](
+	[TransactionID] [int] NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[TransactionType] [nvarchar](50) NOT NULL,
+	[SenderAccountNum] [nchar](8) NOT NULL,
+	[RecipientAccountNum] [nchar](8) NOT NULL,
+	[TransactionAmount] [bigint] NOT NULL,
+	[TransactionDate] [date] NOT NULL,
+ CONSTRAINT [PK_Transactions] PRIMARY KEY CLUSTERED 
+(
+	[TransactionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[BankAccounts] ON 
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10001, 1001, N'38911001', N'قرض الحسنه جاری', 20000000, NULL, NULL, 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10002, 1001, N'38922501', N'قرض الحسنه سپرده', 150000000, NULL, NULL, 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10003, 1001, N'38935001', N'سپرده کوتاه مدت', 50000000, 5, CAST(N'2026-10-07' AS Date), 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10004, 1001, N'38947501', N'سپرده بلند مدت', 100000000, 23, CAST(N'2025-03-16' AS Date), 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10005, 1002, N'38911002', N'قرض الحسنه جاری', 50000000, NULL, NULL, 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10006, 1002, N'38922502', N'قرض الحسنه سپرده', 200000000, NULL, NULL, 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10007, 1002, N'38935002', N'سپرده کوتاه مدت', 150000000, 5, CAST(N'2026-12-12' AS Date), 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10008, 1002, N'38947502', N'سپرده بلند مدت', 250000000, 23, CAST(N'2025-08-19' AS Date), 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10009, 1003, N'38911003', N'قرض الحسنه جاری', 1000000000, NULL, NULL, 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10010, 1003, N'38922503', N'قرض الحسنه سپرده', 2000000000, NULL, NULL, 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10011, 1003, N'38935003', N'سپرده کوتاه مدت', 3000000000, 5, CAST(N'2026-11-05' AS Date), 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10012, 1003, N'38947503', N'سپرده بلند مدت', 5000000000, 23, CAST(N'2025-05-25' AS Date), 1)
+GO
+SET IDENTITY_INSERT [dbo].[BankAccounts] OFF
+GO
+SET IDENTITY_INSERT [dbo].[CreateAccountREQ] ON 
+GO
+INSERT [dbo].[CreateAccountREQ] ([RequestID], [CustomerID], [AccountType], [CustomerUN], [CustomerPassword], [FirstName], [LastName], [NationalCode], [FatherName], [BirthDate], [BirthPlace], [PhoneNumber], [HomePhoneNumber], [HomeAddress], [PostCode], [RequestDate], [RequestStatus]) VALUES (100001, 1001, N'قرض الحسنه جاری', N'Hamed_nxt', N'hmnxt005', N'حامد', N'نوبخت', N'1363922874', N'حسن', CAST(N'2005-05-28' AS Date), N'تبریز', N'09054335214', N'04136584925', N'توانیر', N'5514236987', CAST(N'2024-03-17' AS Date), 0)
+GO
+INSERT [dbo].[CreateAccountREQ] ([RequestID], [CustomerID], [AccountType], [CustomerUN], [CustomerPassword], [FirstName], [LastName], [NationalCode], [FatherName], [BirthDate], [BirthPlace], [PhoneNumber], [HomePhoneNumber], [HomeAddress], [PostCode], [RequestDate], [RequestStatus]) VALUES (100002, 1001, N'قرض الحسنه سپرده', N'Hamed_nxt', N'hmnxt005', N'حامد', N'نوبخت', N'1363922874', N'حسن', CAST(N'2005-05-28' AS Date), N'تبریز', N'09054335214', N'04136584925', N'توانیر', N'5514236987', CAST(N'2024-03-17' AS Date), 0)
+GO
+SET IDENTITY_INSERT [dbo].[CreateAccountREQ] OFF
+GO
+SET IDENTITY_INSERT [dbo].[CustomersInfo] ON 
+GO
+INSERT [dbo].[CustomersInfo] ([CustomerID], [CustomerUN], [CustomerPassword], [FirstName], [LastName], [NationalCode], [FatherName], [BirthDate], [BirthPlace], [PhoneNumber], [HomePhoneNumber], [HomeAddress], [PostCode], [Access]) VALUES (1001, N'Hamed_nxt', N'hmnxt005', N'حامد', N'نوبخت', N'1363922874', N'حسن', CAST(N'2005-05-28' AS Date), N'تبریز', N'09054335214', N'04136584925', N'توانیر', N'5514236987', 1)
+GO
+INSERT [dbo].[CustomersInfo] ([CustomerID], [CustomerUN], [CustomerPassword], [FirstName], [LastName], [NationalCode], [FatherName], [BirthDate], [BirthPlace], [PhoneNumber], [HomePhoneNumber], [HomeAddress], [PostCode], [Access]) VALUES (1002, N'Elemental_EL', N'elyar1234', N'الیار', N'کردکتول', N'1363564132', N'هومن', CAST(N'2004-09-28' AS Date), N'تبریز', N'09391838573', N'04133568749', N'هفده شهریور', N'5585963217', 1)
+GO
+INSERT [dbo].[CustomersInfo] ([CustomerID], [CustomerUN], [CustomerPassword], [FirstName], [LastName], [NationalCode], [FatherName], [BirthDate], [BirthPlace], [PhoneNumber], [HomePhoneNumber], [HomeAddress], [PostCode], [Access]) VALUES (1003, N'Helia_nm', N'12345678', N'هلیا', N'نسیمی', N'4275678941', N'ابراهیم', CAST(N'2004-09-25' AS Date), N'زنجان', N'09195471712', N'04133256987', N'هفده شهریور', N'5874963215', 1)
+GO
+SET IDENTITY_INSERT [dbo].[CustomersInfo] OFF
+GO
+SET IDENTITY_INSERT [dbo].[EmployeesInfo] ON 
+GO
+INSERT [dbo].[EmployeesInfo] ([EmployeeID], [EmployeeUN], [EmployeePassword], [FirstName], [LastName], [NationalCode], [BirthDate], [BirthPlace], [PhoneNumber], [HomePhoneNumber], [HomeAddress], [PostCode], [EmployeePost], [Access]) VALUES (101, N'J.Tanha', N'weLoveJava', N'جعفر', N'تنها', N'1687895214', CAST(N'1980-06-15' AS Date), N'بناب', N'09145003607', N'04135698741', N'ولیعصر', N'5469871230', N'مدیر', 1)
+GO
+INSERT [dbo].[EmployeesInfo] ([EmployeeID], [EmployeeUN], [EmployeePassword], [FirstName], [LastName], [NationalCode], [BirthDate], [BirthPlace], [PhoneNumber], [HomePhoneNumber], [HomeAddress], [PostCode], [EmployeePost], [Access]) VALUES (102, N'hmnNF', N'hamed1234', N'حامد', N'نوبخت', N'1363922874', CAST(N'2005-05-28' AS Date), N'تبریز', N'09054335214', N'04136584925', N'توانیر', N'5541236987', N'کارمند', 1)
+GO
+SET IDENTITY_INSERT [dbo].[EmployeesInfo] OFF
+GO
+ALTER TABLE [dbo].[BankAccounts]  WITH CHECK ADD  CONSTRAINT [FK_BankAccounts_CustomersInfo] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[BankAccounts] CHECK CONSTRAINT [FK_BankAccounts_CustomersInfo]
+GO
+ALTER TABLE [dbo].[BankCardREQ]  WITH CHECK ADD  CONSTRAINT [FK_BankCardREQ_BankAccounts] FOREIGN KEY([SelectedAccountID])
+REFERENCES [dbo].[BankAccounts] ([AccountID])
+GO
+ALTER TABLE [dbo].[BankCardREQ] CHECK CONSTRAINT [FK_BankCardREQ_BankAccounts]
+GO
+ALTER TABLE [dbo].[BankCardREQ]  WITH CHECK ADD  CONSTRAINT [FK_BankCardREQ_CustomersInfo] FOREIGN KEY([CustomerId])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[BankCardREQ] CHECK CONSTRAINT [FK_BankCardREQ_CustomersInfo]
+GO
+ALTER TABLE [dbo].[BankCards]  WITH CHECK ADD  CONSTRAINT [FK_BankCards_BankAccounts] FOREIGN KEY([AccountID])
+REFERENCES [dbo].[BankAccounts] ([AccountID])
+GO
+ALTER TABLE [dbo].[BankCards] CHECK CONSTRAINT [FK_BankCards_BankAccounts]
+GO
+ALTER TABLE [dbo].[BankCards]  WITH CHECK ADD  CONSTRAINT [FK_BankCards_CustomersInfo] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[BankCards] CHECK CONSTRAINT [FK_BankCards_CustomersInfo]
+GO
+ALTER TABLE [dbo].[ChargingHistory]  WITH CHECK ADD  CONSTRAINT [FK_ChargingHistory_BankAccounts] FOREIGN KEY([AccountID])
+REFERENCES [dbo].[BankAccounts] ([AccountID])
+GO
+ALTER TABLE [dbo].[ChargingHistory] CHECK CONSTRAINT [FK_ChargingHistory_BankAccounts]
+GO
+ALTER TABLE [dbo].[ChargingHistory]  WITH CHECK ADD  CONSTRAINT [FK_ChargingHistory_CustomersInfo] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[ChargingHistory] CHECK CONSTRAINT [FK_ChargingHistory_CustomersInfo]
+GO
+ALTER TABLE [dbo].[CheckBookREQ]  WITH CHECK ADD  CONSTRAINT [FK_CheckBookREQ_BankAccounts] FOREIGN KEY([AccountID])
+REFERENCES [dbo].[BankAccounts] ([AccountID])
+GO
+ALTER TABLE [dbo].[CheckBookREQ] CHECK CONSTRAINT [FK_CheckBookREQ_BankAccounts]
+GO
+ALTER TABLE [dbo].[CheckBookREQ]  WITH CHECK ADD  CONSTRAINT [FK_CheckBookREQ_CustomersInfo] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[CheckBookREQ] CHECK CONSTRAINT [FK_CheckBookREQ_CustomersInfo]
+GO
+ALTER TABLE [dbo].[ChequeHistory]  WITH CHECK ADD  CONSTRAINT [FK_ChequeHistory_BankAccounts] FOREIGN KEY([AccountID])
+REFERENCES [dbo].[BankAccounts] ([AccountID])
+GO
+ALTER TABLE [dbo].[ChequeHistory] CHECK CONSTRAINT [FK_ChequeHistory_BankAccounts]
+GO
+ALTER TABLE [dbo].[ChequeHistory]  WITH CHECK ADD  CONSTRAINT [FK_ChequeHistory_CustomersInfo] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[ChequeHistory] CHECK CONSTRAINT [FK_ChequeHistory_CustomersInfo]
+GO
+ALTER TABLE [dbo].[CreateAccountREQ]  WITH CHECK ADD  CONSTRAINT [FK_CreateAccountREQ_CustomersInfo] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[CreateAccountREQ] CHECK CONSTRAINT [FK_CreateAccountREQ_CustomersInfo]
+GO
+ALTER TABLE [dbo].[DeleteAccountREQ]  WITH CHECK ADD  CONSTRAINT [FK_DeleteAccountREQ_BankAccounts] FOREIGN KEY([AccountID])
+REFERENCES [dbo].[BankAccounts] ([AccountID])
+GO
+ALTER TABLE [dbo].[DeleteAccountREQ] CHECK CONSTRAINT [FK_DeleteAccountREQ_BankAccounts]
+GO
+ALTER TABLE [dbo].[DeleteAccountREQ]  WITH CHECK ADD  CONSTRAINT [FK_DeleteAccountREQ_CustomersInfo] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[DeleteAccountREQ] CHECK CONSTRAINT [FK_DeleteAccountREQ_CustomersInfo]
+GO
+ALTER TABLE [dbo].[LoanREQ]  WITH CHECK ADD  CONSTRAINT [FK_LoanREQ_BankAccounts] FOREIGN KEY([SelectedAccountID])
+REFERENCES [dbo].[BankAccounts] ([AccountID])
+GO
+ALTER TABLE [dbo].[LoanREQ] CHECK CONSTRAINT [FK_LoanREQ_BankAccounts]
+GO
+ALTER TABLE [dbo].[LoanREQ]  WITH CHECK ADD  CONSTRAINT [FK_LoanREQ_CustomersInfo] FOREIGN KEY([CutomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[LoanREQ] CHECK CONSTRAINT [FK_LoanREQ_CustomersInfo]
+GO
+ALTER TABLE [dbo].[LoansHistory]  WITH CHECK ADD  CONSTRAINT [FK_LoansHistory_BankAccounts] FOREIGN KEY([AccountID])
+REFERENCES [dbo].[BankAccounts] ([AccountID])
+GO
+ALTER TABLE [dbo].[LoansHistory] CHECK CONSTRAINT [FK_LoansHistory_BankAccounts]
+GO
+ALTER TABLE [dbo].[LoansHistory]  WITH CHECK ADD  CONSTRAINT [FK_LoansHistory_CustomersInfo] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[LoansHistory] CHECK CONSTRAINT [FK_LoansHistory_CustomersInfo]
+GO
+ALTER TABLE [dbo].[Messages]  WITH CHECK ADD  CONSTRAINT [FK_Messages_CustomersInfo] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[Messages] CHECK CONSTRAINT [FK_Messages_CustomersInfo]
+GO
+ALTER TABLE [dbo].[PayingBills]  WITH CHECK ADD  CONSTRAINT [FK_PayingBills_BankAccounts] FOREIGN KEY([SelectAccountID])
+REFERENCES [dbo].[BankAccounts] ([AccountID])
+GO
+ALTER TABLE [dbo].[PayingBills] CHECK CONSTRAINT [FK_PayingBills_BankAccounts]
+GO
+ALTER TABLE [dbo].[PayingBills]  WITH CHECK ADD  CONSTRAINT [FK_PayingBills_CustomersInfo] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[PayingBills] CHECK CONSTRAINT [FK_PayingBills_CustomersInfo]
+GO
+ALTER TABLE [dbo].[ReceiptChequeREQ]  WITH CHECK ADD  CONSTRAINT [FK_ReceiptChequeREQ_BankAccounts] FOREIGN KEY([AccountID])
+REFERENCES [dbo].[BankAccounts] ([AccountID])
+GO
+ALTER TABLE [dbo].[ReceiptChequeREQ] CHECK CONSTRAINT [FK_ReceiptChequeREQ_BankAccounts]
+GO
+ALTER TABLE [dbo].[ReceiptChequeREQ]  WITH CHECK ADD  CONSTRAINT [FK_ReceiptChequeREQ_CustomersInfo] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[ReceiptChequeREQ] CHECK CONSTRAINT [FK_ReceiptChequeREQ_CustomersInfo]
+GO
+ALTER TABLE [dbo].[RequestsHistory]  WITH CHECK ADD  CONSTRAINT [FK_RequestsHistory_CustomersInfo] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[RequestsHistory] CHECK CONSTRAINT [FK_RequestsHistory_CustomersInfo]
+GO
+ALTER TABLE [dbo].[StockCheque]  WITH CHECK ADD  CONSTRAINT [FK_StockCheque_BankAccounts] FOREIGN KEY([AccountID])
+REFERENCES [dbo].[BankAccounts] ([AccountID])
+GO
+ALTER TABLE [dbo].[StockCheque] CHECK CONSTRAINT [FK_StockCheque_BankAccounts]
+GO
+ALTER TABLE [dbo].[StockCheque]  WITH CHECK ADD  CONSTRAINT [FK_StockCheque_CustomersInfo] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[StockCheque] CHECK CONSTRAINT [FK_StockCheque_CustomersInfo]
+GO
+ALTER TABLE [dbo].[Transactions]  WITH CHECK ADD  CONSTRAINT [FK_Transactions_CustomersInfo] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+GO
+ALTER TABLE [dbo].[Transactions] CHECK CONSTRAINT [FK_Transactions_CustomersInfo]
+GO
