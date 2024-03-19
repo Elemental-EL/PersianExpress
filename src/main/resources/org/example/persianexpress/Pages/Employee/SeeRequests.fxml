@@ -14,7 +14,10 @@
    <children>
       <Pane prefHeight="100.0" prefWidth="800.0" styleClass="darkblue">
          <children>
-            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="700.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="686.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/persian-express-high-resolution-logo-white-transparent.png" />
+               </image></ImageView>
             <Label layoutX="277.0" layoutY="41.0" text="درخواست ها (فعال)" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />

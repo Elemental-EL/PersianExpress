@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="775.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.BossPanelController">
+<AnchorPane prefHeight="775.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.BossPanelController">
     <children>
         <Pane prefHeight="100.0" prefWidth="500.0" styleClass="darkblue">
             <children>
-                <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="400.0" pickOnBounds="true" preserveRatio="true" />
                 <Label layoutX="200.0" layoutY="41.0" text="پنل کاربری" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="24.0" />
@@ -25,6 +27,10 @@
                         </ImageView>
                     </children>
                 </Pane>
+                <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="393.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/persian-express-high-resolution-logo-white-transparent.png" />
+               </image></ImageView>
             </children></Pane>
         <Pane layoutY="100.0" prefHeight="75.0" prefWidth="500.0" styleClass="gray">
             <children>
