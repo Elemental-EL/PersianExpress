@@ -78,7 +78,7 @@ public class CustomersPanelController implements Initializable {
         int i = 0;
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
+            connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
             PreparedStatement statement = connection.prepareStatement("select *from BankAccounts");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
@@ -123,7 +123,7 @@ public class CustomersPanelController implements Initializable {
             }else if (Objects.equals(showAccountType.getValue(), "سپرده کوتاه مدت")) {
                 showAcountsVBox.getChildren().clear();
                 ShowSepordehKotah(sepordehAcc);
-            }else if (Objects.equals(showAccountType.getValue(), "قرض بلند مدت")) {
+            }else if (Objects.equals(showAccountType.getValue(), "سپرده بلند مدت")) {
                 showAcountsVBox.getChildren().clear();
                 ShowSepordehBoland(sepordehAcc);
             } else if (Objects.equals(showAccountType.getValue(), "همه حساب ها")) {

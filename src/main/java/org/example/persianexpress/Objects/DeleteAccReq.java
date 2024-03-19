@@ -20,11 +20,11 @@ public class DeleteAccReq extends Request{
         this.accID = accID;
     }
 
-    public String getSubstituteAccID() {
+    public String getSubstituteAccNum() {
         return substituteAccID;
     }
 
-    public void setSubstituteAccID(String substituteAccID) {
+    public void setSubstituteAccNum(String substituteAccID) {
         this.substituteAccID = substituteAccID;
     }
 }
