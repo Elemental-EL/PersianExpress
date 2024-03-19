@@ -19,6 +19,7 @@ public class HelloApplication extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Pages/hello-view.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Persian Express");
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("Images/persian-express-high-resolution-logo-transparent.png")));
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

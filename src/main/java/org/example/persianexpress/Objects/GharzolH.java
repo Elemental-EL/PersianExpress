@@ -1,5 +1,7 @@
 package org.example.persianexpress.Objects;
 
+import org.example.persianexpress.HelloController;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.Collection;
@@ -122,5 +124,17 @@ public class GharzolH {
         }
         statement.setBoolean(7,true);
         int resultSet = statement.executeUpdate();
+    }
+
+    public static ResultSet getAvailableAccsForTransaction(Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT AccountNumber FROM BankAccounts WHERE (AccountType = 'قرض الحسنه جاری' OR AccountType = 'سپرده کوتاه مدت' ) AND CustomerID = ?");
+        statement.setInt(1, HelloController.userID);
+        return statement.executeQuery();
+    }
+
+    public static ResultSet getAvailableDestsForTransaction(Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT AccountNumber From BankAccounts WHERE CustomerID != ?");
+        statement.setInt(1,HelloController.userID);
+        return statement.executeQuery();
     }
 }
