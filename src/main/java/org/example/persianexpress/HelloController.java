@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -26,7 +27,7 @@ public class HelloController {
     @FXML
     private TextField userText;
     @FXML
-    private TextField passwordText;
+    private PasswordField passwordText;
     @FXML
     private Label errorTXT;
     private String CustomerUserName;
