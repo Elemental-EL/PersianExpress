@@ -19,7 +19,10 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <ImageView fx:id="logoBtn" fitHeight="68.0" fitWidth="79.0" layoutX="398.0" layoutY="17.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="logoBtn" fitHeight="68.0" fitWidth="79.0" layoutX="407.0" layoutY="29.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/persian-express-high-resolution-logo-white-transparent.png" />
+               </image></ImageView>
             <Pane layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 25;" styleClass="gray">
                <children>
                   <ImageView fx:id="backBtn" fitHeight="30.0" fitWidth="30.0" layoutX="3.0" layoutY="5.0" onMouseClicked="#onBackClicked" pickOnBounds="true" preserveRatio="true">

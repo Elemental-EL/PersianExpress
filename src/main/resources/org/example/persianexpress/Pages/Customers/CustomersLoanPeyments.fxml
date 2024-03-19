@@ -22,7 +22,10 @@
                   </ImageView>
                </children>
             </Pane>
-            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="600.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="586.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/persian-express-high-resolution-logo-white-transparent.png" />
+               </image></ImageView>
             <Label layoutX="244.0" layoutY="41.0" text="اقساط وام (فعلی)" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="28.0" />

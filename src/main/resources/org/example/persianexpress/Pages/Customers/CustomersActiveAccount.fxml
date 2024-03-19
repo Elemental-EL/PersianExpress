@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.CustomersActiveAccountController">
    <children>
       <Pane prefHeight="100.0" prefWidth="800.0" styleClass="darkblue">
@@ -28,7 +27,10 @@
                   </ImageView>
                </children>
             </Pane>
-            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="700.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="686.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/persian-express-high-resolution-logo-white-transparent.png" />
+               </image></ImageView>
          </children>
       </Pane>
       <Pane layoutY="100.0" prefHeight="500.0" prefWidth="800.0" styleClass="backgroundColor">

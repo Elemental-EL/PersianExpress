@@ -16,7 +16,10 @@
    <children>
       <Pane prefHeight="75.0" prefWidth="700.0" styleClass="darkblue">
          <children>
-            <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="625.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="610.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/persian-express-high-resolution-logo-white-transparent.png" />
+               </image></ImageView>
          </children>
       </Pane>
       <Pane layoutY="75.0" prefHeight="50.0" prefWidth="700.0" styleClass="gray">
