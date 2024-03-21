@@ -1,5 +1,6 @@
 package org.example.persianexpress.Objects;
 
+import org.example.persianexpress.CustomersMoneyTransferController;
 import org.example.persianexpress.HelloController;
 
 import java.sql.*;
@@ -127,14 +128,51 @@ public class GharzolH {
     }
 
     public static ResultSet getAvailableAccsForTransaction(Connection connection) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("SELECT AccountNumber FROM BankAccounts WHERE (AccountType = 'قرض الحسنه جاری' OR AccountType = 'سپرده کوتاه مدت' ) AND CustomerID = ?");
+        PreparedStatement statement = connection.prepareStatement("SELECT AccountID , CustomerID , AccountNumber , AccountStock FROM BankAccounts WHERE (AccountType =N'قرض الحسنه جاری' OR AccountType =N'سپرده کوتاه مدت') AND CustomerID = ?");
         statement.setInt(1, HelloController.userID);
         return statement.executeQuery();
     }
 
     public static ResultSet getAvailableDestsForTransaction(Connection connection) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("SELECT AccountNumber From BankAccounts WHERE CustomerID != ?");
+        PreparedStatement statement = connection.prepareStatement("SELECT AccountID , CustomerID , AccountNumber , AccountStock From BankAccounts WHERE CustomerID != ?");
         statement.setInt(1,HelloController.userID);
         return statement.executeQuery();
+    }
+
+    public String getHolderName(Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT FirstName , LastName FROM CustomersInfo WHERE CustomerID = ?");
+        statement.setInt(1,this.accHolderUID);
+        ResultSet resultSet = statement.executeQuery();
+        String holderName="";
+        while (resultSet.next()){
+            holderName = resultSet.getNString("FirstName");
+            holderName+= " "+resultSet.getNString("LastName");
+        }
+        return holderName;
+    }
+
+    public void updateBalance(Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE BankAccounts SET AccountStock = ? WHERE AccountID = ?");
+        statement.setLong(1,this.accBalance);
+        statement.setInt(2,this.accUID);
+        int resultSet = statement.executeUpdate();
+    }
+
+    public static int submitTransaction(Sepordeh acc, String type, Connection connection, LocalDate nowsDate) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO Transactions (CustomerID,TransactionType,SenderAccountNum,RecipientAccountNum,TransactionAmount,TransactionDate) VALUES (?,?,?,?,?,?)");
+        statement.setInt(1, acc.getAccHolderUID());
+        statement.setNString(2, type);
+        statement.setNString(3, CustomersMoneyTransferController.orgAcc.getAccNumber());
+        statement.setNString(4,CustomersMoneyTransferController.destAcc.getAccNumber());
+        statement.setLong(5,CustomersMoneyTransferController.amount);
+        statement.setDate(6, Date.valueOf(nowsDate));
+        int resultSet = statement.executeUpdate();
+        PreparedStatement statement1 = connection.prepareStatement("SELECT TOP 1 TransactionID FROM Transactions ORDER BY TransactionID DESC");
+        ResultSet resultSet1 = statement1.executeQuery();
+        int TID =0;
+        while (resultSet1.next()){
+            TID = resultSet1.getInt("TransactionID");
+        }
+        return TID;
     }
 }
