@@ -4,9 +4,9 @@ import org.example.persianexpress.CustomersMoneyTransferController;
 import org.example.persianexpress.HelloController;
 
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Random;
+import java.util.*;
 
 public class GharzolH {
     private int accUID;
@@ -23,6 +23,7 @@ public class GharzolH {
         this.accUID = accUID;
         this.accHolderUID = accHolderUID;
     }
+
 
     public int getAccUID() {
         return accUID;
@@ -128,13 +129,13 @@ public class GharzolH {
     }
 
     public static ResultSet getAvailableAccsForTransaction(Connection connection) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("SELECT AccountID , CustomerID , AccountNumber , AccountStock FROM BankAccounts WHERE (AccountType =N'قرض الحسنه جاری' OR AccountType =N'سپرده کوتاه مدت') AND CustomerID = ?");
+        PreparedStatement statement = connection.prepareStatement("SELECT AccountID , CustomerID , AccountNumber , AccountStock FROM BankAccounts WHERE (AccountType =N'قرض الحسنه جاری' OR AccountType =N'سپرده کوتاه مدت') AND CustomerID = ? AND AccountAccess = 1");
         statement.setInt(1, HelloController.userID);
         return statement.executeQuery();
     }
 
     public static ResultSet getAvailableDestsForTransaction(Connection connection) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("SELECT AccountID , CustomerID , AccountNumber , AccountStock From BankAccounts WHERE CustomerID != ?");
+        PreparedStatement statement = connection.prepareStatement("SELECT AccountID , CustomerID , AccountNumber , AccountStock From BankAccounts WHERE CustomerID != ? AND AccountAccess = 1");
         statement.setInt(1,HelloController.userID);
         return statement.executeQuery();
     }
@@ -149,6 +150,28 @@ public class GharzolH {
             holderName+= " "+resultSet.getNString("LastName");
         }
         return holderName;
+    }
+
+    public String getAccountNumber (Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT AccountNumber FROM BankAccounts WHERE AccountID=?");
+        statement.setInt(1,this.accUID);
+        ResultSet resultSet = statement.executeQuery();
+        String accNum="";
+        while (resultSet.next()){
+            accNum = resultSet.getNString("AccountNumber");
+        }
+        return accNum;
+    }
+
+    public static int getAccountUID(String accNumber,Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT AccountID FROM BankAccounts WHERE AccountNumber = ?");
+        statement.setNString(1,accNumber);
+        ResultSet resultSet = statement.executeQuery();
+        int accID = 0;
+        while (resultSet.next()){
+            accID = resultSet.getInt("AccountID");
+        }
+        return accID;
     }
 
     public void updateBalance(Connection connection) throws SQLException {
@@ -174,5 +197,36 @@ public class GharzolH {
             TID = resultSet1.getInt("TransactionID");
         }
         return TID;
+    }
+
+    public static String[] getValidAccNumsForCheque(Connection connection) throws SQLException {
+        PreparedStatement statement1 = connection.prepareStatement("SELECT AccountID FROM StockCheque WHERE CustomerID = ?");
+        statement1.setInt(1,HelloController.userID);
+        ResultSet resultSet1 = statement1.executeQuery();
+        ArrayList<Integer> illegalAccs = new ArrayList<>();
+        while (resultSet1.next()){
+            illegalAccs.add(resultSet1.getInt("AccountID"));
+        }
+        PreparedStatement statement2 = connection.prepareStatement("SELECT AccountID FROM BankAccounts WHERE CustomerID = ? AND AccountType =N'قرض الحسنه جاری' AND AccountAccess = 1");
+        statement2.setInt(1,HelloController.userID);
+        ResultSet resultSet2 = statement2.executeQuery();
+        ArrayList<Integer> availableAccs = new ArrayList<>();
+        while (resultSet2.next()){
+            availableAccs.add(resultSet2.getInt("AccountID"));
+        }
+        ArrayList<Integer> validAccs = new ArrayList<>();
+        for (int acc : availableAccs){
+            if (!illegalAccs.contains(acc)){
+                validAccs.add(acc);
+            }
+        }
+        String[] accs = new String[1000];
+        accs[0] = "انتخاب کنید";
+        int i=1;
+        for (int accN : validAccs){
+            GharzolH acc = new GharzolH(accN,HelloController.userID);
+            accs[i++] = acc.getAccountNumber(connection);
+        }
+        return Arrays.stream(accs).filter(Objects::nonNull).toArray(String[]::new);
     }
 }

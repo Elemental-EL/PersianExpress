@@ -13,10 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.persianexpress.Objects.CreateAccReq;
-import org.example.persianexpress.Objects.GharzolH;
-import org.example.persianexpress.Objects.Request;
-import org.example.persianexpress.Objects.User;
+import org.example.persianexpress.Objects.*;
 
 import java.io.IOException;
 import java.sql.*;
@@ -33,13 +30,12 @@ public class EmployeeSeeOneRequestController {
     private Connection connection;
     private ResultSet resultSet;
     private LocalDate nowsDate = LocalDate.now();
+    private String reqType;
 
     public void initialize() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
+        connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
         resultSet = Request.getReq(connection,EmployeeSeeRequestsController.REQID);
-
-
-
+        reqType = Request.getReqType(EmployeeSeeRequestsController.REQID);
         mainPane.setPrefHeight(418);
         mainVBox.setPrefHeight(418);
         if (Objects.equals(Request.getReqType(EmployeeSeeRequestsController.REQID), "CreateAccountREQ")){
@@ -70,7 +66,7 @@ public class EmployeeSeeOneRequestController {
 
     public void onRejectClicked(ActionEvent event) throws SQLException, IOException {
         Request.passToHistory(connection, resultSet, false);
-        Request.deleteFromCreateAccountREQ(connection, resultSet);
+        Request.deleteFromREQS(connection, resultSet,reqType);
         Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeRequests.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -82,14 +78,14 @@ public class EmployeeSeeOneRequestController {
     }
 
     public void onConfirmClicked(ActionEvent event) throws SQLException, IOException {
-        String reqType = Request.getReqType(EmployeeSeeRequestsController.REQID);
+        resultSet.beforeFirst();
         if (reqType.equals("CreateAccountREQ")){
             while (resultSet.next()) {
                 if (resultSet.getInt("CustomerID") == 100) {
                     int uID = User.createUser(connection, resultSet);
                     GharzolH.createBankAcc(connection, uID, GharzolH.generateAccNum(connection, resultSet.getNString("AccountType")), resultSet.getNString("AccountType"), nowsDate);
                     Request.passToHistory(connection, resultSet, true);
-                    Request.deleteFromCreateAccountREQ(connection, resultSet);
+                    Request.deleteFromREQS(connection, resultSet,reqType);
                     Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeRequests.fxml"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
@@ -101,7 +97,7 @@ public class EmployeeSeeOneRequestController {
                 } else {
                     GharzolH.createBankAcc(connection, resultSet.getInt("CustomerID"), GharzolH.generateAccNum(connection, resultSet.getNString("AccountType")), resultSet.getNString("AccountType"), nowsDate);
                     Request.passToHistory(connection, resultSet, true);
-                    Request.deleteFromCreateAccountREQ(connection, resultSet);
+                    Request.deleteFromREQS(connection, resultSet, reqType);
                     Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeRequests.fxml"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
@@ -111,6 +107,20 @@ public class EmployeeSeeOneRequestController {
                     stage.show();
                     stage.centerOnScreen();
                 }
+            }
+        } else if (reqType.equals("CheckBookREQ")) {
+            while (resultSet.next()){
+                CheckBookReq.createChequeStock(connection, resultSet);
+                Request.passToHistory(connection, resultSet, true);
+                Request.deleteFromREQS(connection,resultSet,reqType);
+                Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeRequests.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setTitle("Persian Express");
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                stage.centerOnScreen();
             }
         }
     }
