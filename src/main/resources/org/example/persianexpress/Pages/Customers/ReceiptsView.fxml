@@ -24,7 +24,7 @@
             </Label>
             <Pane layoutX="14.0" layoutY="14.0" onMouseClicked="#onBackClicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 25;" styleClass="gray">
                <children>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="2.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="backBtn" fitHeight="30.0" fitWidth="30.0" layoutX="2.0" layoutY="5.0" onMouseClicked="#onBackClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../Images/exit.png" />
                      </image>
@@ -73,7 +73,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="originAccHolderTxt" layoutX="70.0" layoutY="161.0" prefHeight="30.0" prefWidth="225.0" styleClass="gray">
+      <Label fx:id="originAccHolderTxt" alignment="CENTER_RIGHT" layoutX="70.0" layoutY="161.0" prefHeight="30.0" prefWidth="225.0" styleClass="gray" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -83,7 +83,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="destAccHolderTxt" layoutX="70.0" layoutY="249.0" prefHeight="30.0" prefWidth="225.0" styleClass="gray">
+      <Label fx:id="destAccHolderTxt" alignment="CENTER_RIGHT" layoutX="70.0" layoutY="249.0" prefHeight="30.0" prefWidth="225.0" styleClass="gray" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -103,7 +103,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="198.0" layoutY="440.0" mnemonicParsing="false" onMouseClicked="#onPrintReceipt" prefHeight="30.0" prefWidth="104.0" style="-fx-background-radius: 5;" text="چاپ رسید" textFill="WHITE">
+      <Button fx:id="returnToMP" layoutX="165.0" layoutY="441.0" mnemonicParsing="false" onAction="#onReturnToMPClicked" prefHeight="31.0" prefWidth="170.0" style="-fx-background-radius: 5;" text="بازگشت به صفحه اصلی" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

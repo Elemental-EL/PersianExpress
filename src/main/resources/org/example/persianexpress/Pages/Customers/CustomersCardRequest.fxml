@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="700.0" prefWidth="600.0" styleClass="backgroundColor" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.CustomersCardRequestController">
     <children>
@@ -48,7 +49,7 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="firstNameText" alignment="CENTER_RIGHT" layoutX="131.0" layoutY="195.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
+        <TextField fx:id="firstNameText" alignment="CENTER_RIGHT" editable="false" layoutX="131.0" layoutY="195.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -58,7 +59,7 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="familyNameText" alignment="CENTER_RIGHT" layoutX="131.0" layoutY="235.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
+        <TextField fx:id="familyNameText" alignment="CENTER_RIGHT" editable="false" layoutX="131.0" layoutY="235.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -68,7 +69,7 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="nCodeText" layoutX="131.0" layoutY="274.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
+        <TextField fx:id="nCodeText" editable="false" layoutX="131.0" layoutY="274.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -78,13 +79,13 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <DatePicker fx:id="bDate" layoutX="131.0" layoutY="313.0" prefHeight="30.0" prefWidth="280.0" />
+        <DatePicker fx:id="bDate" editable="false" layoutX="131.0" layoutY="313.0" prefHeight="30.0" prefWidth="280.0" />
         <Label layoutX="426.0" layoutY="355.0" text="نام پدر:" textAlignment="RIGHT">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="fatherNameText" alignment="CENTER_RIGHT" layoutX="131.0" layoutY="351.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
+        <TextField fx:id="fatherNameText" alignment="CENTER_RIGHT" editable="false" layoutX="131.0" layoutY="351.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -94,7 +95,7 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="bPlaceText" alignment="CENTER_RIGHT" layoutX="131.0" layoutY="392.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
+        <TextField fx:id="bPlaceText" alignment="CENTER_RIGHT" editable="false" layoutX="131.0" layoutY="392.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -104,7 +105,7 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <TextArea fx:id="addressText" layoutX="132.0" layoutY="431.0" prefHeight="39.0" prefWidth="280.0" styleClass="gray" text="&#10;">
+        <TextArea fx:id="addressText" editable="false" layoutX="132.0" layoutY="431.0" prefHeight="39.0" prefWidth="280.0" styleClass="gray" text="&#10;">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -114,7 +115,7 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="codePText" layoutX="131.0" layoutY="479.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
+        <TextField fx:id="codePText" editable="false" layoutX="131.0" layoutY="479.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -124,7 +125,7 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="mPhoneText" layoutX="131.0" layoutY="519.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
+        <TextField fx:id="mPhoneText" editable="false" layoutX="131.0" layoutY="519.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -134,7 +135,7 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="hPhoneText" layoutX="131.0" layoutY="559.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
+        <TextField fx:id="hPhoneText" editable="false" layoutX="131.0" layoutY="559.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -150,5 +151,10 @@
             <String fx:value="zoom" />
          </styleClass>
         </Button>
+      <Text fx:id="errorText" fill="RED" layoutX="41.0" layoutY="611.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="518.1367492675781">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>

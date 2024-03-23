@@ -63,7 +63,7 @@ public class Request {
             } else if (reqID/100000==6) {
                query = "select * from ReceiptChequeREQ where RequestID = ?";
             }
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             statement.setInt(1,reqID);
             return statement.executeQuery();
         }
@@ -101,8 +101,9 @@ public class Request {
         int resultSetN = statement.executeUpdate();
     }
 
-    public static void deleteFromCreateAccountREQ(Connection connection, ResultSet resultSet) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("DELETE FROM CreateAccountReq WHERE RequestID = ?");
+    public static void deleteFromREQS (Connection connection, ResultSet resultSet, String reqType) throws SQLException {
+        String query = "DELETE FROM "+reqType+" WHERE RequestID = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, resultSet.getInt("RequestID"));
         int resultSetN = statement.executeUpdate();
     }

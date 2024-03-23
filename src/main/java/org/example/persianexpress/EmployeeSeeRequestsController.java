@@ -2,6 +2,7 @@ package org.example.persianexpress;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,6 +19,7 @@ import org.example.persianexpress.Objects.*;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class EmployeeSeeRequestsController {
     private Stage stage;
@@ -28,7 +30,7 @@ public class EmployeeSeeRequestsController {
     private AnchorPane mainPane;
     @FXML
     private VBox mainVBox;
-
+    private Connection connection;
     public static int REQID = 100;
     public void initialize() throws SQLException {
         String[] REQType = new String[]{"همه درخواست ها" , "ایجاد حساب جدید" , "بستن حساب" , "کارت بانکی" , "وام" , "دسته چک" , "وصول چک"};
@@ -42,7 +44,7 @@ public class EmployeeSeeRequestsController {
         ArrayList<CheckBookReq> CheckBookREQ = new ArrayList<>();
         ArrayList<Receipt> ReceiptChequeREQ = new ArrayList<>();
 
-        Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
+        connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
         PreparedStatement statement1 = connection.prepareStatement("select *from CreateAccountREQ");
         ResultSet resultSet1 = statement1.executeQuery();
         while (resultSet1.next()){
@@ -64,7 +66,7 @@ public class EmployeeSeeRequestsController {
         while (resultSet2.next()){
             DeleteAccReq accREQ = new DeleteAccReq(resultSet2.getInt("RequestID") , resultSet2.getInt("CustomerID"));
             accREQ.setAccID(resultSet2.getInt("AccountID"));
-            accREQ.setSubstituteAccID(resultSet2.getNString("SubstituteAccount"));
+            accREQ.setSubstituteAccNum(resultSet2.getNString("SubstituteAccount"));
             accREQ.setReqDate(resultSet2.getDate("RequestDate"));
             DeleteAccREQ.add(accREQ);
         }
@@ -118,6 +120,54 @@ public class EmployeeSeeRequestsController {
         }
 
         ShowAllREQ(CreateAccREQ , DeleteAccREQ , CardREQ , LoanREQ , CheckBookREQ , ReceiptChequeREQ);
+        RequestTypeBox.setOnAction(event -> {
+            if (Objects.equals(RequestTypeBox.getValue(), "همه درخواست ها")){
+                mainVBox.getChildren().clear();
+                try {
+                    ShowAllREQ(CreateAccREQ , DeleteAccREQ , CardREQ , LoanREQ , CheckBookREQ , ReceiptChequeREQ);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (Objects.equals(RequestTypeBox.getValue(), "ایجاد حساب جدید")) {
+                mainVBox.getChildren().clear();
+                ShowCreateAccREQ(CreateAccREQ);
+            } else if (Objects.equals(RequestTypeBox.getValue(), "بستن حساب")) {
+                mainVBox.getChildren().clear();
+                try {
+                    ShowDeleteAccREQ(DeleteAccREQ);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (Objects.equals(RequestTypeBox.getValue(), "کارت بانکی")) {
+                mainVBox.getChildren().clear();
+                try {
+                    ShowCardREQ(CardREQ);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (Objects.equals(RequestTypeBox.getValue(), "وام")) {
+                mainVBox.getChildren().clear();
+                try {
+                    ShowLoanREQ(LoanREQ);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (Objects.equals(RequestTypeBox.getValue(), "دسته چک")) {
+                mainVBox.getChildren().clear();
+                try {
+                    ShowCheckBookREQ(CheckBookREQ);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (Objects.equals(RequestTypeBox.getValue(), "وصول چک")) {
+                mainVBox.getChildren().clear();
+                try {
+                    ShowReceiptChequeREQ(ReceiptChequeREQ);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
     public void onBackClicked(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/EmployeePanel.fxml"));
@@ -130,7 +180,14 @@ public class EmployeeSeeRequestsController {
         stage.centerOnScreen();
     }
 
-    private void ShowAllREQ(ArrayList<CreateAccReq> CreateAccREQ , ArrayList<DeleteAccReq> DeleteAccREQ , ArrayList<CardReq> CardREQ , ArrayList<LoanReq> LoanREQ , ArrayList<CheckBookReq> CheckBookREQ , ArrayList<Receipt> ReceiptChequeREQ){
+    private void ShowAllREQ(ArrayList<CreateAccReq> CreateAccREQ , ArrayList<DeleteAccReq> DeleteAccREQ , ArrayList<CardReq> CardREQ , ArrayList<LoanReq> LoanREQ , ArrayList<CheckBookReq> CheckBookREQ , ArrayList<Receipt> ReceiptChequeREQ) throws SQLException {
+        mainVBox.setPrefHeight(500);
+        mainPane.setPrefHeight(500);
+        int i = CreateAccREQ.size() + DeleteAccREQ.size() + CardREQ.size() +LoanREQ.size() + CheckBookREQ.size() + ReceiptChequeREQ.size();
+        if (i > 2){
+            mainPane.setPrefHeight(mainPane.getPrefHeight() + 240*(i-2));
+            mainVBox.setPrefHeight(mainVBox.getPrefHeight() + 240*(i-2));
+        }
         for (CreateAccReq createAcc: CreateAccREQ) {
             Label requestTypelbl = new Label("نوع درخواست :");
             Label requestTypetxt = new Label("ایجاد حساب جدید");
@@ -138,18 +195,32 @@ public class EmployeeSeeRequestsController {
             Label selectedAccTypeTxt = new Label(createAcc.getAccType());
             Label userFNamelbl = new Label("نام و نام خانوادگی :");
             Label userFNametxt = new Label(createAcc.getfName() + " " + createAcc.getlName());
-            Label requestDatelbl = new Label("تاریخ ثبت درخواست");
+            Label requestDatelbl = new Label("تاریخ ثبت درخواست :");
             Label requestDatetxt = new Label(String.valueOf(createAcc.getReqDate()));
             Button seeRequest = new Button("مشاهده درخواست");
+            requestTypelbl.getStyleClass().add("labels1");
+            requestTypetxt.getStyleClass().add("labels1");
+            requestDatelbl.getStyleClass().add("labels1");
+            requestDatetxt.getStyleClass().add("labels1");
+            selectedAccTypelbl.getStyleClass().add("labels1");
+            selectedAccTypeTxt.getStyleClass().add("labels1");
+            userFNametxt.getStyleClass().add("labels1");
+            userFNamelbl.getStyleClass().add("labels1");
+            seeRequest.getStyleClass().addAll("seeRequestBtn" , "zoom");
             VBox vBox1 = new VBox(4);
             VBox vBox2 = new VBox(4);
             vBox1.getChildren().addAll(requestTypelbl , selectedAccTypelbl , userFNamelbl , requestDatelbl );
             vBox2.getChildren().addAll(requestTypetxt , selectedAccTypeTxt , userFNametxt , requestDatetxt );
+            vBox1.setAlignment(Pos.CENTER_RIGHT);
             BorderPane borderPane1 = new BorderPane();
             borderPane1.setRight(vBox1);
             borderPane1.setLeft(vBox2);
             BorderPane borderPane2 = new BorderPane();
+            BorderPane spacePane = new BorderPane();
             borderPane2.setCenter(seeRequest);
+            borderPane1.getStyleClass().addAll("gray" , "CPBorderPane1");
+            borderPane2.getStyleClass().addAll("gray" , "CPBorderPane1");
+            spacePane.setStyle("-fx-pref-height: 20");
             seeRequest.setOnAction(event -> {
                 REQID = createAcc.getReqID();
                 Parent root = null;
@@ -165,8 +236,809 @@ public class EmployeeSeeRequestsController {
                 stage.show();
                 stage.centerOnScreen();
             });
-            mainVBox.getChildren().add(borderPane1);
-            mainVBox.getChildren().add(borderPane2);
+            mainVBox.getChildren().addAll(borderPane1 , borderPane2 , spacePane);
         }
+        for (DeleteAccReq deleteAcc: DeleteAccREQ) {
+            String firstName = new String();
+            String lastName = new String();
+            PreparedStatement statement = connection.prepareStatement("select FirstName , LastName from CustomersInfo where CustomerID = ?");
+            statement.setInt(1 , deleteAcc.getReqerID());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                firstName = resultSet.getNString("FirstName");
+                lastName = resultSet.getNString("LastName");
+            }
+            String accNum = new String();
+            PreparedStatement statement1 = connection.prepareStatement("select AccountNumber from BankAccounts where AccountID = ? ");
+            statement1.setInt(1 , deleteAcc.getAccID());
+            ResultSet resultSet1 = statement1.executeQuery();
+            while (resultSet1.next()){
+                accNum = resultSet1.getNString("AccountNumber");
+            }
+            //
+            Label requestTypelbl = new Label("نوع درخواست :");
+            Label requestTypetxt = new Label("بستن حساب");
+            Label userFNamelbl = new Label("نام و نام خانوادگی :");
+            Label userFNameTxt = new Label(firstName + " " + lastName);
+            Label firstAcclbl = new Label("حساب اصلی :");
+            Label firstAccTxt = new Label(accNum);
+            Label secondAcclbl = new Label("حساب جایگزین :");
+            Label secondAccTxt = new Label(deleteAcc.getSubstituteAccNum());
+            Label requestDatelbl = new Label("تاریخ ثبت درخواست :");
+            Label requestDatetxt = new Label(String.valueOf(deleteAcc.getReqDate()));
+            Button seeRequest = new Button("مشاهده درخواست");
+            requestTypelbl.getStyleClass().add("labels1");
+            requestTypetxt.getStyleClass().add("labels1");
+            userFNamelbl.getStyleClass().add("labels1");
+            userFNameTxt.getStyleClass().add("labels1");
+            firstAcclbl.getStyleClass().add("labels1");
+            firstAccTxt.getStyleClass().add("labels1");
+            secondAcclbl.getStyleClass().add("labels1");
+            secondAccTxt.getStyleClass().add("labels1");
+            requestDatelbl.getStyleClass().add("labels1");
+            requestDatetxt.getStyleClass().add("labels1");
+            seeRequest.getStyleClass().addAll("seeRequestBtn" , "zoom");
+            VBox vBox1 = new VBox(5);
+            VBox vBox2 = new VBox(5);
+            vBox1.setAlignment(Pos.CENTER_RIGHT);
+            vBox1.getChildren().addAll(requestTypelbl , userFNamelbl , firstAcclbl , secondAcclbl , requestDatelbl);
+            vBox2.getChildren().addAll(requestTypetxt , userFNameTxt , firstAccTxt , secondAccTxt , requestDatetxt);
+            BorderPane borderPane1 = new BorderPane();
+            borderPane1.setRight(vBox1);
+            borderPane1.setLeft(vBox2);
+            BorderPane borderPane2 = new BorderPane();
+            borderPane2.setCenter(seeRequest);
+            BorderPane spacePane = new BorderPane();
+            borderPane1.getStyleClass().addAll("gray" , "CPBorderPane1");
+            borderPane2.getStyleClass().addAll("gray" , "CPBorderPane1");
+            spacePane.setStyle("-fx-pref-height: 20");
+            seeRequest.setOnAction(event -> {
+                REQID = deleteAcc.getReqID();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeOneRequest.fxml"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                stage.centerOnScreen();
+            });
+            mainVBox.getChildren().addAll(borderPane1 , borderPane2 , spacePane);
+        }
+        for (CardReq cardreq: CardREQ) {
+            String firstName = new String();
+            String lastName = new String();
+            PreparedStatement statement = connection.prepareStatement("select FirstName , LastName from CustomersInfo where CustomerID = ?");
+            statement.setInt(1 , cardreq.getReqerID());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                firstName = resultSet.getNString("FirstName");
+                lastName = resultSet.getNString("LastName");
+            }
+            String accNum = new String();
+            PreparedStatement statement1 = connection.prepareStatement("select AccountNumber from BankAccounts where AccountID = ? ");
+            statement1.setInt(1 , cardreq.getAccID());
+            ResultSet resultSet1 = statement1.executeQuery();
+            while (resultSet1.next()){
+                accNum = resultSet1.getNString("AccountNumber");
+            }
+            //
+            Label requestTypelbl = new Label("نوع درخواست :");
+            Label requestTypetxt = new Label("درخواست کارت بانکی");
+            Label userFNamelbl = new Label("نام و نام خانوادگی :");
+            Label userFNameTxt = new Label(firstName + " " + lastName);
+            Label accNumberlbl = new Label("حساب مبداء :");
+            Label accNumbertxt = new Label(accNum);
+            Label requestDatelbl = new Label("تاریخ ثبت درخواست :");
+            Label requestDatetxt = new Label(String.valueOf(cardreq.getReqDate()));
+            Button seeRequest = new Button("مشاهده درخواست");
+            requestTypelbl.getStyleClass().add("labels1");
+            requestTypetxt.getStyleClass().add("labels1");
+            userFNamelbl.getStyleClass().add("labels1");
+            userFNameTxt.getStyleClass().add("labels1");
+            accNumberlbl.getStyleClass().add("labels1");
+            accNumbertxt.getStyleClass().add("labels1");
+            requestDatelbl.getStyleClass().add("labels1");
+            requestDatetxt.getStyleClass().add("labels1");
+            seeRequest.getStyleClass().addAll("seeRequestBtn" , "zoom");
+            VBox vBox1 = new VBox(5);
+            VBox vBox2 = new VBox(5);
+            vBox1.setAlignment(Pos.CENTER_RIGHT);
+            vBox1.getChildren().addAll(requestTypelbl , userFNamelbl , accNumberlbl  , requestDatelbl);
+            vBox2.getChildren().addAll(requestTypetxt , userFNameTxt , accNumbertxt  , requestDatetxt);
+            BorderPane borderPane1 = new BorderPane();
+            borderPane1.setRight(vBox1);
+            borderPane1.setLeft(vBox2);
+            BorderPane borderPane2 = new BorderPane();
+            borderPane2.setCenter(seeRequest);
+            BorderPane spacePane = new BorderPane();
+            borderPane1.getStyleClass().addAll("gray" , "CPBorderPane1");
+            borderPane2.getStyleClass().addAll("gray" , "CPBorderPane1");
+            spacePane.setStyle("-fx-pref-height: 20");
+            seeRequest.setOnAction(event -> {
+                REQID = cardreq.getReqID();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeOneRequest.fxml"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                stage.centerOnScreen();
+            });
+            mainVBox.getChildren().addAll(borderPane1 , borderPane2 , spacePane);
+        }
+        for (LoanReq loanreq: LoanREQ) {
+            String firstName = new String();
+            String lastName = new String();
+            PreparedStatement statement = connection.prepareStatement("select FirstName , LastName from CustomersInfo where CustomerID = ?");
+            statement.setInt(1 , loanreq.getReqerID());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                firstName = resultSet.getNString("FirstName");
+                lastName = resultSet.getNString("LastName");
+            }
+            String accNum = new String();
+            PreparedStatement statement1 = connection.prepareStatement("select AccountNumber from BankAccounts where AccountID = ? ");
+            statement1.setInt(1 , loanreq.getAccID());
+            ResultSet resultSet1 = statement1.executeQuery();
+            while (resultSet1.next()){
+                accNum = resultSet1.getNString("AccountNumber");
+            }
+            Label requestTypelbl = new Label("نوع درخواست :");
+            Label requestTypetxt = new Label("درخواست وام");
+            Label userFNamelbl = new Label("نام و نام خانوادگی :");
+            Label userFNameTxt = new Label(firstName + " " + lastName);
+            Label accNumberlbl = new Label("حساب مبداء :");
+            Label accNumbertxt = new Label(accNum);
+            Label loanTypelbl = new Label("نوع وام درخواستی :");
+            Label loanTypeTxt = new Label(loanreq.getLoanType());
+            Label requestDatelbl = new Label("تاریخ ثبت درخواست :");
+            Label requestDatetxt = new Label(String.valueOf(loanreq.getReqDate()));
+            Button seeRequest = new Button("مشاهده درخواست");
+            requestTypelbl.getStyleClass().add("labels1");
+            requestTypetxt.getStyleClass().add("labels1");
+            userFNamelbl.getStyleClass().add("labels1");
+            userFNameTxt.getStyleClass().add("labels1");
+            accNumberlbl.getStyleClass().add("labels1");
+            accNumbertxt.getStyleClass().add("labels1");
+            loanTypelbl.getStyleClass().add("labels1");
+            loanTypeTxt.getStyleClass().add("labels1");
+            requestDatelbl.getStyleClass().add("labels1");
+            requestDatetxt.getStyleClass().add("labels1");
+            seeRequest.getStyleClass().addAll("seeRequestBtn" , "zoom");
+            VBox vBox1 = new VBox(5);
+            VBox vBox2 = new VBox(5);
+            vBox1.setAlignment(Pos.CENTER_RIGHT);
+            vBox1.getChildren().addAll(requestTypelbl , userFNamelbl , accNumberlbl , loanTypelbl , requestDatelbl);
+            vBox2.getChildren().addAll(requestTypetxt , userFNameTxt , accNumbertxt , loanTypeTxt , requestDatetxt);
+            BorderPane borderPane1 = new BorderPane();
+            borderPane1.setRight(vBox1);
+            borderPane1.setLeft(vBox2);
+            BorderPane borderPane2 = new BorderPane();
+            borderPane2.setCenter(seeRequest);
+            BorderPane spacePane = new BorderPane();
+            borderPane1.getStyleClass().addAll("gray" , "CPBorderPane1");
+            borderPane2.getStyleClass().addAll("gray" , "CPBorderPane1");
+            spacePane.setStyle("-fx-pref-height: 20");
+            seeRequest.setOnAction(event -> {
+                REQID = loanreq.getReqID();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeOneRequest.fxml"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                stage.centerOnScreen();
+            });
+            mainVBox.getChildren().addAll(borderPane1 , borderPane2 , spacePane);
+        }
+        for (CheckBookReq chequeReq: CheckBookREQ) {
+            String firstName = new String();
+            String lastName = new String();
+            PreparedStatement statement = connection.prepareStatement("select FirstName , LastName from CustomersInfo where CustomerID = ?");
+            statement.setInt(1 , chequeReq.getReqerID());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                firstName = resultSet.getNString("FirstName");
+                lastName = resultSet.getNString("LastName");
+            }
+            String accNum = new String();
+            PreparedStatement statement1 = connection.prepareStatement("select AccountNumber from BankAccounts where AccountID = ? ");
+            statement1.setInt(1 , chequeReq.getAccID());
+            ResultSet resultSet1 = statement1.executeQuery();
+            while (resultSet1.next()){
+                accNum = resultSet1.getNString("AccountNumber");
+            }
+            Label requestTypelbl = new Label("نوع درخواست :");
+            Label requestTypetxt = new Label("درخواست دسته چک");
+            Label userFNamelbl = new Label("نام و نام خانوادگی :");
+            Label userFNameTxt = new Label(firstName + " " + lastName);
+            Label accNumberlbl = new Label("حساب مبداء :");
+            Label accNumbertxt = new Label(accNum);
+            Label requestDatelbl = new Label("تاریخ ثبت درخواست :");
+            Label requestDatetxt = new Label(String.valueOf(chequeReq.getReqDate()));
+            Button seeRequest = new Button("مشاهده درخواست");
+            requestTypelbl.getStyleClass().add("labels1");
+            requestTypetxt.getStyleClass().add("labels1");
+            userFNamelbl.getStyleClass().add("labels1");
+            userFNameTxt.getStyleClass().add("labels1");
+            accNumberlbl.getStyleClass().add("labels1");
+            accNumbertxt.getStyleClass().add("labels1");
+            requestDatelbl.getStyleClass().add("labels1");
+            requestDatetxt.getStyleClass().add("labels1");
+            seeRequest.getStyleClass().addAll("seeRequestBtn" , "zoom");
+            VBox vBox1 = new VBox(4);
+            VBox vBox2 = new VBox(4);
+            vBox1.setAlignment(Pos.CENTER_RIGHT);
+            vBox1.getChildren().addAll(requestTypelbl , userFNamelbl , accNumberlbl , requestDatelbl);
+            vBox2.getChildren().addAll(requestTypetxt , userFNameTxt , accNumbertxt , requestDatetxt);
+            BorderPane borderPane1 = new BorderPane();
+            borderPane1.setRight(vBox1);
+            borderPane1.setLeft(vBox2);
+            BorderPane borderPane2 = new BorderPane();
+            borderPane2.setCenter(seeRequest);
+            BorderPane spacePane = new BorderPane();
+            borderPane1.getStyleClass().addAll("gray" , "CPBorderPane1");
+            borderPane2.getStyleClass().addAll("gray" , "CPBorderPane1");
+            spacePane.setStyle("-fx-pref-height: 20");
+            seeRequest.setOnAction(event -> {
+                REQID = chequeReq.getReqID();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeOneRequest.fxml"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                stage.centerOnScreen();
+            });
+            mainVBox.getChildren().addAll(borderPane1 , borderPane2 , spacePane);
+        }
+        for (Receipt receiptCheque:ReceiptChequeREQ) {
+            String firstName = new String();
+            String lastName = new String();
+            PreparedStatement statement = connection.prepareStatement("select FirstName , LastName from CustomersInfo where CustomerID = ?");
+            statement.setInt(1 , receiptCheque.getReqerID());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                firstName = resultSet.getNString("FirstName");
+                lastName = resultSet.getNString("LastName");
+            }
+            String accNum = new String();
+            PreparedStatement statement1 = connection.prepareStatement("select AccountNumber from BankAccounts where AccountID = ? ");
+            statement1.setInt(1 , receiptCheque.getAccID());
+            ResultSet resultSet1 = statement1.executeQuery();
+            while (resultSet1.next()){
+                accNum = resultSet1.getNString("AccountNumber");
+            }
+            Label requestTypelbl = new Label("نوع درخواست :");
+            Label requestTypetxt = new Label("درخواست وصول چک :");
+            Label userFNamelbl = new Label("نام و نام خانوادگی :");
+            Label userFNameTxt = new Label(firstName + " " + lastName);
+            Label chequeSerialNumlbl = new Label("شماره سریال چک :");
+            Label chequeSerialNumTxt = new Label(String.valueOf(receiptCheque.getChequeSerial()));
+            Label chequeAmountlbl = new Label("مبلغ چک :");
+            Label chequeAmountTxt = new Label(String.valueOf(receiptCheque.getChequeAmount()));
+            Label accNumberlbl = new Label("حساب مقصد :");
+            Label accNumbertxt = new Label(accNum);
+            Label requestDatelbl = new Label("تاریخ ثبت درخواست :");
+            Label requestDatetxt = new Label(String.valueOf(receiptCheque.getReqDate()));
+            Button seeRequest = new Button("مشاهده درخواست");
+            requestTypelbl.getStyleClass().add("labels1");
+            requestTypetxt.getStyleClass().add("labels1");
+            userFNamelbl.getStyleClass().add("labels1");
+            userFNameTxt.getStyleClass().add("labels1");
+            chequeSerialNumlbl.getStyleClass().add("labels1");
+            chequeSerialNumTxt.getStyleClass().add("labels1");
+            chequeAmountlbl.getStyleClass().add("labels1");
+            chequeAmountTxt.getStyleClass().add("labels1");
+            accNumberlbl.getStyleClass().add("labels1");
+            accNumbertxt.getStyleClass().add("labels1");
+            requestDatelbl.getStyleClass().add("labels1");
+            requestDatetxt.getStyleClass().add("labels1");
+            seeRequest.getStyleClass().addAll("seeRequestBtn" , "zoom");
+            VBox vBox1 = new VBox(6);
+            vBox1.setAlignment(Pos.CENTER_RIGHT);
+            VBox vBox2 = new VBox(6);
+            vBox1.getChildren().addAll(requestTypelbl , userFNamelbl , chequeSerialNumlbl , chequeAmountlbl , accNumberlbl , requestDatelbl);
+            vBox2.getChildren().addAll(requestTypetxt , userFNameTxt , chequeSerialNumTxt , chequeAmountTxt , accNumbertxt , requestDatetxt);
+            BorderPane borderPane1 = new BorderPane();
+            BorderPane borderPane2 = new BorderPane();
+            BorderPane spacePane = new BorderPane();
+            borderPane1.setRight(vBox1);
+            borderPane1.setLeft(vBox2);
+            borderPane2.setCenter(seeRequest);
+            borderPane1.getStyleClass().addAll("gray" , "CPBorderPane1");
+            borderPane2.getStyleClass().addAll("gray" , "CPBorderPane1");
+            spacePane.setStyle("-fx-pref-height: 20");
+            seeRequest.setOnAction(event -> {
+                REQID = receiptCheque.getReqID();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeOneRequest.fxml"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                stage.centerOnScreen();
+            });
+            mainVBox.getChildren().addAll(borderPane1 , borderPane2 , spacePane);
+        }
+    }
+    private void ShowCreateAccREQ(ArrayList<CreateAccReq> CreateAccREQ){
+        mainPane.setPrefHeight(500);
+        mainVBox.setPrefHeight(500);
+        int i = CreateAccREQ.size();
+        if (i > 2){
+            mainPane.setPrefHeight(mainPane.getPrefHeight() + 240*(i-2));
+            mainVBox.setPrefHeight(mainVBox.getPrefHeight() + 240*(i-2));
+        }
+        for (CreateAccReq createAcc: CreateAccREQ) {
+            Label requestTypelbl = new Label("نوع درخواست :");
+            Label requestTypetxt = new Label("ایجاد حساب جدید");
+            Label selectedAccTypelbl = new Label("نوع حساب درخواستی :");
+            Label selectedAccTypeTxt = new Label(createAcc.getAccType());
+            Label userFNamelbl = new Label("نام و نام خانوادگی :");
+            Label userFNametxt = new Label(createAcc.getfName() + " " + createAcc.getlName());
+            Label requestDatelbl = new Label("تاریخ ثبت درخواست :");
+            Label requestDatetxt = new Label(String.valueOf(createAcc.getReqDate()));
+            Button seeRequest = new Button("مشاهده درخواست");
+            requestTypelbl.getStyleClass().add("labels1");
+            requestTypetxt.getStyleClass().add("labels1");
+            requestDatelbl.getStyleClass().add("labels1");
+            requestDatetxt.getStyleClass().add("labels1");
+            selectedAccTypelbl.getStyleClass().add("labels1");
+            selectedAccTypeTxt.getStyleClass().add("labels1");
+            userFNametxt.getStyleClass().add("labels1");
+            userFNamelbl.getStyleClass().add("labels1");
+            seeRequest.getStyleClass().addAll("seeRequestBtn" , "zoom");
+            VBox vBox1 = new VBox(4);
+            VBox vBox2 = new VBox(4);
+            vBox1.getChildren().addAll(requestTypelbl , selectedAccTypelbl , userFNamelbl , requestDatelbl );
+            vBox2.getChildren().addAll(requestTypetxt , selectedAccTypeTxt , userFNametxt , requestDatetxt );
+            vBox1.setAlignment(Pos.CENTER_RIGHT);
+            BorderPane borderPane1 = new BorderPane();
+            borderPane1.setRight(vBox1);
+            borderPane1.setLeft(vBox2);
+            BorderPane borderPane2 = new BorderPane();
+            BorderPane spacePane = new BorderPane();
+            borderPane2.setCenter(seeRequest);
+            borderPane1.getStyleClass().addAll("gray" , "CPBorderPane1");
+            borderPane2.getStyleClass().addAll("gray" , "CPBorderPane1");
+            spacePane.setStyle("-fx-pref-height: 20");
+            seeRequest.setOnAction(event -> {
+                REQID = createAcc.getReqID();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeOneRequest.fxml"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                stage.centerOnScreen();
+            });
+            mainVBox.getChildren().addAll(borderPane1 , borderPane2 , spacePane);
+        }
+    }
+    private void ShowDeleteAccREQ(ArrayList<DeleteAccReq> DeleteAccREQ) throws SQLException {
+        mainPane.setPrefHeight(500);
+        mainVBox.setPrefHeight(500);
+        int i = DeleteAccREQ.size();
+        if (i > 2){
+            mainPane.setPrefHeight(mainPane.getPrefHeight() + 240*(i-2));
+            mainVBox.setPrefHeight(mainVBox.getPrefHeight() + 240*(i-2));
+        }
+        for (DeleteAccReq deleteAcc: DeleteAccREQ) {
+            String firstName = new String();
+            String lastName = new String();
+            PreparedStatement statement = connection.prepareStatement("select FirstName , LastName from CustomersInfo where CustomerID = ?");
+            statement.setInt(1 , deleteAcc.getReqerID());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                firstName = resultSet.getNString("FirstName");
+                lastName = resultSet.getNString("LastName");
+            }
+            String accNum = new String();
+            PreparedStatement statement1 = connection.prepareStatement("select AccountNumber from BankAccounts where AccountID = ? ");
+            statement1.setInt(1 , deleteAcc.getAccID());
+            ResultSet resultSet1 = statement1.executeQuery();
+            while (resultSet1.next()){
+                accNum = resultSet1.getNString("AccountNumber");
+            }
+            //
+            Label requestTypelbl = new Label("نوع درخواست :");
+            Label requestTypetxt = new Label("بستن حساب");
+            Label userFNamelbl = new Label("نام و نام خانوادگی :");
+            Label userFNameTxt = new Label(firstName + " " + lastName);
+            Label firstAcclbl = new Label("حساب اصلی :");
+            Label firstAccTxt = new Label(accNum);
+            Label secondAcclbl = new Label("حساب جایگزین :");
+            Label secondAccTxt = new Label(deleteAcc.getSubstituteAccNum());
+            Label requestDatelbl = new Label("تاریخ ثبت درخواست :");
+            Label requestDatetxt = new Label(String.valueOf(deleteAcc.getReqDate()));
+            Button seeRequest = new Button("مشاهده درخواست");
+            requestTypelbl.getStyleClass().add("labels1");
+            requestTypetxt.getStyleClass().add("labels1");
+            userFNamelbl.getStyleClass().add("labels1");
+            userFNameTxt.getStyleClass().add("labels1");
+            firstAcclbl.getStyleClass().add("labels1");
+            firstAccTxt.getStyleClass().add("labels1");
+            secondAcclbl.getStyleClass().add("labels1");
+            secondAccTxt.getStyleClass().add("labels1");
+            requestDatelbl.getStyleClass().add("labels1");
+            requestDatetxt.getStyleClass().add("labels1");
+            seeRequest.getStyleClass().addAll("seeRequestBtn" , "zoom");
+            VBox vBox1 = new VBox(5);
+            VBox vBox2 = new VBox(5);
+            vBox1.setAlignment(Pos.CENTER_RIGHT);
+            vBox1.getChildren().addAll(requestTypelbl , userFNamelbl , firstAcclbl , secondAcclbl , requestDatelbl);
+            vBox2.getChildren().addAll(requestTypetxt , userFNameTxt , firstAccTxt , secondAccTxt , requestDatetxt);
+            BorderPane borderPane1 = new BorderPane();
+            borderPane1.setRight(vBox1);
+            borderPane1.setLeft(vBox2);
+            BorderPane borderPane2 = new BorderPane();
+            borderPane2.setCenter(seeRequest);
+            BorderPane spacePane = new BorderPane();
+            borderPane1.getStyleClass().addAll("gray" , "CPBorderPane1");
+            borderPane2.getStyleClass().addAll("gray" , "CPBorderPane1");
+            spacePane.setStyle("-fx-pref-height: 20");
+            seeRequest.setOnAction(event -> {
+                REQID = deleteAcc.getReqID();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeOneRequest.fxml"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                stage.centerOnScreen();
+            });
+            mainVBox.getChildren().addAll(borderPane1 , borderPane2 , spacePane);
+        }
+    }
+    private void ShowCardREQ(ArrayList<CardReq> CardREQ) throws SQLException {
+        mainPane.setPrefHeight(500);
+        mainVBox.setPrefHeight(500);
+        int i = CardREQ.size();
+        if (i > 2){
+            mainPane.setPrefHeight(mainPane.getPrefHeight() + 240*(i-2));
+            mainVBox.setPrefHeight(mainVBox.getPrefHeight() + 240*(i-2));
+        }
+        for (CardReq cardreq: CardREQ) {
+            String firstName = new String();
+            String lastName = new String();
+            PreparedStatement statement = connection.prepareStatement("select FirstName , LastName from CustomersInfo where CustomerID = ?");
+            statement.setInt(1 , cardreq.getReqerID());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                firstName = resultSet.getNString("FirstName");
+                lastName = resultSet.getNString("LastName");
+            }
+            String accNum = new String();
+            PreparedStatement statement1 = connection.prepareStatement("select AccountNumber from BankAccounts where AccountID = ? ");
+            statement1.setInt(1 , cardreq.getAccID());
+            ResultSet resultSet1 = statement1.executeQuery();
+            while (resultSet1.next()){
+                accNum = resultSet1.getNString("AccountNumber");
+            }
+            //
+            Label requestTypelbl = new Label("نوع درخواست :");
+            Label requestTypetxt = new Label("درخواست کارت بانکی");
+            Label userFNamelbl = new Label("نام و نام خانوادگی :");
+            Label userFNameTxt = new Label(firstName + " " + lastName);
+            Label accNumberlbl = new Label("حساب مبداء :");
+            Label accNumbertxt = new Label(accNum);
+            Label requestDatelbl = new Label("تاریخ ثبت درخواست :");
+            Label requestDatetxt = new Label(String.valueOf(cardreq.getReqDate()));
+            Button seeRequest = new Button("مشاهده درخواست");
+            requestTypelbl.getStyleClass().add("labels1");
+            requestTypetxt.getStyleClass().add("labels1");
+            userFNamelbl.getStyleClass().add("labels1");
+            userFNameTxt.getStyleClass().add("labels1");
+            accNumberlbl.getStyleClass().add("labels1");
+            accNumbertxt.getStyleClass().add("labels1");
+            requestDatelbl.getStyleClass().add("labels1");
+            requestDatetxt.getStyleClass().add("labels1");
+            seeRequest.getStyleClass().addAll("seeRequestBtn" , "zoom");
+            VBox vBox1 = new VBox(5);
+            VBox vBox2 = new VBox(5);
+            vBox1.setAlignment(Pos.CENTER_RIGHT);
+            vBox1.getChildren().addAll(requestTypelbl , userFNamelbl , accNumberlbl  , requestDatelbl);
+            vBox2.getChildren().addAll(requestTypetxt , userFNameTxt , accNumbertxt  , requestDatetxt);
+            BorderPane borderPane1 = new BorderPane();
+            borderPane1.setRight(vBox1);
+            borderPane1.setLeft(vBox2);
+            BorderPane borderPane2 = new BorderPane();
+            borderPane2.setCenter(seeRequest);
+            BorderPane spacePane = new BorderPane();
+            borderPane1.getStyleClass().addAll("gray" , "CPBorderPane1");
+            borderPane2.getStyleClass().addAll("gray" , "CPBorderPane1");
+            spacePane.setStyle("-fx-pref-height: 20");
+            seeRequest.setOnAction(event -> {
+                REQID = cardreq.getReqID();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeOneRequest.fxml"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                stage.centerOnScreen();
+            });
+            mainVBox.getChildren().addAll(borderPane1 , borderPane2 , spacePane);
+        }
+    }
+    private void ShowLoanREQ(ArrayList<LoanReq> LoanREQ) throws SQLException {
+        mainPane.setPrefHeight(500);
+        mainVBox.setPrefHeight(500);
+        int i = LoanREQ.size();
+        if (i > 2){
+            mainPane.setPrefHeight(mainPane.getPrefHeight() + 240*(i-2));
+            mainVBox.setPrefHeight(mainVBox.getPrefHeight() + 240*(i-2));
+        }
+        for (LoanReq loanreq: LoanREQ) {
+            String firstName = new String();
+            String lastName = new String();
+            PreparedStatement statement = connection.prepareStatement("select FirstName , LastName from CustomersInfo where CustomerID = ?");
+            statement.setInt(1 , loanreq.getReqerID());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                firstName = resultSet.getNString("FirstName");
+                lastName = resultSet.getNString("LastName");
+            }
+            String accNum = new String();
+            PreparedStatement statement1 = connection.prepareStatement("select AccountNumber from BankAccounts where AccountID = ? ");
+            statement1.setInt(1 , loanreq.getAccID());
+            ResultSet resultSet1 = statement1.executeQuery();
+            while (resultSet1.next()){
+                accNum = resultSet1.getNString("AccountNumber");
+            }
+            Label requestTypelbl = new Label("نوع درخواست :");
+            Label requestTypetxt = new Label("درخواست وام");
+            Label userFNamelbl = new Label("نام و نام خانوادگی :");
+            Label userFNameTxt = new Label(firstName + " " + lastName);
+            Label accNumberlbl = new Label("حساب مبداء :");
+            Label accNumbertxt = new Label(accNum);
+            Label loanTypelbl = new Label("نوع وام درخواستی :");
+            Label loanTypeTxt = new Label(loanreq.getLoanType());
+            Label requestDatelbl = new Label("تاریخ ثبت درخواست :");
+            Label requestDatetxt = new Label(String.valueOf(loanreq.getReqDate()));
+            Button seeRequest = new Button("مشاهده درخواست");
+            requestTypelbl.getStyleClass().add("labels1");
+            requestTypetxt.getStyleClass().add("labels1");
+            userFNamelbl.getStyleClass().add("labels1");
+            userFNameTxt.getStyleClass().add("labels1");
+            accNumberlbl.getStyleClass().add("labels1");
+            accNumbertxt.getStyleClass().add("labels1");
+            loanTypelbl.getStyleClass().add("labels1");
+            loanTypeTxt.getStyleClass().add("labels1");
+            requestDatelbl.getStyleClass().add("labels1");
+            requestDatetxt.getStyleClass().add("labels1");
+            seeRequest.getStyleClass().addAll("seeRequestBtn" , "zoom");
+            VBox vBox1 = new VBox(5);
+            VBox vBox2 = new VBox(5);
+            vBox1.setAlignment(Pos.CENTER_RIGHT);
+            vBox1.getChildren().addAll(requestTypelbl , userFNamelbl , accNumberlbl , loanTypelbl , requestDatelbl);
+            vBox2.getChildren().addAll(requestTypetxt , userFNameTxt , accNumbertxt , loanTypeTxt , requestDatetxt);
+            BorderPane borderPane1 = new BorderPane();
+            borderPane1.setRight(vBox1);
+            borderPane1.setLeft(vBox2);
+            BorderPane borderPane2 = new BorderPane();
+            borderPane2.setCenter(seeRequest);
+            BorderPane spacePane = new BorderPane();
+            borderPane1.getStyleClass().addAll("gray" , "CPBorderPane1");
+            borderPane2.getStyleClass().addAll("gray" , "CPBorderPane1");
+            spacePane.setStyle("-fx-pref-height: 20");
+            seeRequest.setOnAction(event -> {
+                REQID = loanreq.getReqID();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeOneRequest.fxml"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                stage.centerOnScreen();
+            });
+            mainVBox.getChildren().addAll(borderPane1 , borderPane2 , spacePane);
+        }
+
+    }
+    private void ShowCheckBookREQ(ArrayList<CheckBookReq> CheckBookREQ) throws SQLException {
+        mainPane.setPrefHeight(500);
+        mainVBox.setPrefHeight(500);
+        int i = CheckBookREQ.size();
+        if (i > 2){
+            mainPane.setPrefHeight(mainPane.getPrefHeight() + 240*(i-2));
+            mainVBox.setPrefHeight(mainVBox.getPrefHeight() + 240*(i-2));
+        }
+        for (CheckBookReq chequeReq: CheckBookREQ) {
+            String firstName = new String();
+            String lastName = new String();
+            PreparedStatement statement = connection.prepareStatement("select FirstName , LastName from CustomersInfo where CustomerID = ?");
+            statement.setInt(1 , chequeReq.getReqerID());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                firstName = resultSet.getNString("FirstName");
+                lastName = resultSet.getNString("LastName");
+            }
+            String accNum = new String();
+            PreparedStatement statement1 = connection.prepareStatement("select AccountNumber from BankAccounts where AccountID = ? ");
+            statement1.setInt(1 , chequeReq.getAccID());
+            ResultSet resultSet1 = statement1.executeQuery();
+            while (resultSet1.next()){
+                accNum = resultSet1.getNString("AccountNumber");
+            }
+            Label requestTypelbl = new Label("نوع درخواست :");
+            Label requestTypetxt = new Label("درخواست دسته چک");
+            Label userFNamelbl = new Label("نام و نام خانوادگی :");
+            Label userFNameTxt = new Label(firstName + " " + lastName);
+            Label accNumberlbl = new Label("حساب مبداء :");
+            Label accNumbertxt = new Label(accNum);
+            Label requestDatelbl = new Label("تاریخ ثبت درخواست :");
+            Label requestDatetxt = new Label(String.valueOf(chequeReq.getReqDate()));
+            Button seeRequest = new Button("مشاهده درخواست");
+            requestTypelbl.getStyleClass().add("labels1");
+            requestTypetxt.getStyleClass().add("labels1");
+            userFNamelbl.getStyleClass().add("labels1");
+            userFNameTxt.getStyleClass().add("labels1");
+            accNumberlbl.getStyleClass().add("labels1");
+            accNumbertxt.getStyleClass().add("labels1");
+            requestDatelbl.getStyleClass().add("labels1");
+            requestDatetxt.getStyleClass().add("labels1");
+            seeRequest.getStyleClass().addAll("seeRequestBtn" , "zoom");
+            VBox vBox1 = new VBox(4);
+            VBox vBox2 = new VBox(4);
+            vBox1.setAlignment(Pos.CENTER_RIGHT);
+            vBox1.getChildren().addAll(requestTypelbl , userFNamelbl , accNumberlbl , requestDatelbl);
+            vBox2.getChildren().addAll(requestTypetxt , userFNameTxt , accNumbertxt , requestDatetxt);
+            BorderPane borderPane1 = new BorderPane();
+            borderPane1.setRight(vBox1);
+            borderPane1.setLeft(vBox2);
+            BorderPane borderPane2 = new BorderPane();
+            borderPane2.setCenter(seeRequest);
+            BorderPane spacePane = new BorderPane();
+            borderPane1.getStyleClass().addAll("gray" , "CPBorderPane1");
+            borderPane2.getStyleClass().addAll("gray" , "CPBorderPane1");
+            spacePane.setStyle("-fx-pref-height: 20");
+            seeRequest.setOnAction(event -> {
+                REQID = chequeReq.getReqID();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeOneRequest.fxml"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                stage.centerOnScreen();
+            });
+            mainVBox.getChildren().addAll(borderPane1 , borderPane2 , spacePane);
+        }
+    }
+    private void ShowReceiptChequeREQ(ArrayList<Receipt> ReceiptChequeREQ) throws SQLException {
+        mainPane.setPrefHeight(500);
+        mainVBox.setPrefHeight(500);
+        int i = ReceiptChequeREQ.size();
+        if (i > 2){
+            mainPane.setPrefHeight(mainPane.getPrefHeight() + 240*(i-2));
+            mainVBox.setPrefHeight(mainVBox.getPrefHeight() + 240*(i-2));
+        }
+        for (Receipt receiptCheque:ReceiptChequeREQ) {
+            String firstName = new String();
+            String lastName = new String();
+            PreparedStatement statement = connection.prepareStatement("select FirstName , LastName from CustomersInfo where CustomerID = ?");
+            statement.setInt(1 , receiptCheque.getReqerID());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                firstName = resultSet.getNString("FirstName");
+                lastName = resultSet.getNString("LastName");
+            }
+            String accNum = new String();
+            PreparedStatement statement1 = connection.prepareStatement("select AccountNumber from BankAccounts where AccountID = ? ");
+            statement1.setInt(1 , receiptCheque.getAccID());
+            ResultSet resultSet1 = statement1.executeQuery();
+            while (resultSet1.next()){
+                accNum = resultSet1.getNString("AccountNumber");
+            }
+            Label requestTypelbl = new Label("نوع درخواست :");
+            Label requestTypetxt = new Label("درخواست وصول چک :");
+            Label userFNamelbl = new Label("نام و نام خانوادگی :");
+            Label userFNameTxt = new Label(firstName + " " + lastName);
+            Label chequeSerialNumlbl = new Label("شماره سریال چک :");
+            Label chequeSerialNumTxt = new Label(String.valueOf(receiptCheque.getChequeSerial()));
+            Label chequeAmountlbl = new Label("مبلغ چک :");
+            Label chequeAmountTxt = new Label(String.valueOf(receiptCheque.getChequeAmount()));
+            Label accNumberlbl = new Label("حساب مقصد :");
+            Label accNumbertxt = new Label(accNum);
+            Label requestDatelbl = new Label("تاریخ ثبت درخواست :");
+            Label requestDatetxt = new Label(String.valueOf(receiptCheque.getReqDate()));
+            Button seeRequest = new Button("مشاهده درخواست");
+            requestTypelbl.getStyleClass().add("labels1");
+            requestTypetxt.getStyleClass().add("labels1");
+            userFNamelbl.getStyleClass().add("labels1");
+            userFNameTxt.getStyleClass().add("labels1");
+            chequeSerialNumlbl.getStyleClass().add("labels1");
+            chequeSerialNumTxt.getStyleClass().add("labels1");
+            chequeAmountlbl.getStyleClass().add("labels1");
+            chequeAmountTxt.getStyleClass().add("labels1");
+            accNumberlbl.getStyleClass().add("labels1");
+            accNumbertxt.getStyleClass().add("labels1");
+            requestDatelbl.getStyleClass().add("labels1");
+            requestDatetxt.getStyleClass().add("labels1");
+            seeRequest.getStyleClass().addAll("seeRequestBtn" , "zoom");
+            VBox vBox1 = new VBox(6);
+            vBox1.setAlignment(Pos.CENTER_RIGHT);
+            VBox vBox2 = new VBox(6);
+            vBox1.getChildren().addAll(requestTypelbl , userFNamelbl , chequeSerialNumlbl , chequeAmountlbl , accNumberlbl , requestDatelbl);
+            vBox2.getChildren().addAll(requestTypetxt , userFNameTxt , chequeSerialNumTxt , chequeAmountTxt , accNumbertxt , requestDatetxt);
+            BorderPane borderPane1 = new BorderPane();
+            BorderPane borderPane2 = new BorderPane();
+            BorderPane spacePane = new BorderPane();
+            borderPane1.setRight(vBox1);
+            borderPane1.setLeft(vBox2);
+            borderPane2.setCenter(seeRequest);
+            borderPane1.getStyleClass().addAll("gray" , "CPBorderPane1");
+            borderPane2.getStyleClass().addAll("gray" , "CPBorderPane1");
+            spacePane.setStyle("-fx-pref-height: 20");
+            seeRequest.setOnAction(event -> {
+                REQID = receiptCheque.getReqID();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeOneRequest.fxml"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                stage.centerOnScreen();
+            });
+            mainVBox.getChildren().addAll(borderPane1 , borderPane2 , spacePane);
+        }
+
     }
 }

@@ -41,31 +41,46 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="originAccNumTxt" layoutX="102.0" layoutY="52.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray" />
+            <TextField fx:id="originAccNumTxt" editable="false" layoutX="102.0" layoutY="52.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></TextField>
             <Label layoutX="280.0" layoutY="102.0" text="صاحب حساب مبدا :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="originAccHolderTxt" layoutX="102.0" layoutY="140.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray" />
+            <TextField fx:id="originAccHolderTxt" alignment="CENTER_RIGHT" editable="false" layoutX="102.0" layoutY="140.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></TextField>
             <Label layoutX="382.0" layoutY="184.0" text="مبلغ :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="amountTxt" layoutX="102.0" layoutY="222.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray" />
+            <TextField fx:id="amountTxt" editable="false" layoutX="102.0" layoutY="222.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></TextField>
             <Label layoutX="274.0" layoutY="273.0" text="شماره حساب مقصد :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="destAccNumTxt" layoutX="102.0" layoutY="309.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray" />
+            <TextField fx:id="destAccNumTxt" editable="false" layoutX="102.0" layoutY="309.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></TextField>
             <Label layoutX="272.0" layoutY="358.0" text="صاحب حساب مقصد :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="destAccHolderTxt" layoutX="102.0" layoutY="395.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray" />
+            <TextField fx:id="destAccHolderTxt" alignment="CENTER_RIGHT" editable="false" layoutX="102.0" layoutY="395.0" prefHeight="30.0" prefWidth="280.0" styleClass="gray">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></TextField>
             <Button layoutX="200.0" layoutY="449.0" mnemonicParsing="false" onAction="#onConfirmClicked" prefHeight="36.0" prefWidth="100.0" text="تایید" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />

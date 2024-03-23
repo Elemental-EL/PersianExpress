@@ -44,7 +44,17 @@
 .labels{
     -fx-font-size: 18;
     -fx-font-weight: bold;
+    -fx-text-fill:#11235A;
 }
 .CPBorderPane1{
     -fx-padding: 8;
+}
+.labels1{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+.seeRequestBtn{
+    -fx-background-color:#023e8a;
+    -fx-font-size: 18;
+    -fx-text-fill: #ffffff;
 }

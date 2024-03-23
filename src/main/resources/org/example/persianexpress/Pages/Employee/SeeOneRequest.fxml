@@ -41,7 +41,7 @@
               <content>
                 <AnchorPane fx:id="mainPane" minHeight="0.0" minWidth="0.0" prefHeight="418.0" prefWidth="664.0" styleClass="backgroundColor">
                      <children>
-                        <VBox fx:id="mainVBox" prefHeight="418.0" prefWidth="664.0" />
+                        <VBox fx:id="mainVBox" prefHeight="418.0" prefWidth="664.0" styleClass="backgroundColor" />
                      </children>
                   </AnchorPane>
               </content>

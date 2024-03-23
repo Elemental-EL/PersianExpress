@@ -26,6 +26,12 @@ public class CustomersRequestLoanController {
     private TextArea applicantTXT ;
     @FXML
     private ChoiceBox<String> loanType;
+
+    public void initialize(){
+        String[] loanTypes = new String[]{"انتخاب کنید" , "وام دانشجویی" , "وام مسکن" , "وام قرض الحسنه" , "وام ازدواج"};
+        loanType.getItems().addAll(loanTypes);
+        loanType.setValue(loanTypes[0]);
+    }
     public void onBackClicked(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersPanel.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
