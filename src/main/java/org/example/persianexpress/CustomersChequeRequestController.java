@@ -83,7 +83,7 @@ public class CustomersChequeRequestController {
         stage.centerOnScreen();
     }
 
-    public void onSubmitClicked(ActionEvent event) throws SQLException {
+    public void onSubmitClicked(ActionEvent event) throws SQLException, IOException {
         String amountSlctd = numberOfCheque.getSelectionModel().getSelectedItem();
         String accSlctd = selectedAccount.getSelectionModel().getSelectedItem();
         if (accSlctd.equals("انتخاب کنید")){
@@ -92,6 +92,13 @@ public class CustomersChequeRequestController {
             errorText.setText("لطفا تعداد برگه های چک را انتخاب کنید.");
         } else {
             CheckBookReq.submitChequeBookReq(accSlctd, amountSlctd, connection, user, nowsDate);
+            Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersPanel.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+            stage.centerOnScreen();
         }
     }
 

@@ -260,7 +260,7 @@ public class EmployeeSeeOneRequestController {
             }
             String accNum = new String();
             PreparedStatement statement1 = connection.prepareStatement("select AccountNumber from BankAccounts where AccountID = ? ");
-            statement1.setInt(1 , resultSet.getInt("AccountID"));
+            statement1.setInt(1 , resultSet.getInt("SelectedAccountID"));
             ResultSet resultSet2 = statement1.executeQuery();
             while (resultSet2.next()){
                 accNum = resultSet2.getNString("AccountNumber");

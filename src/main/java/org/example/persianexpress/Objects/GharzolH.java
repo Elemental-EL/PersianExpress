@@ -229,4 +229,35 @@ public class GharzolH {
         }
         return Arrays.stream(accs).filter(Objects::nonNull).toArray(String[]::new);
     }
+
+    public static String[] getValidAccNumsForCard(Connection connection) throws SQLException {
+        PreparedStatement statement1 = connection.prepareStatement("SELECT AccountID FROM BankCards WHERE CustomerID = ?");
+        statement1.setInt(1,HelloController.userID);
+        ResultSet resultSet1 = statement1.executeQuery();
+        ArrayList<Integer> illegalAccs = new ArrayList<>();
+        while (resultSet1.next()){
+            illegalAccs.add(resultSet1.getInt("AccountID"));
+        }
+        PreparedStatement statement2 = connection.prepareStatement("SELECT AccountID FROM BankAccounts WHERE CustomerID = ? AND (AccountType=N'قرض الحسنه جاری' OR AccountType=N'سپرده کوتاه مدت') AND AccountAccess = 1");
+        statement2.setInt(1,HelloController.userID);
+        ResultSet resultSet2 = statement2.executeQuery();
+        ArrayList<Integer> availableAccs = new ArrayList<>();
+        while (resultSet2.next()){
+            availableAccs.add(resultSet2.getInt("AccountID"));
+        }
+        ArrayList<Integer> validAccs = new ArrayList<>();
+        for (int acc : availableAccs){
+            if (!illegalAccs.contains(acc)){
+                validAccs.add(acc);
+            }
+        }
+        String[] accs = new String[1000];
+        accs[0] = "انتخاب کنید";
+        int i=1;
+        for (int accN : validAccs){
+            GharzolH acc = new GharzolH(accN,HelloController.userID);
+            accs[i++] = acc.getAccountNumber(connection);
+        }
+        return Arrays.stream(accs).filter(Objects::nonNull).toArray(String[]::new);
+    }
 }
