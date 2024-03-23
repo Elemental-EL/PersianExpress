@@ -68,7 +68,7 @@ public class CustomersCardRequestController {
         addressText.setEditable(false);
         if (accNums.length<2){
             submitBtn.setDisable(true);
-            errorText.setText("*شما حساب معتبری برای درخواست دسته چک ندارید.");
+            errorText.setText("*شما حساب معتبری برای درخواست کارت بانکی ندارید.");
         }
     }
 

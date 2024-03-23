@@ -207,12 +207,18 @@ public class GharzolH {
         while (resultSet1.next()){
             illegalAccs.add(resultSet1.getInt("AccountID"));
         }
-        PreparedStatement statement2 = connection.prepareStatement("SELECT AccountID FROM BankAccounts WHERE CustomerID = ? AND AccountType =N'قرض الحسنه جاری' AND AccountAccess = 1");
+        PreparedStatement statement2 = connection.prepareStatement("SELECT AccountID FROM CheckBookREQ WHERE CustomerID = ?");
         statement2.setInt(1,HelloController.userID);
         ResultSet resultSet2 = statement2.executeQuery();
-        ArrayList<Integer> availableAccs = new ArrayList<>();
         while (resultSet2.next()){
-            availableAccs.add(resultSet2.getInt("AccountID"));
+            illegalAccs.add(resultSet2.getInt("AccountID"));
+        }
+        PreparedStatement statement3 = connection.prepareStatement("SELECT AccountID FROM BankAccounts WHERE CustomerID = ? AND AccountType =N'قرض الحسنه جاری' AND AccountAccess = 1");
+        statement3.setInt(1,HelloController.userID);
+        ResultSet resultSet3 = statement3.executeQuery();
+        ArrayList<Integer> availableAccs = new ArrayList<>();
+        while (resultSet3.next()){
+            availableAccs.add(resultSet3.getInt("AccountID"));
         }
         ArrayList<Integer> validAccs = new ArrayList<>();
         for (int acc : availableAccs){
@@ -238,12 +244,18 @@ public class GharzolH {
         while (resultSet1.next()){
             illegalAccs.add(resultSet1.getInt("AccountID"));
         }
-        PreparedStatement statement2 = connection.prepareStatement("SELECT AccountID FROM BankAccounts WHERE CustomerID = ? AND (AccountType=N'قرض الحسنه جاری' OR AccountType=N'سپرده کوتاه مدت') AND AccountAccess = 1");
+        PreparedStatement statement2 = connection.prepareStatement("SELECT SelectedAccountID FROM BankCardREQ WHERE CustomerID = ?");
         statement2.setInt(1,HelloController.userID);
         ResultSet resultSet2 = statement2.executeQuery();
-        ArrayList<Integer> availableAccs = new ArrayList<>();
         while (resultSet2.next()){
-            availableAccs.add(resultSet2.getInt("AccountID"));
+            illegalAccs.add(resultSet2.getInt("SelectedAccountID"));
+        }
+        PreparedStatement statement3 = connection.prepareStatement("SELECT AccountID FROM BankAccounts WHERE CustomerID = ? AND (AccountType=N'قرض الحسنه جاری' OR AccountType=N'سپرده کوتاه مدت') AND AccountAccess = 1");
+        statement3.setInt(1,HelloController.userID);
+        ResultSet resultSet3 = statement3.executeQuery();
+        ArrayList<Integer> availableAccs = new ArrayList<>();
+        while (resultSet3.next()){
+            availableAccs.add(resultSet3.getInt("AccountID"));
         }
         ArrayList<Integer> validAccs = new ArrayList<>();
         for (int acc : availableAccs){

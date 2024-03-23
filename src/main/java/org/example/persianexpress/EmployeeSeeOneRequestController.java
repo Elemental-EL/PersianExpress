@@ -65,8 +65,11 @@ public class EmployeeSeeOneRequestController {
     }
 
     public void onRejectClicked(ActionEvent event) throws SQLException, IOException {
-        Request.passToHistory(connection, resultSet, false);
-        Request.deleteFromREQS(connection, resultSet,reqType);
+        resultSet.beforeFirst();
+        while (resultSet.next()) {
+            Request.passToHistory(connection, resultSet, false);
+            Request.deleteFromREQS(connection, resultSet,reqType);
+        }
         Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeRequests.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
