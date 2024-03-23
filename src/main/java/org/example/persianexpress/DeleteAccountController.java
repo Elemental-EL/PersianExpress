@@ -24,6 +24,7 @@ public class DeleteAccountController {
     private ChoiceBox<String> SelectedAccount , AlternativeAccount;
     private ArrayList <String> BankAccount=new ArrayList<String>();
     private ArrayList <Integer> BankAccountID=new ArrayList<Integer>();
+    @FXML
     private Label errorText;
     private java.sql.Date currentDate = Date.valueOf(LocalDate.now());
     Connection connection;
