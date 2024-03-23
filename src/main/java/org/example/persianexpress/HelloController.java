@@ -53,7 +53,7 @@ public class HelloController {
             if (CustomerUserName.isEmpty() || CustomerPassword.isEmpty()){
                 errorTXT.setText("نام کاربری و رمز عبور خود را وارد کنید!");
             }else {
-                Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
+                Connection connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374");
                 PreparedStatement statement = connection.prepareStatement("select CustomerID , CustomerPassword , Access from  CustomersInfo where CustomerUN = ? ");
                 statement.setNString(1 , CustomerUserName);
                 ResultSet resultSet = statement.executeQuery();
@@ -144,4 +144,4 @@ public class HelloController {
 //
 
 //    Helia sql server Connection
-//
+//    "jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374"

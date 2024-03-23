@@ -26,7 +26,7 @@ public class CustomersMTConfirmInfoController {
     public static int TID=0;
 
     public void initialize() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
+        connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374");
         originAccNumTxt.setText(CustomersMoneyTransferController.orgAcc.getAccNumber());
         originAccHolderTxt.setText(CustomersMoneyTransferController.orgAcc.getHolderName(connection));
         destAccNumTxt.setText(CustomersMoneyTransferController.destAcc.getAccNumber());

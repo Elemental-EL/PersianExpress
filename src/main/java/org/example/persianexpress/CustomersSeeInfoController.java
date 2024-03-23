@@ -30,7 +30,7 @@ public class CustomersSeeInfoController {
     private Label errorTXT;
 
     public void initialize() throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt" );
+        Connection connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374" );
         PreparedStatement statement = connection.prepareStatement("select *from CustomersInfo where CustomerID = ?");
         statement.setInt(1 , HelloController.userID);
         ResultSet resultSet = statement.executeQuery();
@@ -85,7 +85,7 @@ public class CustomersSeeInfoController {
         else if (!hPhoneText.getText().matches("\\d{11}")){
             errorTXT.setText("*فرمت شماره تلفن ثابت اشتباه است.");
         }else {
-            Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374");
             PreparedStatement statement = connection.prepareStatement("update CustomersInfo set FirstName = ? , LastName = ? , NationalCode = ? , BirthDate = ? , BirthPlace = ? , PhoneNumber = ? , HomePhoneNumber = ? , HomeAddress = ? , PostCode = ?  where CustomerID = ?");
             statement.setNString(1 , firstNameText.getText());
             statement.setNString(2 , familyNameText.getText());

@@ -32,7 +32,7 @@ public class CustomersMoneyTransferController {
     public static Sepordeh orgAcc,destAcc;
 
     public void initialize() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
+        connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374");
     }
 
 

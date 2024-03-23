@@ -78,7 +78,7 @@ public class CustomersPanelController implements Initializable {
         int i = 0;
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
+            connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374");
             PreparedStatement statement = connection.prepareStatement("select *from BankAccounts");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){

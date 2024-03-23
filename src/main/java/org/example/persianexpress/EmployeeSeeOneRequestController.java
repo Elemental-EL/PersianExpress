@@ -33,7 +33,7 @@ public class EmployeeSeeOneRequestController {
     private String reqType;
 
     public void initialize() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
+        connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374");
         resultSet = Request.getReq(connection,EmployeeSeeRequestsController.REQID);
         reqType = Request.getReqType(EmployeeSeeRequestsController.REQID);
         mainPane.setPrefHeight(418);

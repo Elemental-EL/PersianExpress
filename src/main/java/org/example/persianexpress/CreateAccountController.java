@@ -50,7 +50,7 @@ public class CreateAccountController {
         String[] accountType = new String[]{"انتخاب کنید","قرض الحسنه جاری" , "قرض الحسنه سپرده" , "سپرده کوتاه مدت" , "سپرده مدت دار"};
         typeSlct.getItems().addAll(accountType);
         typeSlct.setValue(accountType[0]);
-        connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
+        connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374");
         if (CustomersPanelController.loggedIn){
             user = User.createUserObj(connection,HelloController.userID);
             firstNameText.setText(user.getfName());

@@ -39,7 +39,7 @@ public class CustomersChequeRequestController {
     private LocalDate nowsDate = LocalDate.now();
 
     public void initialize() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
+        connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374");
         String[] numbers = new String[]{"انتخاب کنید" , "10" , "20" , "30" ,"40" , "50"};
         numberOfCheque.getItems().addAll(numbers);
         numberOfCheque.setValue(numbers[0]);

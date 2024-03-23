@@ -44,7 +44,7 @@ public class EmployeeSeeRequestsController {
         ArrayList<CheckBookReq> CheckBookREQ = new ArrayList<>();
         ArrayList<Receipt> ReceiptChequeREQ = new ArrayList<>();
 
-        connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
+        connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374");
         PreparedStatement statement1 = connection.prepareStatement("select *from CreateAccountREQ");
         ResultSet resultSet1 = statement1.executeQuery();
         while (resultSet1.next()){
