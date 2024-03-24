@@ -39,8 +39,8 @@ private final ArrayList <String> BankAccount=new ArrayList<String>();
     }
 
     public void initialize()throws SQLException{
-        connection= DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "pedb1234");
-        statement=connection.prepareStatement("select *from BankAccounts where CustomerID = ? ");
+        connection= DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
+        statement=connection.prepareStatement("select *from BankAccounts where CustomerID = ? AND (AccountType = N'قرض الحسنه جاری' or AccountType = N'سپرده کوتاه مدت')");
         statement.setInt(1,HelloController.userID);
         ResultSet resultSet=statement.executeQuery();
         BankAccount.add("انتخاب کنید");

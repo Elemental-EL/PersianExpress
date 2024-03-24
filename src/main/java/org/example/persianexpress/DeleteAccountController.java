@@ -59,6 +59,7 @@ public class DeleteAccountController {
             statement.setNString(3,AlternativeAccount.getValue());
             statement.setDate(4,currentDate);
             statement.setBoolean(5,false);
+            int boll = statement.executeUpdate();
         }
 
 
