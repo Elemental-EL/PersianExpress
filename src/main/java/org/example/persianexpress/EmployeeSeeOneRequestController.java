@@ -125,6 +125,20 @@ public class EmployeeSeeOneRequestController {
                 stage.show();
                 stage.centerOnScreen();
             }
+        } else if (reqType.equals("BankCardREQ")) {
+            while (resultSet.next()){
+                CardReq.createCard(connection,resultSet);
+                Request.passToHistory(connection,resultSet,true);
+                Request.deleteFromREQS(connection,resultSet,reqType);
+                Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeRequests.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setTitle("Persian Express");
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                stage.centerOnScreen();
+            }
         }
     }
 
