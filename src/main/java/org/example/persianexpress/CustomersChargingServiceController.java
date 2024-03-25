@@ -7,25 +7,29 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class CustomersChargingServiceController {
     private Stage stage;
     private Scene scene;
     @FXML
+    private Label errorText;
+    @FXML
     private ChoiceBox<String> selectedAccount , Operator;
+    private  ArrayList <String> BankAccount=new ArrayList<String>();
+    Connection connection;
+    PreparedStatement statement;
     @FXML
     private TextField phoneNumber , chargeAmount;
-
-    public void initialize(){
-        String[] operators = new String[]{"انتخاب کنید", "همراه اول" , "ایرانسل" , "رایتل"};
-        Operator.getItems().addAll(operators);
-        Operator.setValue(operators[0]);
-    }
+     private long stock = 0;
     public void onBackClicked(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersPanel.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -36,6 +40,64 @@ public class CustomersChargingServiceController {
         stage.centerOnScreen();
     }
 
-    public void onBuyChargeClicked(ActionEvent event) {
+    public void initialize() throws SQLException {
+        String[] operators = new String[]{"انتخاب کنید", "همراه اول" , "ایرانسل" , "رایتل"};
+        Operator.getItems().addAll(operators);
+        Operator.setValue(operators[0]);
+        connection= DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "pedb1234");
+        statement=connection.prepareStatement("select  AccountNumber from BankAccounts where CustomerID=?  AND (AccountType = N'قرض الحسنه جاری' or AccountType = N'سپرده کوتاه مدت')");
+        statement.setInt(1,HelloController.userID);
+        ResultSet resultSet=statement.executeQuery();
+        BankAccount.add("انتخاب کنید");
+        while (resultSet.next()){
+            BankAccount.add(resultSet.getNString("AccountNumber"));
+        }
+        selectedAccount.getItems().addAll(BankAccount);
+        selectedAccount.setValue(BankAccount.get(0));
+    }
+
+
+    public void onBuyChargeClicked(ActionEvent event) throws SQLException {
+        if (phoneNumber.getText().isEmpty()||chargeAmount.getText().isEmpty()){
+            System.out.println("پر کردن تمامی فیلد ها الزامی است.");
+        } else if (!phoneNumber.getText().matches("09\\d{9}")) {
+            System.out.println("فرمت شماره تلفن اشتباه است.");
+        } else if (!phoneNumber.getText().matches("\\d+")||!chargeAmount.getText().matches("\\d+")) {
+            System.out.println("شماره تلفن و مبلغ شارژ فقط باید شامل عدد باشد.");
+        } else if (Objects.equals(Operator.getValue(), "همراه اول")) {
+            if (!phoneNumber.getText().matches("0919\\d{7}")){
+                System.out.println("d");
+            }
+        } else if (Objects.equals(Operator.getValue(), "ایرانسل")) {
+            if (!phoneNumber.getText().matches("0912\\d{7}")){
+                System.out.println("b");
+            }
+        } else if (Objects.equals(Operator.getValue(), "رایتل")) {
+            if (!phoneNumber.getText().matches("0921\\d{7}")){
+                System.out.println("c");
+            }
+        } else {
+            statement=connection.prepareStatement("select AccountStock from BankAccounts where AccountNumber = ?");
+            statement.setNString(1 , selectedAccount.getValue());
+            ResultSet resultSet = statement.executeQuery();
+            System.out.println(stock);
+            while (resultSet.next()){
+                stock = resultSet.getLong("AccountStock");
+                System.out.println(stock);
+            }
+            if (stock < Long.parseLong(chargeAmount.getText())){
+                System.out.println("موجودی شما کافی نمی باشد.");
+            }
+            else {
+                stock -=Long.parseLong(chargeAmount.getText());
+                statement=connection.prepareStatement("update BankAccounts set AccountStock =? where AccountNumber=?");
+                statement.setLong(1,stock);
+                statement.setNString(2,selectedAccount.getValue());
+                int resultSet1=statement.executeUpdate();
+                System.out.println("خرید شارژ با موفقیت انجام شد.");
+
+            }
+        }
+
     }
 }
