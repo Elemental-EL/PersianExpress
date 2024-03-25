@@ -5,6 +5,7 @@ import java.util.Date;
 public class Message {
     private int messageID;
     private int senderUID;
+    private int customerID;
     private String messageContext;
     private Date messageDate;
     private boolean messageStat;
@@ -12,9 +13,10 @@ public class Message {
     private Message(){
     }
 
-    public Message(int messageID, int senderUID) {
+    public Message(int messageID, int senderUID , int customerID) {
         this.messageID = messageID;
         this.senderUID = senderUID;
+        this.customerID = customerID;
     }
 
     public int getMessageID() {
@@ -24,7 +26,15 @@ public class Message {
     public int getSenderUID() {
         return senderUID;
     }
-
+    public void setSenderUID(int senderUID){
+        this.senderUID = senderUID;
+    }
+    public int getCustomerID(){
+        return customerID;
+    }
+    public void setCustomerID(int customerID){
+        this.customerID = customerID;
+    }
     public String getMessageContext() {
         return messageContext;
     }

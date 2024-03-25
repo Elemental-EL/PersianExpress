@@ -58,3 +58,6 @@
     -fx-font-size: 18;
     -fx-text-fill: #ffffff;
 }
+.spacePane{
+    -fx-background-color: #ffffff;
+}

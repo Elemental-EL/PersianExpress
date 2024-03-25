@@ -25,8 +25,8 @@ public class CustomersChargingServiceController {
     @FXML
     private ChoiceBox<String> selectedAccount , Operator;
     private  ArrayList <String> BankAccount=new ArrayList<String>();
-    Connection connection;
-    PreparedStatement statement;
+    private Connection connection;
+    private PreparedStatement statement;
     @FXML
     private TextField phoneNumber , chargeAmount;
      private long stock = 0;
@@ -59,31 +59,23 @@ public class CustomersChargingServiceController {
 
     public void onBuyChargeClicked(ActionEvent event) throws SQLException {
         if (phoneNumber.getText().isEmpty()||chargeAmount.getText().isEmpty()){
-            System.out.println("پر کردن تمامی فیلد ها الزامی است.");
+            errorText.setText("پر کردن تمامی فیلد ها الزامی است.");
         } else if (!phoneNumber.getText().matches("09\\d{9}")) {
-            System.out.println("فرمت شماره تلفن اشتباه است.");
+            errorText.setText("فرمت شماره تلفن اشتباه است.");
         } else if (!phoneNumber.getText().matches("\\d+")||!chargeAmount.getText().matches("\\d+")) {
-            System.out.println("شماره تلفن و مبلغ شارژ فقط باید شامل عدد باشد.");
-        } else if (Objects.equals(Operator.getValue(), "همراه اول")) {
-            if (!phoneNumber.getText().matches("0919\\d{7}")){
-                System.out.println("d");
-            }
-        } else if (Objects.equals(Operator.getValue(), "ایرانسل")) {
-            if (!phoneNumber.getText().matches("0912\\d{7}")){
-                System.out.println("b");
-            }
-        } else if (Objects.equals(Operator.getValue(), "رایتل")) {
-            if (!phoneNumber.getText().matches("0921\\d{7}")){
-                System.out.println("c");
-            }
+            errorText.setText("شماره تلفن و مبلغ شارژ فقط باید شامل عدد باشد.");
+        } else if (Objects.equals(Operator.getValue(), "همراه اول") && !phoneNumber.getText().matches("0919\\d{7}")) {
+            errorText.setText("اپراتور انتخابی صحیح نمیباشد!");
+        } else if (Objects.equals(Operator.getValue(), "ایرانسل") && !phoneNumber.getText().matches("0912\\d{7}")) {
+            errorText.setText("اپراتور انتخابی صحیح نمیباشد!");
+        } else if (Objects.equals(Operator.getValue(), "رایتل") && !phoneNumber.getText().matches("0921\\d{7}")) {
+            errorText.setText("اپراتور انتخابی صحیح نمیباشد!");
         } else {
-            statement=connection.prepareStatement("select AccountStock from BankAccounts where AccountNumber = ?");
+            statement = connection.prepareStatement("select AccountStock from BankAccounts where AccountNumber = ?");
             statement.setNString(1 , selectedAccount.getValue());
             ResultSet resultSet = statement.executeQuery();
-            System.out.println(stock);
             while (resultSet.next()){
                 stock = resultSet.getLong("AccountStock");
-                System.out.println(stock);
             }
             if (stock < Long.parseLong(chargeAmount.getText())){
                 System.out.println("موجودی شما کافی نمی باشد.");
@@ -94,10 +86,8 @@ public class CustomersChargingServiceController {
                 statement.setLong(1,stock);
                 statement.setNString(2,selectedAccount.getValue());
                 int resultSet1=statement.executeUpdate();
-                System.out.println("خرید شارژ با موفقیت انجام شد.");
-
+                errorText.setText("خرید با موفقیت انجام شد.");
             }
         }
-
     }
 }

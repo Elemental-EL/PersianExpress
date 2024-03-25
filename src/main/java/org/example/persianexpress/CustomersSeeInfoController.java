@@ -28,6 +28,7 @@ public class CustomersSeeInfoController {
     private DatePicker bDate;
     @FXML
     private Label errorTXT;
+    private Connection connection;
 
     public void initialize() throws SQLException {
         Connection connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374" );
@@ -46,8 +47,6 @@ public class CustomersSeeInfoController {
             addressText.setText(resultSet.getNString("HomeAddress"));
             bDate.setValue(resultSet.getDate("BirthDate").toLocalDate());
         }
-        statement.close();
-        connection.close();
     }
     public void onBackClicked(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersProfile.fxml"));
@@ -85,7 +84,6 @@ public class CustomersSeeInfoController {
         else if (!hPhoneText.getText().matches("\\d{11}")){
             errorTXT.setText("*فرمت شماره تلفن ثابت اشتباه است.");
         }else {
-            Connection connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374");
             PreparedStatement statement = connection.prepareStatement("update CustomersInfo set FirstName = ? , LastName = ? , NationalCode = ? , BirthDate = ? , BirthPlace = ? , PhoneNumber = ? , HomePhoneNumber = ? , HomeAddress = ? , PostCode = ?  where CustomerID = ?");
             statement.setNString(1 , firstNameText.getText());
             statement.setNString(2 , familyNameText.getText());
@@ -99,8 +97,6 @@ public class CustomersSeeInfoController {
             statement.setInt(10 , HelloController.userID);
             int result = statement.executeUpdate();
             System.out.println(result);
-            statement.close();
-            connection.close();
         }
     }
 }

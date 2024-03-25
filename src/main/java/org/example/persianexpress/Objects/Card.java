@@ -6,8 +6,8 @@ public class Card {
     private int cardID;
     private int cardHolderUID;
     private int relAccID;
-    private long cardNumber;
-    private int cvv2;
+    private String cardNumber;
+    private String cvv2;
     private Date cardExpDate;
     private boolean access;
 
@@ -20,19 +20,19 @@ public class Card {
         this.relAccID = relAccID;
     }
 
-    public long getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(long cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 
-    public int getCvv2() {
+    public String getCvv2() {
         return cvv2;
     }
 
-    public void setCvv2(int cvv2) {
+    public void setCvv2(String cvv2) {
         this.cvv2 = cvv2;
     }
 

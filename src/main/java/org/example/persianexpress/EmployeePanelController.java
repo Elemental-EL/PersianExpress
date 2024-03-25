@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 
 public class EmployeePanelController {
     private Stage stage;
@@ -20,6 +21,18 @@ public class EmployeePanelController {
     private Button logOut,seeUsers,seeAccs,seeReqs,reqsHistory,sendMessage,inbox,suggestions,messagesHistory;
     @FXML
     private Label empName,empRole;
+    private Connection connection;
+    private PreparedStatement statement;
+    public void initialize() throws SQLException {
+        connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
+        statement = connection.prepareStatement("select FirstName , LastName , EmployeePost from EmployeesInfo where EmployeeID = ?");
+        statement.setInt(1 , HelloController.userID);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()){
+            empName.setText(resultSet.getNString("FirstName") + " " + resultSet.getNString("LastName"));
+            empRole.setText(resultSet.getNString("EmployeePost"));
+        }
+    }
     @FXML
     private void onSeeUsersClicked(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeUsers.fxml"));

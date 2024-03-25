@@ -14,7 +14,7 @@
    <children>
       <Pane prefHeight="100.0" prefWidth="700.0" styleClass="darkblue">
          <children>
-            <ImageView fx:id="backBtn" fitHeight="100.0" fitWidth="100.0" layoutX="586.0" layoutY="23.0" onMouseClicked="#onBackBtnClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="backBtn" fitHeight="100.0" fitWidth="100.0" layoutX="586.0" layoutY="23.0"  pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/persian-express-high-resolution-logo-white-transparent.png" />
                </image></ImageView>
