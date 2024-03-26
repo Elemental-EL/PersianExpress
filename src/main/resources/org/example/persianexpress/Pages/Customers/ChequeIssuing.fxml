@@ -2,6 +2,8 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -9,6 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="500.0" prefWidth="500.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.ChequeIssuingController">
    <children>
@@ -34,40 +37,35 @@
             </Pane>
          </children>
       </Pane>
-      <Label layoutX="345.0" layoutY="124.0" text="نام گیرنده:">
+      <Label layoutX="345.0" layoutY="182.0" text="نام گیرنده:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="97.0" layoutY="120.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray">
+      <TextField fx:id="nameText" alignment="CENTER_RIGHT" layoutX="95.0" layoutY="178.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray">
          <font>
             <Font size="17.0" />
          </font></TextField>
-      <Label layoutX="345.0" layoutY="183.0" text="کد ملی گیرنده:">
+      <Label layoutX="345.0" layoutY="239.0" text="کد ملی گیرنده:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="95.0" layoutY="179.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray">
+      <TextField fx:id="nCodeText" layoutX="95.0" layoutY="235.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray">
          <font>
             <Font size="17.0" />
          </font></TextField>
-      <Label layoutX="345.0" layoutY="241.0" text="مبلغ:">
+      <Label layoutX="345.0" layoutY="297.0" text="مبلغ:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="345.0" layoutY="303.0" text="به تاریخ:">
+      <Label layoutX="345.0" layoutY="359.0" text="به تاریخ:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="345.0" layoutY="364.0" text="شماره سریال چک:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Button fx:id="submitBtn" layoutX="200.0" layoutY="427.0" mnemonicParsing="false" onAction="#onSubmitClicked" prefHeight="40.0" prefWidth="100.0" style="-fx-background-radius: 5;" text="ثبت" textFill="WHITE">
+      <Button fx:id="submitBtn" layoutX="200.0" layoutY="423.0" mnemonicParsing="false" onAction="#onSubmitClicked" prefHeight="40.0" prefWidth="100.0" style="-fx-background-radius: 5;" text="ثبت" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -78,17 +76,21 @@
             <String fx:value="zoom" />
          </styleClass>
       </Button>
-      <TextField layoutX="95.0" layoutY="238.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray">
+      <TextField fx:id="amountText" layoutX="95.0" layoutY="294.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray">
          <font>
             <Font size="17.0" />
          </font></TextField>
-      <TextField layoutX="95.0" layoutY="299.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray">
+      <ChoiceBox fx:id="accChoice" layoutX="95.0" layoutY="123.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray" />
+      <Label layoutX="345.0" layoutY="127.0" text="حساب مورد نظر:">
          <font>
-            <Font size="17.0" />
-         </font></TextField>
-      <TextField layoutX="95.0" layoutY="360.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray">
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="date" layoutX="95.0" layoutY="355.0" prefHeight="35.0" prefWidth="240.0" styleClass="gray" />
+      <Text fx:id="errorText" fill="RED" layoutX="37.0" layoutY="411.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="425.33673095703125">
          <font>
-            <Font size="17.0" />
-         </font></TextField>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

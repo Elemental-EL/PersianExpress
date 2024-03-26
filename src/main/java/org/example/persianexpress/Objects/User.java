@@ -99,4 +99,15 @@ public class User extends Person {
         }
         return uID;
     }
+
+    public static int getUserID(Connection connection, String nCode) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT CustomerID FROM CustomersInfo WHERE NationalCode = ?");
+        statement.setNString(1,nCode);
+        ResultSet resultSet = statement.executeQuery();
+        int userID=0;
+        while (resultSet.next()){
+            userID = resultSet.getInt("CustomerID");
+        }
+        return userID;
+    }
 }

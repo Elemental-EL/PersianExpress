@@ -199,6 +199,19 @@ public class GharzolH {
         return TID;
     }
 
+    public static String[] getAccNumsForReceipt(Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT AccountNumber FROM BankAccounts WHERE CustomerID = ? AND (AccountType=N'قرض الحسنه جاری' OR AccountType=N'سپرده کوتاه مدت')");
+        statement.setInt(1,HelloController.userID);
+        ResultSet resultSet = statement.executeQuery();
+        String[] accs = new String[1000];
+        accs[0] = "انتخاب کنید";
+        int i =1;
+        while (resultSet.next()){
+            accs[i++] = resultSet.getNString("AccountNumber");
+        }
+        return Arrays.stream(accs).filter(Objects::nonNull).toArray(String[]::new);
+    }
+
     public static String[] getValidAccNumsForCheque(Connection connection) throws SQLException {
         PreparedStatement statement1 = connection.prepareStatement("SELECT AccountID FROM StockCheque WHERE CustomerID = ?");
         statement1.setInt(1,HelloController.userID);
@@ -271,5 +284,13 @@ public class GharzolH {
             accs[i++] = acc.getAccountNumber(connection);
         }
         return Arrays.stream(accs).filter(Objects::nonNull).toArray(String[]::new);
+    }
+
+    public static Long getAccountBalance(String accSlctd, Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT AccountStock FROM BankAccounts WHERE AccountNumber = ?");
+        statement.setNString(1, accSlctd);
+        ResultSet resultSet1 = statement.executeQuery();
+        resultSet1.next();
+        return resultSet1.getLong("AccountStock");
     }
 }
