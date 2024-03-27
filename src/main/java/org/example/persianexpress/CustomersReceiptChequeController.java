@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.example.persianexpress.Objects.CheckBookReq;
 import org.example.persianexpress.Objects.GharzolH;
 import org.example.persianexpress.Objects.StockCheque;
 import org.example.persianexpress.Objects.User;
@@ -73,16 +74,21 @@ public class CustomersReceiptChequeController {
                     flag = true;
                 }
             }
-            if (flag){
-                PreparedStatement statement = connection.prepareStatement("INSERT INTO ReceiptChequeREQ (CustomerID,AccountID,RequestDate,ChequeSerialNum,ChequeDate,ChequeAmount,ReceiptChequeStatus) VALUES (?,?,?,?,?,?,?)");
-                statement.setInt(1,HelloController.userID);
-                statement.setInt(2,GharzolH.getAccountUID(selectedAccount.getSelectionModel().getSelectedItem(),connection));
-                statement.setDate(3, Date.valueOf(LocalDate.now()));
-                statement.setLong(4, Long.parseLong(chequeSerialNumber.getText()));
-                statement.setDate(5,resultSet.getDate("ChequeDate"));
-                statement.setLong(6,resultSet.getLong("ChequeAmount"));
-                statement.setBoolean(7,false);
-                int resN = statement.executeUpdate();
+            boolean newReq = true;
+            if (flag) {
+                ResultSet res = CheckBookReq.getRequestedCheques(connection);
+                while (res.next()) {
+                    if (chequeSerialNumber.getText().equals(String.valueOf(res.getLong("ChequeSerialNum")))) {
+                        newReq = false;
+                    }
+                }
+            }
+            if (!newReq){
+                errorText.setText("*شما قبلا برای این چک درخواست ثبت کرده اید.");
+            } else if(flag&&resultSet.getDate("ChequeDate").after(Date.valueOf(LocalDate.now()))){
+                errorText.setText("*زمان وصول این چک فرا نرسیده است.");
+            } else if (flag){
+                CheckBookReq.submitReceiptREQ(resultSet, connection, selectedAccount, chequeSerialNumber);
                 Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersPanel.fxml"));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
@@ -95,5 +101,6 @@ public class CustomersReceiptChequeController {
             }
         }
     }
+
 
 }
