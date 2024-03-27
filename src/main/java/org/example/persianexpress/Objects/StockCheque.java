@@ -114,7 +114,7 @@ public class StockCheque {
         statement1.setLong(4,serialNum);
         statement1.setLong(5, Long.parseLong(amountText.getText()));
         statement1.setDate(6, Date.valueOf(date.getValue()));
-        statement1.setBoolean(7,false);
+        statement1.setNString(7 , "وصول نشده");
         int resultSetN = statement1.executeUpdate();
         PreparedStatement statement2 = connection.prepareStatement("UPDATE StockCheque SET StockCheque = StockCheque - 1 WHERE AccountID = ?");
         statement2.setInt(1,GharzolH.getAccountUID(accSlctd, connection));

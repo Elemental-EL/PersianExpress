@@ -50,7 +50,7 @@ public class User extends Person {
         return user;
     }
     public static int createUser(Connection connection, TextField userText, PasswordField passText, TextField firstNameText, TextField familyNameText, TextField nCodeText, TextField fatherNameText, DatePicker bDate, TextField bPlaceText, TextField mPhoneText, TextField hPhoneText, TextArea addressText, TextField codePText) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO CustomersInfo (CustomerUN,CustomerPassword,FirstName,LastName,NationalCode,FatherName,BirthDate,BirthPlace,PhoneNumber,HomePhoneNumber,HomeAddress,PostCode,Access) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,true)");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO CustomersInfo (CustomerUN,CustomerPassword,FirstName,LastName,NationalCode,FatherName,BirthDate,BirthPlace,PhoneNumber,HomePhoneNumber,HomeAddress,PostCode,Access) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
         statement.setString(1, userText.getText());
         statement.setString(2, passText.getText());
         statement.setString(3, firstNameText.getText());
@@ -63,9 +63,10 @@ public class User extends Person {
         statement.setString(10, hPhoneText.getText());
         statement.setString(11, addressText.getText());
         statement.setString(12, codePText.getText());
+        statement.setBoolean(13 , true);
         int resultSet = statement.executeUpdate();
         int uID = 100;
-        PreparedStatement statement1 = connection.prepareStatement("SELECT CustomerID FROM CustomerInfo WHERE CustomerUN=?");
+        PreparedStatement statement1 = connection.prepareStatement("SELECT CustomerID FROM CustomersInfo WHERE CustomerUN=?");
         statement1.setString(1,userText.getText());
         ResultSet resultSet1 = statement1.executeQuery();
         while (resultSet1.next()){

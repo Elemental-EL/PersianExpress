@@ -39,6 +39,7 @@ public class CustomersPanelController implements Initializable {
     private AnchorPane showAcountsPane;
     @FXML
     private VBox showAcountsVBox;
+    private Connection connection;
     public static boolean loggedIn = false;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -76,7 +77,6 @@ public class CustomersPanelController implements Initializable {
         ArrayList<GharzolH> gharzolHSAcc = new ArrayList<>();
         ArrayList<Sepordeh> sepordehAcc = new ArrayList<>();
         int i = 0;
-        Connection connection = null;
         try {
             connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374");
             PreparedStatement statement = connection.prepareStatement("select *from BankAccounts");
@@ -142,17 +142,26 @@ public class CustomersPanelController implements Initializable {
             Label accTypetxt = new Label(gharz.getAccType());
             Label accNumtxt = new Label(gharz.getAccNumber());
             Label accStocktxt = new Label(String.valueOf(gharz.getAccBalance()));
+            Label accAccesslbl = new Label("وضعیت حساب :");
+            Label accAccesstxt = new Label("");
+            if (gharz.isAccAccess()){
+                accAccesstxt.setText("فعال");
+            } else if (!gharz.isAccAccess()) {
+                accAccesstxt.setText("مسدود");
+            }
             accTypelbl.getStyleClass().add("labels");
             accNumlbl.getStyleClass().add("labels");
             accStocklbl.getStyleClass().add("labels");
             accTypetxt.getStyleClass().add("labels");
             accNumtxt.getStyleClass().add("labels");
             accStocktxt.getStyleClass().add("labels");
-            VBox vBox1 = new VBox(3);
-            VBox vBox2 = new VBox(3);
-            vBox1.getChildren().addAll(accTypelbl , accNumlbl , accStocklbl);
+            accAccesslbl.getStyleClass().add("labels");
+            accAccesstxt.getStyleClass().add("labels");
+            VBox vBox1 = new VBox(4);
+            VBox vBox2 = new VBox(4);
+            vBox1.getChildren().addAll(accTypelbl , accNumlbl , accStocklbl , accAccesslbl);
             vBox1.setAlignment(Pos.CENTER_RIGHT);
-            vBox2.getChildren().addAll(accTypetxt , accNumtxt , accStocktxt);
+            vBox2.getChildren().addAll(accTypetxt , accNumtxt , accStocktxt , accAccesstxt);
             BorderPane borderPane = new BorderPane();
             borderPane.setRight(vBox1);
             borderPane.setLeft(vBox2);
@@ -172,6 +181,13 @@ public class CustomersPanelController implements Initializable {
             Label accStocktxt = new Label(String.valueOf(sepordeh.getAccBalance()));
             Label accInteresttxt = new Label(String.valueOf(sepordeh.getAccInterest()) + "%");
             Label accTermtxt = new Label(String.valueOf(sepordeh.getAccTerminationDate()));
+            Label accAccesslbl = new Label("وضعیت حساب :");
+            Label accAccesstxt = new Label("");
+            if (sepordeh.isAccAccess()){
+                accAccesstxt.setText("فعال");
+            } else if (!sepordeh.isAccAccess()) {
+                accAccesstxt.setText("مسدود");
+            }
             accTypelbl.getStyleClass().add("labels");
             accNumlbl.getStyleClass().add("labels");
             accStocklbl.getStyleClass().add("labels");
@@ -182,11 +198,13 @@ public class CustomersPanelController implements Initializable {
             accStocktxt.getStyleClass().add("labels");
             accInteresttxt.getStyleClass().add("labels");
             accTermtxt.getStyleClass().add("labels");
-            VBox vBox1 = new VBox(5);
-            VBox vBox2 = new VBox(5);
-            vBox1.getChildren().addAll(accTypelbl , accNumlbl , accStocklbl , accInterestlbl , accTermlbl);
+            accAccesslbl.getStyleClass().add("labels");
+            accAccesstxt.getStyleClass().add("labels");
+            VBox vBox1 = new VBox(6);
+            VBox vBox2 = new VBox(6);
+            vBox1.getChildren().addAll(accTypelbl , accNumlbl , accStocklbl , accInterestlbl , accTermlbl , accAccesslbl);
             vBox1.setAlignment(Pos.CENTER_RIGHT);
-            vBox2.getChildren().addAll(accTypetxt , accNumtxt , accStocktxt , accInteresttxt , accTermtxt);
+            vBox2.getChildren().addAll(accTypetxt , accNumtxt , accStocktxt , accInteresttxt , accTermtxt , accAccesstxt);
             BorderPane borderPane = new BorderPane();
             borderPane.setRight(vBox1);
             borderPane.setLeft(vBox2);
@@ -198,8 +216,8 @@ public class CustomersPanelController implements Initializable {
         showAcountsPane.setPrefHeight(450);
         showAcountsVBox.setPrefHeight(450);
         if (i >= 3){
-            showAcountsPane.setPrefHeight(showAcountsPane.getPrefHeight() + 150*(i-2));
-            showAcountsVBox.setPrefHeight(showAcountsVBox.getPrefHeight() + 150*(i-2));
+            showAcountsPane.setPrefHeight(showAcountsPane.getPrefHeight() + 175*(i-2));
+            showAcountsVBox.setPrefHeight(showAcountsVBox.getPrefHeight() + 175*(i-2));
         }
     }
     private void ShowGHarzeJari(ArrayList<GharzolH> gharzolHS){
@@ -212,17 +230,26 @@ public class CustomersPanelController implements Initializable {
                 Label accTypetxt = new Label(gharz.getAccType());
                 Label accNumtxt = new Label(gharz.getAccNumber());
                 Label accStocktxt = new Label(String.valueOf(gharz.getAccBalance()));
+                Label accAccesslbl = new Label("وضعیت حساب :");
+                Label accAccesstxt = new Label("");
+                if (gharz.isAccAccess()){
+                    accAccesstxt.setText("فعال");
+                } else if (!gharz.isAccAccess()) {
+                    accAccesstxt.setText("مسدود");
+                }
                 accTypelbl.getStyleClass().add("labels");
                 accNumlbl.getStyleClass().add("labels");
                 accStocklbl.getStyleClass().add("labels");
                 accTypetxt.getStyleClass().add("labels");
                 accNumtxt.getStyleClass().add("labels");
                 accStocktxt.getStyleClass().add("labels");
-                VBox vBox1 = new VBox(3);
-                VBox vBox2 = new VBox(3);
-                vBox1.getChildren().addAll(accTypelbl , accNumlbl , accStocklbl);
+                accAccesslbl.getStyleClass().add("labels");
+                accAccesstxt.getStyleClass().add("labels");
+                VBox vBox1 = new VBox(4);
+                VBox vBox2 = new VBox(4);
+                vBox1.getChildren().addAll(accTypelbl , accNumlbl , accStocklbl , accAccesslbl);
                 vBox1.setAlignment(Pos.CENTER_RIGHT);
-                vBox2.getChildren().addAll(accTypetxt , accNumtxt , accStocktxt);
+                vBox2.getChildren().addAll(accTypetxt , accNumtxt , accStocktxt , accAccesstxt);
                 BorderPane borderPane = new BorderPane();
                 borderPane.setRight(vBox1);
                 borderPane.setLeft(vBox2);
@@ -236,8 +263,8 @@ public class CustomersPanelController implements Initializable {
         showAcountsPane.setPrefHeight(450);
         showAcountsVBox.setPrefHeight(450);
         if (i > 3){
-            showAcountsPane.setPrefHeight(showAcountsPane.getPrefHeight() + 120*(i-3));
-            showAcountsVBox.setPrefHeight(showAcountsVBox.getPrefHeight() + 120*(i-3));
+            showAcountsPane.setPrefHeight(showAcountsPane.getPrefHeight() + 175*(i-3));
+            showAcountsVBox.setPrefHeight(showAcountsVBox.getPrefHeight() + 175*(i-3));
         }
     }
     private void ShowGharzeSepordeh(ArrayList<GharzolH> gharzolHS){
@@ -250,17 +277,26 @@ public class CustomersPanelController implements Initializable {
                 Label accTypetxt = new Label(gharz.getAccType());
                 Label accNumtxt = new Label(gharz.getAccNumber());
                 Label accStocktxt = new Label(String.valueOf(gharz.getAccBalance()));
+                Label accAccesslbl = new Label("وضعیت حساب :");
+                Label accAccesstxt = new Label("");
+                if (gharz.isAccAccess()){
+                    accAccesstxt.setText("فعال");
+                } else if (!gharz.isAccAccess()) {
+                    accAccesstxt.setText("مسدود");
+                }
                 accTypelbl.getStyleClass().add("labels");
                 accNumlbl.getStyleClass().add("labels");
                 accStocklbl.getStyleClass().add("labels");
                 accTypetxt.getStyleClass().add("labels");
                 accNumtxt.getStyleClass().add("labels");
                 accStocktxt.getStyleClass().add("labels");
+                accAccesslbl.getStyleClass().add("labels");
+                accAccesstxt.getStyleClass().add("labels");
                 VBox vBox1 = new VBox(3);
                 VBox vBox2 = new VBox(3);
-                vBox1.getChildren().addAll(accTypelbl , accNumlbl , accStocklbl);
+                vBox1.getChildren().addAll(accTypelbl , accNumlbl , accStocklbl , accAccesslbl);
                 vBox1.setAlignment(Pos.CENTER_RIGHT);
-                vBox2.getChildren().addAll(accTypetxt , accNumtxt , accStocktxt);
+                vBox2.getChildren().addAll(accTypetxt , accNumtxt , accStocktxt , accAccesstxt);
                 BorderPane borderPane = new BorderPane();
                 borderPane.setRight(vBox1);
                 borderPane.setLeft(vBox2);
@@ -275,8 +311,8 @@ public class CustomersPanelController implements Initializable {
         showAcountsVBox.setPrefHeight(450);
         if (i > 3){
 
-            showAcountsPane.setPrefHeight(showAcountsPane.getPrefHeight() + 120*(i-3));
-            showAcountsVBox.setPrefHeight(showAcountsVBox.getPrefHeight() + 120*(i-3));
+            showAcountsPane.setPrefHeight(showAcountsPane.getPrefHeight() + 175*(i-3));
+            showAcountsVBox.setPrefHeight(showAcountsVBox.getPrefHeight() + 175*(i-3));
         }
     }
     private void ShowSepordehKotah(ArrayList<Sepordeh> sepordehs){
@@ -293,6 +329,13 @@ public class CustomersPanelController implements Initializable {
                 Label accStocktxt = new Label(String.valueOf(sepordeh.getAccBalance()));
                 Label accInteresttxt = new Label(String.valueOf(sepordeh.getAccInterest()) + "%");
                 Label accTermtxt = new Label(String.valueOf(sepordeh.getAccTerminationDate()));
+                Label accAccesslbl = new Label("وضعیت حساب :");
+                Label accAccesstxt = new Label("");
+                if (sepordeh.isAccAccess()){
+                    accAccesstxt.setText("فعال");
+                } else if (!sepordeh.isAccAccess()) {
+                    accAccesstxt.setText("مسدود");
+                }
                 accTypelbl.getStyleClass().add("labels");
                 accNumlbl.getStyleClass().add("labels");
                 accStocklbl.getStyleClass().add("labels");
@@ -303,11 +346,13 @@ public class CustomersPanelController implements Initializable {
                 accStocktxt.getStyleClass().add("labels");
                 accInteresttxt.getStyleClass().add("labels");
                 accTermtxt.getStyleClass().add("labels");
-                VBox vBox1 = new VBox(5);
-                VBox vBox2 = new VBox(5);
-                vBox1.getChildren().addAll(accTypelbl , accNumlbl , accStocklbl , accInterestlbl , accTermlbl);
+                accAccesslbl.getStyleClass().add("labels");
+                accAccesstxt.getStyleClass().add("labels");
+                VBox vBox1 = new VBox(6);
+                VBox vBox2 = new VBox(6);
+                vBox1.getChildren().addAll(accTypelbl , accNumlbl , accStocklbl , accInterestlbl , accTermlbl , accAccesslbl);
                 vBox1.setAlignment(Pos.CENTER_RIGHT);
-                vBox2.getChildren().addAll(accTypetxt , accNumtxt , accStocktxt , accInteresttxt , accTermtxt);
+                vBox2.getChildren().addAll(accTypetxt , accNumtxt , accStocktxt , accInteresttxt , accTermtxt , accAccesstxt);
                 BorderPane borderPane = new BorderPane();
                 borderPane.setRight(vBox1);
                 borderPane.setLeft(vBox2);
@@ -320,8 +365,8 @@ public class CustomersPanelController implements Initializable {
             showAcountsPane.setPrefHeight(450);
             showAcountsVBox.setPrefHeight(450);
             if (i > 2){
-                showAcountsPane.setPrefHeight(showAcountsPane.getPrefHeight() + 150*(i-2));
-                showAcountsVBox.setPrefHeight(showAcountsVBox.getPrefHeight() + 120*(i-2));
+                showAcountsPane.setPrefHeight(showAcountsPane.getPrefHeight() + 175*(i-2));
+                showAcountsVBox.setPrefHeight(showAcountsVBox.getPrefHeight() + 175*(i-2));
             }
         }
     }
@@ -339,6 +384,13 @@ public class CustomersPanelController implements Initializable {
                 Label accStocktxt = new Label(String.valueOf(sepordeh.getAccBalance()));
                 Label accInteresttxt = new Label(String.valueOf(sepordeh.getAccInterest()) + "%");
                 Label accTermtxt = new Label(String.valueOf(sepordeh.getAccTerminationDate()));
+                Label accAccesslbl = new Label("وضعیت حساب :");
+                Label accAccesstxt = new Label("");
+                if (sepordeh.isAccAccess()){
+                    accAccesstxt.setText("فعال");
+                } else if (!sepordeh.isAccAccess()) {
+                    accAccesstxt.setText("مسدود");
+                }
                 accTypelbl.getStyleClass().add("labels");
                 accNumlbl.getStyleClass().add("labels");
                 accStocklbl.getStyleClass().add("labels");
@@ -349,11 +401,13 @@ public class CustomersPanelController implements Initializable {
                 accStocktxt.getStyleClass().add("labels");
                 accInteresttxt.getStyleClass().add("labels");
                 accTermtxt.getStyleClass().add("labels");
-                VBox vBox1 = new VBox(5);
-                VBox vBox2 = new VBox(5);
-                vBox1.getChildren().addAll(accTypelbl , accNumlbl , accStocklbl , accInterestlbl , accTermlbl);
+                accAccesslbl.getStyleClass().add("labels");
+                accAccesstxt.getStyleClass().add("labels");
+                VBox vBox1 = new VBox(6);
+                VBox vBox2 = new VBox(6);
+                vBox1.getChildren().addAll(accTypelbl , accNumlbl , accStocklbl , accInterestlbl , accTermlbl , accAccesslbl);
                 vBox1.setAlignment(Pos.CENTER_RIGHT);
-                vBox2.getChildren().addAll(accTypetxt , accNumtxt , accStocktxt , accInteresttxt , accTermtxt);
+                vBox2.getChildren().addAll(accTypetxt , accNumtxt , accStocktxt , accInteresttxt , accTermtxt , accAccesstxt);
                 BorderPane borderPane = new BorderPane();
                 borderPane.setRight(vBox1);
                 borderPane.setLeft(vBox2);
@@ -366,8 +420,8 @@ public class CustomersPanelController implements Initializable {
             showAcountsPane.setPrefHeight(450);
             showAcountsVBox.setPrefHeight(450);
             if (i > 2){
-                showAcountsPane.setPrefHeight(showAcountsPane.getPrefHeight() + 150*(i-2));
-                showAcountsVBox.setPrefHeight(showAcountsVBox.getPrefHeight() + 120*(i-2));
+                showAcountsPane.setPrefHeight(showAcountsPane.getPrefHeight() + 175*(i-2));
+                showAcountsVBox.setPrefHeight(showAcountsVBox.getPrefHeight() + 175*(i-2));
             }
         }
     }

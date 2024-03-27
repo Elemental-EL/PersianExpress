@@ -46,8 +46,16 @@
     -fx-font-weight: bold;
     -fx-text-fill:#11235A;
 }
+.labels2{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill:#11235A;
+}
 .CPBorderPane1{
     -fx-padding: 8;
+}
+.vboxPadding{
+    -fx-padding: 10 , 10 , 10 , 25;
 }
 .labels1{
     -fx-font-size: 20;
@@ -60,4 +68,14 @@
 }
 .spacePane{
     -fx-background-color: #ffffff;
+}
+.button1{
+    -fx-pref-height: 30;
+    -fx-pref-width: 120;
+    -fx-font-size: 16;
+    -fx-text-fill: #fff;
+}
+.borderPane1{
+    -fx-pref-width:764;
+    -fx-pref-height: 50;
 }

@@ -211,25 +211,7 @@ public class CreateAccountController {
                         }
                     }
                     else {
-                        String accnum = GharzolH.generateAccNum(connection,typeSlctd);
-                        GharzolH.createBankAcc(connection, HelloController.userID, accnum, typeSlctd, nowsDate);
-                        if (HelloController.post.equals("کارمند")){
-                            Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/EmployeePanel.fxml"));
-                            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            scene = new Scene(root);
-                            stage.setScene(scene);
-                            stage.setResizable(false);
-                            stage.show();
-                            stage.centerOnScreen();
-                        }else if (HelloController.post.equals("مدیر")){
-                            Parent root = FXMLLoader.load(getClass().getResource("Pages/Boss/BossPanel.fxml"));
-                            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            scene = new Scene(root);
-                            stage.setScene(scene);
-                            stage.setResizable(false);
-                            stage.show();
-                            stage.centerOnScreen();
-                        }
+                        errorText.setText("نام کاربری قبلا استفاده شده است !");
                     }
                 }
             }

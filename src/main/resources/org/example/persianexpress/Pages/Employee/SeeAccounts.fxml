@@ -12,15 +12,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.EmployeeSeeAccountsController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.EmployeeSeeAccountsController">
    <children>
-      <Pane prefHeight="100.0" prefWidth="700.0" styleClass="darkblue">
+      <Pane prefHeight="100.0" prefWidth="900.0" styleClass="darkblue">
          <children>
-            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="586.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="786.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/persian-express-high-resolution-logo-white-transparent.png" />
                </image></ImageView>
-            <Label layoutX="246.0" layoutY="46.0" text="مشاهده حساب ها" textFill="WHITE">
+            <Label layoutX="346.0" layoutY="45.0" text="مشاهده حساب ها" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
@@ -36,18 +36,18 @@
             </Pane>
          </children>
       </Pane>
-      <Pane layoutY="100.0" prefHeight="500.0" prefWidth="700.0" styleClass="gray">
+      <Pane layoutY="100.0" prefHeight="600.0" prefWidth="900.0" styleClass="gray">
          <children>
-            <ScrollPane layoutX="10.0" layoutY="64.0" prefHeight="372.0" prefWidth="680.0">
+            <ScrollPane layoutX="10.0" layoutY="64.0" prefHeight="472.0" prefWidth="880.0">
                <content>
-                  <AnchorPane fx:id="mainPane" minHeight="0.0" minWidth="0.0" prefHeight="372.0" prefWidth="664.0" styleClass="backgroundColor">
+                  <AnchorPane fx:id="mainPane" minHeight="0.0" minWidth="0.0" prefHeight="472.0" prefWidth="864.0" styleClass="backgroundColor">
                      <children>
-                        <VBox fx:id="mainVBox" prefHeight="372.0" prefWidth="664.0" />
+                        <VBox fx:id="mainVBox" prefHeight="472.0" prefWidth="864.0" />
                      </children>
                   </AnchorPane>
                </content>
             </ScrollPane>
-            <Button fx:id="addAccount" layoutX="276.0" layoutY="446.0" mnemonicParsing="false" onAction="#onAddAccountClicked" text="افزودن حساب" textFill="WHITE">
+            <Button fx:id="addAccount" layoutX="379.0" layoutY="546.0" mnemonicParsing="false" onAction="#onAddAccountClicked" text="افزودن حساب" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -58,10 +58,15 @@
                   <String fx:value="pressed" />
                </styleClass>
             </Button>
-            <ChoiceBox fx:id="showAccountType" layoutX="339.0" layoutY="8.0" prefHeight="35.0" prefWidth="207.0" />
-            <Label layoutX="556.0" layoutY="12.0" text="فیلتر(نوع حساب):">
+            <ChoiceBox fx:id="showAccountType" layoutX="462.0" layoutY="15.0" prefHeight="35.0" prefWidth="263.0" />
+            <Label layoutX="734.0" layoutY="19.0" text="فیلتر(نوع حساب):">
                <font>
                   <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorText" alignment="BASELINE_RIGHT" layoutX="575.0" layoutY="546.0" prefHeight="20.0" prefWidth="300.0" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
          </children>
