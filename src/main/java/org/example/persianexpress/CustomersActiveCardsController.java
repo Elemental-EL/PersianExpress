@@ -30,6 +30,7 @@ public class CustomersActiveCardsController {
     private String accNum;
     private String accType;
     private long accStock;
+    private boolean access;
     public void initialize() throws SQLException {
         ArrayList<Card> cards = new ArrayList<Card>();
         connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
@@ -59,43 +60,46 @@ public class CustomersActiveCardsController {
                 accNum = resultSet.getNString("AccountNumber");
                 accType = resultSet.getNString("AccountType");
                 accStock = resultSet.getLong("AccountStock");
+                access = resultSet.getBoolean("AccountAccess");
             }
-            Label accTypelbl = new Label("نوع حساب میدا :");
-            Label accTypetxt = new Label(accType);
-            Label accNumlbl = new Label("شماره حساب مبدا :");
-            Label accNumtxt = new Label(accNum);
-            Label cardNumlbl = new Label("شماره کارت :");
-            Label cardNumtxt = new Label(card.getCardNumber());
-            Label cvv2lbl = new Label(": CVV2");
-            Label cvv2txt = new Label(card.getCvv2());
-            Label cardTermlbl = new Label("تاریخ انقضای کارت :");
-            Label cardTermtxt = new Label(String.valueOf(card.getCardExpDate()));
-            Label accStocklbl = new Label("موجودی :");
-            Label accStocktxt = new Label(String.valueOf(accStock));
-            accTypelbl.getStyleClass().add("labels");
-            accTypetxt.getStyleClass().add("labels");
-            accNumlbl.getStyleClass().add("labels");
-            accNumtxt.getStyleClass().add("labels");
-            cardNumlbl.getStyleClass().add("labels");
-            cardNumtxt.getStyleClass().add("labels");
-            cvv2lbl.getStyleClass().add("labels");
-            cvv2txt.getStyleClass().add("labels");
-            cardTermlbl.getStyleClass().add("labels");
-            cardTermtxt.getStyleClass().add("labels");
-            accStocklbl.getStyleClass().add("labels");
-            accStocktxt.getStyleClass().add("labels");
-            VBox vBox1 = new VBox(6);
-            vBox1.setAlignment(Pos.CENTER_RIGHT);
-            VBox vBox2 = new VBox(6);
-            vBox1.getChildren().addAll(accTypelbl , accNumlbl , cardNumlbl , cvv2lbl , cardTermlbl , accStocklbl);
-            vBox2.getChildren().addAll(accTypetxt , accNumtxt , cardNumtxt , cvv2txt , cardTermtxt , accStocktxt);
-            BorderPane borderPane = new BorderPane();
-            borderPane.setRight(vBox1);
-            borderPane.setLeft(vBox2);
-            borderPane.getStyleClass().addAll("gray" , "CPBorderPane1");
-            BorderPane spacePane = new BorderPane();
-            spacePane.setStyle("-fx-pref-height: 20");
-            MainVBox.getChildren().addAll(borderPane , spacePane);
+            if (access){
+                Label accTypelbl = new Label("نوع حساب میدا :");
+                Label accTypetxt = new Label(accType);
+                Label accNumlbl = new Label("شماره حساب مبدا :");
+                Label accNumtxt = new Label(accNum);
+                Label cardNumlbl = new Label("شماره کارت :");
+                Label cardNumtxt = new Label(card.getCardNumber());
+                Label cvv2lbl = new Label(": CVV2");
+                Label cvv2txt = new Label(card.getCvv2());
+                Label cardTermlbl = new Label("تاریخ انقضای کارت :");
+                Label cardTermtxt = new Label(String.valueOf(card.getCardExpDate()));
+                Label accStocklbl = new Label("موجودی :");
+                Label accStocktxt = new Label(String.valueOf(accStock));
+                accTypelbl.getStyleClass().add("labels");
+                accTypetxt.getStyleClass().add("labels");
+                accNumlbl.getStyleClass().add("labels");
+                accNumtxt.getStyleClass().add("labels");
+                cardNumlbl.getStyleClass().add("labels");
+                cardNumtxt.getStyleClass().add("labels");
+                cvv2lbl.getStyleClass().add("labels");
+                cvv2txt.getStyleClass().add("labels");
+                cardTermlbl.getStyleClass().add("labels");
+                cardTermtxt.getStyleClass().add("labels");
+                accStocklbl.getStyleClass().add("labels");
+                accStocktxt.getStyleClass().add("labels");
+                VBox vBox1 = new VBox(6);
+                vBox1.setAlignment(Pos.CENTER_RIGHT);
+                VBox vBox2 = new VBox(6);
+                vBox1.getChildren().addAll(accTypelbl , accNumlbl , cardNumlbl , cvv2lbl , cardTermlbl , accStocklbl);
+                vBox2.getChildren().addAll(accTypetxt , accNumtxt , cardNumtxt , cvv2txt , cardTermtxt , accStocktxt);
+                BorderPane borderPane = new BorderPane();
+                borderPane.setRight(vBox1);
+                borderPane.setLeft(vBox2);
+                borderPane.getStyleClass().addAll("gray" , "CPBorderPane1");
+                BorderPane spacePane = new BorderPane();
+                spacePane.setStyle("-fx-pref-height: 20");
+                MainVBox.getChildren().addAll(borderPane , spacePane);
+            }
         }
     }
     public void onBackClicked(MouseEvent event) throws IOException {
