@@ -27,28 +27,84 @@ public class BossPanelController {
         HelloController.userID = 100;
     }
 
-    public void onSeeUsersClicked(ActionEvent event) {
+    public void onSeeUsersClicked(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeUsers.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+        stage.centerOnScreen();
     }
 
-    public void onSeeAccsClicked(ActionEvent event) {
+    public void onSeeAccsClicked(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeAccounts.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+        stage.centerOnScreen();
     }
 
-    public void onSeeReqsClicked(ActionEvent event) {
+    public void onSeeReqsClicked(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeRequests.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+        stage.centerOnScreen();
     }
 
-    public void onReqsHistoryClicked(ActionEvent event) {
+    public void onReqsHistoryClicked(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/RequestsHistory.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+        stage.centerOnScreen();
     }
 
-    public void onSendMessageClicked(ActionEvent event) {
+    public void onSendMessageClicked(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SendMessage.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+        stage.centerOnScreen();
     }
 
-    public void onInboxClicked(ActionEvent event) {
+    public void onInboxClicked(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeMessages.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+        stage.centerOnScreen();
     }
 
-    public void onSuggestionsClicked(ActionEvent event) {
+    public void onSuggestionsClicked(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeSuggestions.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+        stage.centerOnScreen();
     }
 
-    public void onMessagesHistoryClicked(ActionEvent event) {
+    public void onMessagesHistoryClicked(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/MessagesHistory.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+        stage.centerOnScreen();
     }
 
     public void onSeeEmployeeClicked(ActionEvent event) {

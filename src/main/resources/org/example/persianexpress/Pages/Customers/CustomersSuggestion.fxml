@@ -45,7 +45,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </TextArea>
-            <Button layoutX="290.0" layoutY="421.0" mnemonicParsing="false" onAction="#onSendClicked" prefHeight="40.0" prefWidth="120.0" text="ارسال" textFill="WHITE">
+            <Button layoutX="290.0" layoutY="429.0" mnemonicParsing="false" onAction="#onSendClicked" prefHeight="40.0" prefWidth="120.0" text="ارسال" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -56,6 +56,11 @@
                   <String fx:value="hover" />
                </styleClass>
             </Button>
+            <Label fx:id="errorText" alignment="BASELINE_RIGHT" layoutX="344.0" layoutY="400.0" prefHeight="20.0" prefWidth="300.0" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

@@ -170,14 +170,25 @@ public class EmployeeSeeRequestsController {
         });
     }
     public void onBackClicked(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/EmployeePanel.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setTitle("Persian Express");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-        stage.centerOnScreen();
+        if (HelloController.userID == 101){
+            Parent root = FXMLLoader.load(getClass().getResource("Pages/Boss/BossPanel.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setTitle("Persian Express");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+            stage.centerOnScreen();
+        }else {
+            Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/EmployeePanel.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setTitle("Persian Express");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+            stage.centerOnScreen();
+        }
     }
 
     private void ShowAllREQ(ArrayList<CreateAccReq> CreateAccREQ , ArrayList<DeleteAccReq> DeleteAccREQ , ArrayList<CardReq> CardREQ , ArrayList<LoanReq> LoanREQ , ArrayList<CheckBookReq> CheckBookREQ , ArrayList<Receipt> ReceiptChequeREQ) throws SQLException {

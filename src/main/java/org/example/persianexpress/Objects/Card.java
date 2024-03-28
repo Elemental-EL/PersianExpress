@@ -19,7 +19,9 @@ public class Card {
         this.cardHolderUID = cardHolderUID;
         this.relAccID = relAccID;
     }
-
+    public int getRelAccID(){
+        return relAccID;
+    }
     public String getCardNumber() {
         return cardNumber;
     }
