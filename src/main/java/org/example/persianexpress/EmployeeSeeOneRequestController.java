@@ -153,6 +153,52 @@ public class EmployeeSeeOneRequestController {
                 stage.show();
                 stage.centerOnScreen();
             }
+        } else if (reqType.equals("ReceiptChequeREQ")) {
+            while (resultSet.next()){
+                long serial = resultSet.getLong("ChequeSerialNum");
+                ResultSet res = StockCheque.getCheque(serial, connection);
+                res.next();
+                long accBalance = GharzolH.getAccountBalance(res.getInt("AccountID"),connection);
+                long debt = res.getLong("ChequeAmount");
+                boolean isValid = false;
+                String status = "برگشت خورده";
+                if (accBalance>=debt){
+                    isValid = true;
+                    status = "وصول شده";
+                }
+                if (isValid){
+                    long newBalacne = accBalance - debt;
+                    GharzolH.updateBalance(newBalacne, res, connection);
+                    long destAccBalance = GharzolH.getAccountBalance(resultSet.getInt("AccountID"),connection);
+                    destAccBalance += debt;
+                    GharzolH.updateBalance(destAccBalance,resultSet,connection);
+                    StockCheque.setNewStatusForCheque(status, res, connection);
+                    Request.passToHistory(connection,resultSet,true);
+                    Request.deleteFromREQS(connection,resultSet,reqType);
+                    Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeRequests.fxml"));
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setTitle("Persian Express");
+                    stage.setScene(scene);
+                    stage.setResizable(false);
+                    stage.show();
+                    stage.centerOnScreen();
+                } else {
+                    int accID = res.getInt("AccountID");
+                    GharzolH.suspendAccount(accID, connection);
+                    StockCheque.setNewStatusForCheque(status, res, connection);
+                    Request.passToHistory(connection,resultSet,true);
+                    Request.deleteFromREQS(connection,resultSet,reqType);
+                    Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeRequests.fxml"));
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setTitle("Persian Express");
+                    stage.setScene(scene);
+                    stage.setResizable(false);
+                    stage.show();
+                    stage.centerOnScreen();
+                }
+            }
         }
     }
 

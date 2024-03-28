@@ -181,6 +181,13 @@ public class GharzolH {
         int resultSet = statement.executeUpdate();
     }
 
+    public static void updateBalance(long newBalacne, ResultSet res, Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE BankAccounts SET AccountStock = ? WHERE AccountID = ?");
+        statement.setLong(1, newBalacne);
+        statement.setInt(2, res.getInt("AccountID"));
+        int resN = statement.executeUpdate();
+    }
+
     public static int submitTransaction(Sepordeh acc, String type, Connection connection, LocalDate nowsDate) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("INSERT INTO Transactions (CustomerID,TransactionType,SenderAccountNum,RecipientAccountNum,TransactionAmount,TransactionDate) VALUES (?,?,?,?,?,?)");
         statement.setInt(1, acc.getAccHolderUID());
@@ -293,4 +300,19 @@ public class GharzolH {
         resultSet1.next();
         return resultSet1.getLong("AccountStock");
     }
+
+    public static Long getAccountBalance(int accID, Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT AccountStock FROM BankAccounts WHERE AccountID = ?");
+        statement.setInt(1, accID);
+        ResultSet resultSet1 = statement.executeQuery();
+        resultSet1.next();
+        return resultSet1.getLong("AccountStock");
+    }
+
+    public static void suspendAccount(int accID, Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE BankAccounts SET AccountAccess = 0 WHERE AccountID=?");
+        statement.setInt(1, accID);
+        int resN = statement.executeUpdate();
+    }
+
 }

@@ -124,8 +124,22 @@ public class StockCheque {
     public static ResultSet getUserCheques(Connection connection) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("SELECT ChequeID, ChequeSerialNum, ChequeAmount, ChequeDate FROM ChequeHistory WHERE RecipientID = ? AND ChequeStatus = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         statement.setInt(1,HelloController.userID);
-        statement.setBoolean(2,false);
+        statement.setNString(2,"وصول نشده");
         ResultSet resultSet = statement.executeQuery();
         return resultSet;
+    }
+
+    public static ResultSet getCheque(long serial, Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM ChequeHistory WHERE ChequeSerialNum = ?");
+        statement.setLong(1, serial);
+        ResultSet res = statement.executeQuery();
+        return res;
+    }
+
+    public static void setNewStatusForCheque(String status, ResultSet res, Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE ChequeHistory SET ChequeStatus = ? WHERE ChequeID = ?");
+        statement.setNString(1, status);
+        statement.setInt(2, res.getInt("ChequeID"));
+        int resN = statement.executeUpdate();
     }
 }
