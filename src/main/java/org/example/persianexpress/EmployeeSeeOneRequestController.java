@@ -87,7 +87,7 @@ public class EmployeeSeeOneRequestController {
                 if (resultSet.getInt("CustomerID") == 100) {
                     int uID = User.createUser(connection, resultSet);
                     GharzolH.createBankAcc(connection, uID, GharzolH.generateAccNum(connection, resultSet.getNString("AccountType")), resultSet.getNString("AccountType"), nowsDate);
-                    Request.passToHistory(connection, resultSet, true);
+                    Request.passToHistory(connection, resultSet,uID, true);
                     Request.deleteFromREQS(connection, resultSet,reqType);
                     Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeRequests.fxml"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

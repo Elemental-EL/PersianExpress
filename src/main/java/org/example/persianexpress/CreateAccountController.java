@@ -128,6 +128,7 @@ public class CreateAccountController {
         String typeSlctd = typeSlct.getSelectionModel().getSelectedItem();
         errorText.setText("");
         boolean isUnique = true;
+        boolean nIsUnique = true;
         if (Objects.equals(typeSlctd,"انتخاب کنید")||firstNameText.getText().trim().isEmpty() ||familyNameText.getText().trim().isEmpty() || nCodeText.getText().trim().isEmpty() || fatherNameText.getText().trim().isEmpty() || userText.getText().trim().isEmpty() || passText.getText().trim().isEmpty() || passRepText.getText().trim().isEmpty() || bPlaceText.getText().trim().isEmpty() || addressText.getText().trim().isEmpty() || codePText.getText().trim().isEmpty() || mPhoneText.getText().trim().isEmpty() || hPhoneText.getText().trim().isEmpty() || bDate.getValue()==null){
             errorText.setText("*پر کردن تمامی فیلد ها الزامی است.");
         }
@@ -163,11 +164,15 @@ public class CreateAccountController {
         }
         else {
             String CustomerUserName = userText.getText();
-            PreparedStatement statement0 = connection.prepareStatement("SELECT CustomerUN FROM CustomersInfo");
+            String CustomerNCode = nCodeText.getText();
+            PreparedStatement statement0 = connection.prepareStatement("SELECT CustomerUN , NationalCode FROM CustomersInfo");
             ResultSet resultSet0 = statement0.executeQuery();
             while (resultSet0.next()){
                 if (Objects.equals(CustomerUserName , resultSet0.getNString("CustomerUN"))){
                     isUnique = false;
+                }
+                if (Objects.equals(CustomerNCode , resultSet0.getString("NationalCode"))){
+                    nIsUnique = false;
                 }
             }
             if (!CustomersPanelController.loggedIn){
@@ -175,9 +180,12 @@ public class CreateAccountController {
                     if (!isUnique){
                         errorText.setText("*این نام کاربری قبلا استفاده شده است.");
                     }
+                    else if (!nIsUnique){
+                        errorText.setText("*کاربری با این کد ملی قبلا ثبت نام کرده است.");
+                    }
                     else {
                         CreateAccReq.insert2DB(connection, currentDate, typeSlct, userText, passText, firstNameText, familyNameText, nCodeText, bDate, bPlaceText, mPhoneText, hPhoneText, addressText, codePText, fatherNameText,HelloController.userID);
-                        Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/hello-view.fxml"));
+                        Parent root = FXMLLoader.load(getClass().getResource("Pages/hello-view.fxml"));
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
                         stage.setTitle("Persian Express");
@@ -188,7 +196,7 @@ public class CreateAccountController {
                     }
                 }
                 else {
-                    if (isUnique){
+                    if (isUnique && nIsUnique){
                         int uID = User.createUser(connection, userText, passText, firstNameText, familyNameText, nCodeText, fatherNameText, bDate, bPlaceText, mPhoneText, hPhoneText, addressText, codePText);
                         String accnum = GharzolH.generateAccNum(connection,typeSlctd);
                         GharzolH.createBankAcc(connection, uID, accnum, typeSlctd, nowsDate);
@@ -210,8 +218,10 @@ public class CreateAccountController {
                             stage.centerOnScreen();
                         }
                     }
-                    else {
+                    else if (nIsUnique){
                         errorText.setText("نام کاربری قبلا استفاده شده است !");
+                    } else {
+                        errorText.setText("*کاربری با این کد ملی قبلا ثبت نام کرده است.");
                     }
                 }
             }

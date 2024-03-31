@@ -101,6 +101,15 @@ public class Request {
         int resultSetN = statement.executeUpdate();
     }
 
+    public static void passToHistory(Connection connection, ResultSet resultSet,int CustomerID, boolean isAccepted) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO RequestsHistory VALUES (?,?,?,?)");
+        statement.setInt(1, resultSet.getInt("RequestID"));
+        statement.setInt(2, CustomerID);
+        statement.setDate(3, resultSet.getDate("RequestDate"));
+        statement.setBoolean(4, isAccepted);
+        int resultSetN = statement.executeUpdate();
+    }
+
     public static void deleteFromREQS (Connection connection, ResultSet resultSet, String reqType) throws SQLException {
         String query = "DELETE FROM "+reqType+" WHERE RequestID = ?";
         PreparedStatement statement = connection.prepareStatement(query);
