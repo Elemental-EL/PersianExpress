@@ -88,6 +88,19 @@ public class CustomersRequestLoanController {
             selectedAccount.setValue("شما حساب معتبر ندارید");
             loanType.getItems().clear();
         }
+        loanType.setOnAction(event -> {
+            if (Objects.equals(loanType.getValue(), "انتخاب کنید")){
+                LoanAmount.setText("");
+            } else if (Objects.equals(loanType.getValue(), "وام دانشجویی")) {
+                LoanAmount.setText("50000000 ریال");
+            } else if (Objects.equals(loanType.getValue(), "وام قرض الحسنه")) {
+                LoanAmount.setText("200000000 ریال");
+            }else if (Objects.equals(loanType.getValue(), "وام ازدواج")){
+                LoanAmount.setText("1000000000 ریال");
+            } else if (Objects.equals(loanType.getValue(), "وام مسکن")) {
+                LoanAmount.setText("3000000000 ریال");
+            }
+        });
     }
     public void onBackClicked(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersPanel.fxml"));

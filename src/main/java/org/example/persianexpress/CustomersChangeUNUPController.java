@@ -35,6 +35,7 @@ public class CustomersChangeUNUPController {
     public void onRecordChangesClicked(ActionEvent event) throws SQLException {
         Connection connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374");
     public void onRecordChangesClicked(ActionEvent event) throws SQLException, IOException {
+        Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
         PreparedStatement statement = connection.prepareStatement("select *from CustomersInfo where CustomerID = ? ");
         statement.setInt(1 , HelloController.userID);
         ResultSet resultSet = statement.executeQuery();
