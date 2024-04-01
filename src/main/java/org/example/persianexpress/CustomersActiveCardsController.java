@@ -53,7 +53,7 @@ public class CustomersActiveCardsController {
         MainAnchorPane.setPrefHeight(460);
         MainVBox.setPrefHeight(460);
         for (Card card:cards) {
-            statement = connection.prepareStatement("select AccountNumber , AccountType , AccountStock from BankAccounts where CustomerID = ?");
+            statement = connection.prepareStatement("select AccountNumber , AccountType , AccountStock , AccountAccess from BankAccounts where CustomerID = ?");
             statement.setInt(1 , HelloController.userID);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
