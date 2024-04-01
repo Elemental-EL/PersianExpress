@@ -50,7 +50,13 @@ public class CreateAccountController {
         String[] accountType = new String[]{"انتخاب کنید","قرض الحسنه جاری" , "قرض الحسنه سپرده" , "سپرده کوتاه مدت" , "سپرده مدت دار"};
         typeSlct.getItems().addAll(accountType);
         typeSlct.setValue(accountType[0]);
-        connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374");
+        connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
+
+        PreparedStatement statement = connection.prepareStatement("Select BirthDate From CustomersInfo where CustomerID=1001");
+        ResultSet res = statement.executeQuery();
+        while (res.next()){
+            System.out.println(res.getDate("BirthDate").toLocalDate().plusMonths(1).toString());
+        }
         if (CustomersPanelController.loggedIn){
             user = User.createUserObj(connection,HelloController.userID);
             firstNameText.setText(user.getfName());
@@ -173,6 +179,7 @@ public class CreateAccountController {
                 }
                 if (Objects.equals(CustomerNCode , resultSet0.getString("NationalCode"))){
                     nIsUnique = false;
+
                 }
             }
             if (!CustomersPanelController.loggedIn){
@@ -231,7 +238,7 @@ public class CreateAccountController {
                 }
                 else {
                     CreateAccReq.insert2DB(connection, currentDate, typeSlct, userText, passText, firstNameText, familyNameText, nCodeText, bDate, bPlaceText, mPhoneText, hPhoneText, addressText, codePText, fatherNameText,HelloController.userID);
-                    Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/CustomersPanel.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/Panel.fxml"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);
