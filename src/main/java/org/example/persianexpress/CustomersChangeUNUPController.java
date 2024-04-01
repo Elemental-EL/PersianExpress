@@ -34,6 +34,7 @@ public class CustomersChangeUNUPController {
 
     public void onRecordChangesClicked(ActionEvent event) throws SQLException {
         Connection connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-0KSSE4QN;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "Nasimi" , "138374");
+    public void onRecordChangesClicked(ActionEvent event) throws SQLException, IOException {
         PreparedStatement statement = connection.prepareStatement("select *from CustomersInfo where CustomerID = ? ");
         statement.setInt(1 , HelloController.userID);
         ResultSet resultSet = statement.executeQuery();
@@ -71,18 +72,39 @@ public class CustomersChangeUNUPController {
                         statement2.setInt(3 , HelloController.userID);
                         int result = statement2.executeUpdate();
                         errorTXT.setText("");
+                        Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersProfile.fxml"));
+                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.setResizable(false);
+                        stage.show();
+                        stage.centerOnScreen();
                     } else if (!newUserNameTXT.getText().isEmpty()) {
                         PreparedStatement statement2 = connection.prepareStatement("update CustomersInfo set CustomerUN = ? where CustomerID = ?");
                         statement2.setNString(1 , newUserNameTXT.getText());
                         statement2.setInt(2 , HelloController.userID);
                         int result = statement2.executeUpdate();
                         errorTXT.setText("");
+                        Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersProfile.fxml"));
+                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.setResizable(false);
+                        stage.show();
+                        stage.centerOnScreen();
                     } else if (!newPasswordTXT.getText().isEmpty()) {
                         PreparedStatement statement2 = connection.prepareStatement("update CustomersInfo set CustomerPassword = ? where CustomerID = ?");
                         statement2.setNString(1 , newPasswordTXT.getText());
                         statement2.setInt(2 , HelloController.userID);
                         int result = statement2.executeUpdate();
                         errorTXT.setText("");
+                        Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersProfile.fxml"));
+                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.setResizable(false);
+                        stage.show();
+                        stage.centerOnScreen();
                     }
                 }
             }

@@ -92,7 +92,7 @@ public class CustomersPanelController implements Initializable {
                         account1.setAccAccess(resultSet.getBoolean("AccountAccess"));
                         gharzolHSAcc.add(account1);
                         i++;
-                    } else if (Objects.equals(accType, "سپرده کوتاه مدت") || Objects.equals(accType, "سپرده بلند مدت")) {
+                    } else if (Objects.equals(accType, "سپرده کوتاه مدت") || Objects.equals(accType, "سپرده مدت دار")) {
                         Sepordeh account2 = new Sepordeh(resultSet.getInt("AccountID"),resultSet.getInt("CustomerID"));
                         account2.setAccNumber(resultSet.getNString("AccountNumber"));
                         account2.setAccType(resultSet.getNString("AccountType"));

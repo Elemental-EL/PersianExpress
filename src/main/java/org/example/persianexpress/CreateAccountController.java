@@ -231,7 +231,7 @@ public class CreateAccountController {
                 }
                 else {
                     CreateAccReq.insert2DB(connection, currentDate, typeSlct, userText, passText, firstNameText, familyNameText, nCodeText, bDate, bPlaceText, mPhoneText, hPhoneText, addressText, codePText, fatherNameText,HelloController.userID);
-                    Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/CustomersPanel.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersPanel.fxml"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);

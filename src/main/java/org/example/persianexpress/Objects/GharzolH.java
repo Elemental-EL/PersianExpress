@@ -84,7 +84,7 @@ public class GharzolH {
             prefix = 3892;
         } else if (type.equals("سپرده کوتاه مدت")){
             prefix = 3893;
-        } else if (type.equals("سپرده بلند مدت")){
+        } else if (type.equals("سپرده مدت دار")){
             prefix = 3894;
         }
         while (canContinue){
