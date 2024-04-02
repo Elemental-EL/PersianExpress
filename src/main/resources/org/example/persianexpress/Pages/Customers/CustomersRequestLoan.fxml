@@ -165,7 +165,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="LoanAmount" layoutX="194.0" layoutY="361.0" prefHeight="35.0" prefWidth="270.0" styleClass="gray" />
+                        <TextField fx:id="LoanAmount" editable="false" layoutX="194.0" layoutY="361.0" prefHeight="35.0" prefWidth="270.0" styleClass="gray" />
                      </children>
                   </AnchorPane>
               </content>

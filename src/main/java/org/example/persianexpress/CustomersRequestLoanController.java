@@ -12,7 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import org.example.persianexpress.Objects.Account;
+import org.example.persianexpress.Objects.GharzolH;
 
 import java.io.IOException;
 import java.sql.*;
@@ -33,7 +33,7 @@ public class CustomersRequestLoanController {
 
     private Connection connection;
     private PreparedStatement statement;
-    private ArrayList<Account> accounts = new ArrayList<>();
+    private ArrayList<GharzolH> accounts = new ArrayList<>();
 
     public void initialize() throws SQLException {
         connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-98DDBT0\\MYSQLSERVER;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "sa" , "hmnxt");
@@ -42,28 +42,28 @@ public class CustomersRequestLoanController {
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()){
             if (resultSet.getLong("AccountStock") >= 25000000 && resultSet.getBoolean("AccountAccess")){
-                Account account = new Account(resultSet.getInt("AccountID"));
-                account.setAccountNumber(resultSet.getNString("AccountNumber"));
-                account.setAccountStock(resultSet.getLong("AccountStock"));
+                GharzolH account = new GharzolH(resultSet.getInt("AccountID") , resultSet.getInt("CustomerID"));
+                account.setAccNumber(resultSet.getNString("AccountNumber"));
+                account.setAccBalance(resultSet.getLong("AccountStock"));
                 accounts.add(account);
             }
         }
         selectedAccount.getItems().add("انتخاب کنید");
         selectedAccount.setValue("انتخاب کنید");
         if (accounts.size() != 0) {
-            for (Account account:accounts) {
-                selectedAccount.getItems().add(account.getAccountNumber());
+            for (GharzolH account:accounts) {
+                selectedAccount.getItems().add(account.getAccNumber());
             }
             selectedAccount.setOnAction(event -> {
                 int index = -1;
                 long stock = 0;
                 for ( int i = 0 ; i < accounts.size() ; i++){
-                    if (Objects.equals(accounts.get(i).getAccountNumber(), selectedAccount.getValue())){
+                    if (Objects.equals(accounts.get(i).getAccNumber(), selectedAccount.getValue())){
                         index = i;
                     }
                 }
                 if (index != -1){
-                    stock = accounts.get(index).getAccountStock();
+                    stock = accounts.get(index).getAccBalance();
                 }
                 if (stock >= 1500000000) {
                     loanType.getItems().clear();
