@@ -1,11 +1,15 @@
 package org.example.persianexpress.Objects;
 
+import javafx.scene.control.TextArea;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class LoanReq extends Request{
     private int accID;
-    private String cDiploma;
-    private String cJob;
     private String sFName;
     private String sLName;
     private String sNCode;
@@ -13,9 +17,8 @@ public class LoanReq extends Request{
     private String sBPlace;
     private Date sBDate;
     private String sPhNumber;
-    private String sDiploma;
-    private String sJob;
     private String loanType;
+    private String loanText;
 
     private LoanReq(){
     }
@@ -31,22 +34,6 @@ public class LoanReq extends Request{
 
     public void setAccID(int accID) {
         this.accID = accID;
-    }
-
-    public String getcDiploma() {
-        return cDiploma;
-    }
-
-    public void setcDiploma(String cDiploma) {
-        this.cDiploma = cDiploma;
-    }
-
-    public String getcJob() {
-        return cJob;
-    }
-
-    public void setcJob(String cJob) {
-        this.cJob = cJob;
     }
 
     public String getsFName() {
@@ -105,22 +92,6 @@ public class LoanReq extends Request{
         this.sPhNumber = sPhNumber;
     }
 
-    public String getsDiploma() {
-        return sDiploma;
-    }
-
-    public void setsDiploma(String sDiploma) {
-        this.sDiploma = sDiploma;
-    }
-
-    public String getsJob() {
-        return sJob;
-    }
-
-    public void setsJob(String sJob) {
-        this.sJob = sJob;
-    }
-
     public String getLoanType() {
         return loanType;
     }
@@ -128,4 +99,48 @@ public class LoanReq extends Request{
     public void setLoanType(String loanType) {
         this.loanType = loanType;
     }
+
+    public String getLoanText() {
+        return loanText;
+    }
+
+    public void setLoanText(String loanText) {
+        this.loanText = loanText;
+    }
+
+    public static void submitLoanReq(String accNum, User surety, String lType, Connection connection, User user, TextArea applicantTXT) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO LoanREQ (CustomerID,SelectedAccountID,RequestText,SuretyFirstName,SuretyLastName,SuretyNationalCode,SuretyFatherName,SuretyBirthPlace,SuretyBirthDate,SuretyPhoneNumber,LoanType,RequestDate,RequestStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        statement.setInt(1, user.getuID());
+        statement.setInt(2,GharzolH.getAccountUID(accNum, connection));
+        statement.setNString(3, applicantTXT.getText());
+        statement.setNString(4, surety.getfName());
+        statement.setNString(5, surety.getLastname());
+        statement.setString(6, surety.getNationalCode());
+        statement.setNString(7, surety.getFatherName());
+        statement.setNString(8, surety.getbPlace());
+        statement.setDate(9, java.sql.Date.valueOf(surety.getbDate()));
+        statement.setString(10, surety.getPhNumber());
+        statement.setNString(11, lType);
+        statement.setDate(12, java.sql.Date.valueOf(LocalDate.now()));
+        statement.setBoolean(13,false);
+        int res = statement.executeUpdate();
+    }
+     public static long getLoanAmount(String loanType){
+        long amount = 0;
+        switch (loanType) {
+            case "وام دانشجویی":
+                amount = 50000000;
+                break;
+            case "وام قرض الحسنه":
+                amount = 200000000;
+                break;
+            case "وام ازدواج":
+                amount = 1000000000;
+                break;
+            case "وام مسکن":
+                amount = 3000000000L;
+                break;
+        }
+        return amount;
+     }
 }

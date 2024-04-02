@@ -30,7 +30,7 @@ public class User extends Person {
     public static User createUserObj(Connection connection, int uID) throws SQLException {
         User user = new User(uID);
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM CustomersInfo WHERE CustomerID = ?");
-        statement.setInt(1,HelloController.userID);
+        statement.setInt(1,user.getuID());
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()){
             user.setUserName(resultSet.getNString("CustomerUN"));
