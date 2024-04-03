@@ -83,8 +83,6 @@ public class EmployeeSeeRequestsController {
         while (resultSet4.next()){
             LoanReq loanReq = new LoanReq(resultSet4.getInt("RequestID") , resultSet4.getInt("CustomerID"));
             loanReq.setAccID(resultSet4.getInt("SelectedAccountID"));
-            loanReq.setcDiploma(resultSet4.getNString("CustomerDiploma"));
-            loanReq.setcJob(resultSet4.getNString("CustomerJob"));
             loanReq.setsFName(resultSet4.getNString("SuretyFirstName"));
             loanReq.setsLName(resultSet4.getNString("SuretyLastName"));
             loanReq.setsNCode(resultSet4.getString("SuretyNationalCode"));
@@ -92,8 +90,6 @@ public class EmployeeSeeRequestsController {
             loanReq.setsBDate(resultSet4.getDate("SuretyBirthDate"));
             loanReq.setsBPlace(resultSet4.getNString("SuretyBirthPlace"));
             loanReq.setsPhNumber(resultSet4.getString("SuretyPhoneNumber"));
-            loanReq.setsDiploma(resultSet4.getNString("SuretyDiploma"));
-            loanReq.setsJob(resultSet4.getNString("SuretyJob"));
             loanReq.setLoanType(resultSet4.getNString("LoanType"));
             loanReq.setReqDate(resultSet4.getDate("RequestDate"));
             LoanREQ.add(loanReq);

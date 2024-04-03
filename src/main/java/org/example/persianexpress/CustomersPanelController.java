@@ -373,7 +373,7 @@ public class CustomersPanelController implements Initializable {
     private void ShowSepordehBoland(ArrayList<Sepordeh> sepordehs){
         int i = 0;
         for (Sepordeh sepordeh: sepordehs) {
-            if (Objects.equals(sepordeh.getAccType(), "سپرده بلند مدت")){
+            if (Objects.equals(sepordeh.getAccType(), "سپرده مدت دار")){
                 Label accTypelbl = new Label("نوع حساب : ");
                 Label accNumlbl = new Label("شماره حساب : ");
                 Label accStocklbl = new Label("موجودی :(ریال) ");
