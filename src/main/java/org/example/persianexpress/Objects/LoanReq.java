@@ -4,6 +4,7 @@ import javafx.scene.control.TextArea;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
@@ -143,4 +144,54 @@ public class LoanReq extends Request{
         }
         return amount;
      }
+
+     public static long getDebtAmount(String loanType, long amount){
+        double debt = amount;
+        switch (loanType) {
+            case "وام قرض الحسنه":
+                debt = amount;
+                break;
+            case "وام دانشجویی":
+                debt = amount * 1.03;
+                break;
+            case "وام ازدواج":
+                debt = amount * 1.04;
+                break;
+            case "وام مسکن":
+                debt = amount * 1.08;
+                break;
+        }
+        return (long) debt;
+     }
+
+     public static int getLoanInstalments(String loanType){
+        int instalments = 0;
+         switch (loanType) {
+             case "وام دانشجویی":
+                 instalments = 12;
+                 break;
+             case "وام قرض الحسنه":
+                 instalments = 36;
+                 break;
+             case "وام ازدواج":
+                 instalments = 60;
+                 break;
+             case "وام مسکن":
+                 instalments = 120;
+                 break;
+         }
+         return instalments;
+     }
+
+    public static void createLoan(String loanType, long loanAmount, int instalments, Connection connection, ResultSet resultSet) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO LoansHistory (CustomerID,AccountID,LoanType,LoanAmount,LoanDate,LoanInstalments,RemainingAmount) VALUES (?,?,?,?,?,?,?)");
+        statement.setInt(1, resultSet.getInt("CustomerID"));
+        statement.setInt(2, resultSet.getInt("SelectedAccountID"));
+        statement.setNString(3, loanType);
+        statement.setLong(4, loanAmount);
+        statement.setDate(5, java.sql.Date.valueOf(LocalDate.now()));
+        statement.setInt(6, instalments);
+        statement.setLong(7,LoanReq.getDebtAmount(loanType, loanAmount));
+        int res = statement.executeUpdate();
+    }
 }

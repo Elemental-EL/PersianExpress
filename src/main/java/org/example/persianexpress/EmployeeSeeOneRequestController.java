@@ -200,24 +200,27 @@ public class EmployeeSeeOneRequestController {
                 }
             }
         } else if (reqType.equals("LoanREQ")){
-            GharzolH acc = new GharzolH(resultSet.getInt("SelectedAccountID"),resultSet.getInt("CustomerID"));
-            long oldBalance = acc.getAccBalance();
-            long newBalance = oldBalance + LoanReq.getLoanAmount(resultSet.getNString("LoanType"));
-            acc.setAccBalance(newBalance);
-            acc.updateBalance(connection);
-            //حامد اینجا متود قسط بندی رو بزن
-
-            //*******************************
-            Request.passToHistory(connection,resultSet,true);
-            Request.deleteFromREQS(connection,resultSet,reqType);
-            Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeRequests.fxml"));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setTitle("Persian Express");
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.show();
-            stage.centerOnScreen();
+            while (resultSet.next()) {
+                GharzolH acc = new GharzolH(resultSet.getInt("SelectedAccountID"), resultSet.getInt("CustomerID"));
+                String loanType = resultSet.getNString("LoanType");
+                long loanAmount = LoanReq.getLoanAmount(resultSet.getNString("LoanType"));
+                long oldBalance = acc.getAccBalance();
+                long newBalance = oldBalance + loanAmount;
+                int instalments = LoanReq.getLoanInstalments(loanType);
+                acc.setAccBalance(newBalance);
+                acc.updateBalance(connection);
+                LoanReq.createLoan(loanType, loanAmount, instalments, connection, resultSet);
+                Request.passToHistory(connection, resultSet, true);
+                Request.deleteFromREQS(connection, resultSet, reqType);
+                Parent root = FXMLLoader.load(getClass().getResource("Pages/Employee/SeeRequests.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setTitle("Persian Express");
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                stage.centerOnScreen();
+            }
         }
     }
 
