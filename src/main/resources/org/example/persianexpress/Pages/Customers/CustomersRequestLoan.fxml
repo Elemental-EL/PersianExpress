@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.CustomersRequestLoanController">
    <children>
@@ -53,43 +54,43 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="applicantFirstName" layoutX="423.0" layoutY="67.0" prefHeight="35.0" prefWidth="250.0" styleClass="gray" />
+                        <TextField fx:id="applicantFirstName" editable="false" layoutX="423.0" layoutY="67.0" prefHeight="35.0" prefWidth="250.0" styleClass="gray" />
                         <Label layoutX="286.0" layoutY="70.0" text="نام خانوادگی :">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="applicantFamily" layoutX="26.0" layoutY="67.0" prefHeight="35.0" prefWidth="250.0" styleClass="gray" />
+                        <TextField fx:id="applicantFamily" editable="false" layoutX="26.0" layoutY="67.0" prefHeight="35.0" prefWidth="250.0" styleClass="gray" />
                         <Label layoutX="683.0" layoutY="117.0" text="کد ملی :">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="applicantNCode" layoutX="423.0" layoutY="113.0" prefHeight="35.0" prefWidth="250.0" styleClass="gray" />
+                        <TextField fx:id="applicantNCode" editable="false" layoutX="423.0" layoutY="113.0" prefHeight="35.0" prefWidth="250.0" styleClass="gray" />
                         <Label layoutX="286.0" layoutY="117.0" text="نام پدر :">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="applicantFatherName" layoutX="26.0" layoutY="113.0" prefHeight="35.0" prefWidth="250.0" styleClass="gray" />
+                        <TextField fx:id="applicantFatherName" editable="false" layoutX="26.0" layoutY="113.0" prefHeight="35.0" prefWidth="250.0" styleClass="gray" />
                         <Label layoutX="683.0" layoutY="163.0" text="محل تولد :">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="applicantBPlace" layoutX="423.0" layoutY="159.0" prefHeight="35.0" prefWidth="250.0" styleClass="gray" />
+                        <TextField fx:id="applicantBPlace" editable="false" layoutX="423.0" layoutY="159.0" prefHeight="35.0" prefWidth="250.0" styleClass="gray" />
                         <Label layoutX="680.0" layoutY="209.0" text="تاریخ تولد :">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="applicantBDate" layoutX="423.0" layoutY="205.0" prefHeight="35.0" prefWidth="250.0" />
+                        <DatePicker fx:id="applicantBDate" editable="false" layoutX="423.0" layoutY="205.0" prefHeight="35.0" prefWidth="250.0" />
                         <Label layoutX="286.0" layoutY="163.0" text="شماره همراه :">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="applicantPhoneNumber" layoutX="26.0" layoutY="159.0" prefHeight="35.0" prefWidth="250.0" styleClass="gray" />
+                        <TextField fx:id="applicantPhoneNumber" editable="false" layoutX="26.0" layoutY="159.0" prefHeight="35.0" prefWidth="250.0" styleClass="gray" />
                         <Label layoutX="605.0" layoutY="415.0" text="متن درخواست :">
                            <font>
                               <Font name="System Bold" size="18.0" />
@@ -166,6 +167,11 @@
                            </font>
                         </Label>
                         <TextField fx:id="LoanAmount" editable="false" layoutX="194.0" layoutY="361.0" prefHeight="35.0" prefWidth="270.0" styleClass="gray" />
+                        <Text fx:id="errorText" fill="RED" layoutX="33.0" layoutY="925.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="705.7570190429688">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
                      </children>
                   </AnchorPane>
               </content>

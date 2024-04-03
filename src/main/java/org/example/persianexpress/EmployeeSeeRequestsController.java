@@ -92,6 +92,7 @@ public class EmployeeSeeRequestsController {
             loanReq.setsPhNumber(resultSet4.getString("SuretyPhoneNumber"));
             loanReq.setLoanType(resultSet4.getNString("LoanType"));
             loanReq.setReqDate(resultSet4.getDate("RequestDate"));
+            loanReq.setLoanText(resultSet4.getNString("RequestText"));
             LoanREQ.add(loanReq);
         }
         PreparedStatement statement5 = connection.prepareStatement("select *from CheckBookREQ");

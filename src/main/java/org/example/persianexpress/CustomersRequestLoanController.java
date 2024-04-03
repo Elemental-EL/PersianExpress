@@ -11,11 +11,15 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.persianexpress.Objects.GharzolH;
+import org.example.persianexpress.Objects.LoanReq;
+import org.example.persianexpress.Objects.User;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -30,7 +34,9 @@ public class CustomersRequestLoanController {
     private TextArea applicantTXT ;
     @FXML
     private ChoiceBox<String> loanType , selectedAccount;
-
+    @FXML
+    private Text errorText;
+    private User user;
     private Connection connection;
     private PreparedStatement statement;
     private ArrayList<GharzolH> accounts = new ArrayList<>();
@@ -101,6 +107,14 @@ public class CustomersRequestLoanController {
                 LoanAmount.setText("3000000000 ریال");
             }
         });
+        user = User.createUserObj(connection,HelloController.userID);
+        applicantFirstName.setText(user.getfName());
+        applicantFamily.setText(user.getLastname());
+        applicantNCode.setText(user.getNationalCode());
+        applicantFatherName.setText(user.getFatherName());
+        applicantBPlace.setText(user.getbPlace());
+        applicantPhoneNumber.setText(user.getPhNumber());
+        applicantBDate.setValue(LocalDate.parse(user.getbDate()));
     }
     public void onBackClicked(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersPanel.fxml"));
@@ -112,6 +126,38 @@ public class CustomersRequestLoanController {
         stage.centerOnScreen();
     }
 
-    public void onRegisterClicked(ActionEvent event) {
+    public void onRegisterClicked(ActionEvent event) throws SQLException, IOException {
+        String accNum = selectedAccount.getSelectionModel().getSelectedItem();
+        String lType = loanType.getSelectionModel().getSelectedItem();
+        if (accNum.equals("انتخاب کنید") || lType.equals("انتخاب کنید") || suretyFirstName.getText().trim().isEmpty() || suretyFamily.getText().trim().isEmpty() || suretyNCode.getText().trim().isEmpty() || suretyFatherName.getText().trim().isEmpty() || suretyBPlace.getText().trim().isEmpty() || suretyPhoneNumber.getText().trim().isEmpty() || suretyBDate.getValue() == null){
+            errorText.setText("*پر کردن تمامی فیلد ها الزامی است.");
+        } else if (!suretyNCode.getText().matches("\\d+")){
+            errorText.setText("*کد ملی باید تنها شامل عدد باشد.");
+        } else if (!suretyPhoneNumber.getText().matches("\\d+")){
+            errorText.setText("*شماره موبایل باید تنها شامل عدد باشد.");
+        } else if (!suretyPhoneNumber.getText().matches("09\\d{9}")){
+            errorText.setText("*فرمت شماره موبایل اشتباه است.");
+        } else if (!suretyNCode.getText().matches("\\d{10}")){
+            errorText.setText("*کد ملی باید ده رقمی باشد.");
+        } else {
+            int suretyID = User.getUserID(connection,suretyNCode.getText());
+            User surety = User.createUserObj(connection,suretyID);
+            if (suretyFirstName.getText().equals(surety.getfName())&&suretyFamily.getText().equals(surety.getLastname())&&suretyNCode.getText().equals(surety.getNationalCode())&&suretyFatherName.getText().equals(surety.getFatherName())&&suretyBPlace.getText().equals(surety.getbPlace())&&suretyPhoneNumber.getText().equals(surety.getPhNumber())&&suretyBDate.getValue().equals(LocalDate.parse(surety.getbDate()))){
+                if (surety.getNationalCode().equals(user.getNationalCode())){
+                    errorText.setText("*شما نمی توانید ضامن خود باشید!");
+                } else {
+                    LoanReq.submitLoanReq(accNum, surety, lType, connection, user, applicantTXT);
+                    Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersPanel.fxml"));
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.setResizable(false);
+                    stage.show();
+                    stage.centerOnScreen();
+                }
+            } else {
+                errorText.setText("*اطلاعات ضامن صحیح نمی باشد.");
+            }
+        }
     }
 }
