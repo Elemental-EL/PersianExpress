@@ -3,6 +3,8 @@ package org.example.persianexpress.Objects;
 import javafx.scene.text.Text;
 import org.example.persianexpress.Objects.GharzolH;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -74,6 +76,19 @@ public class Sepordeh extends GharzolH {
             errorText.setText("شماره حساب مقصد معتبر نمی باشد.");
             return false;
         }
+    }
+
+    public static ResultSet getAccsForInterest(Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM BankAccounts WHERE AccountType=N'سپرده کوتاه مدت' OR AccountType=N'سپرده مدت دار'");
+        return statement.executeQuery();
+    }
+
+    public static long applyInterest (int rate , long balance){
+        float rateForMonth = rate*30;
+        rateForMonth /= 365;
+        rateForMonth+=1;
+        double newBalance = balance * rateForMonth;
+        return (long) newBalance;
     }
 
 }

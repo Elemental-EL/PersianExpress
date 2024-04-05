@@ -12,11 +12,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.example.persianexpress.Objects.GharzolH;
+import org.example.persianexpress.Objects.Sepordeh;
 
 import java.sql.*;
 
 import java.io.IOException;
 import java.net.ConnectException;
+import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Objects;
 
 public class HelloController {
@@ -41,7 +45,16 @@ public class HelloController {
         String[] role = new String[]{"انتخاب کنید" , "کاربر" , "کارمند" ,"مدیر"};
         roleCB.getItems().addAll(role);
         roleCB.setValue(role[0]);
+        if (LocalDate.now().getDayOfMonth()==1) {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
+            ResultSet resultSet = Sepordeh.getAccsForInterest(connection);
+            while (resultSet.next()){
+                GharzolH.updateBalance(Sepordeh.applyInterest(resultSet.getInt("AccountProfit"),resultSet.getLong("AccountStock")),resultSet,connection);
+            }
+        }
     }
+
+
 
     public void onloginBtnClicked(ActionEvent event) throws IOException, SQLException {
         String role = roleCB.getSelectionModel().getSelectedItem();
