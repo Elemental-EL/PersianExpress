@@ -1,5 +1,9 @@
 package org.example.persianexpress.Objects;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 public class Card {
@@ -52,5 +56,17 @@ public class Card {
 
     public void setAccess(boolean access) {
         this.access = access;
+    }
+
+    public static String getAccNumOfCard (Connection connection, String cardNum) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT AccountID FROM BankCards WHERE CardNumber = ?");
+        statement.setNString(1,cardNum);
+        ResultSet resultSet = statement.executeQuery();
+        int accID = 0;
+        while (resultSet.next()){
+            accID = resultSet.getInt("AccountID");
+        }
+        GharzolH acc = new GharzolH(accID);
+        return acc.getAccountNumber(connection);
     }
 }

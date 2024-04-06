@@ -37,7 +37,7 @@
       </Pane>
       <Pane layoutY="100.0" prefHeight="400.0" prefWidth="500.0" styleClass="backgroundColor">
          <children>
-            <Label layoutX="331.0" layoutY="23.0" text="شماره حساب مبدا :">
+            <Label layoutX="289.0" layoutY="23.0" text="شماره کارت/حساب مبدا :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -47,7 +47,7 @@
                   <Font size="16.0" />
                </font>
             </TextField>
-            <Label layoutX="314.0" layoutY="126.0" text="شماره حساب مقصد :">
+            <Label layoutX="275.0" layoutY="126.0" text="شماره کارت/حساب مقصد :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

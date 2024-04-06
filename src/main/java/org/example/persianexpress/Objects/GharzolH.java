@@ -24,6 +24,9 @@ public class GharzolH {
         this.accHolderUID = accHolderUID;
     }
 
+    public GharzolH(int accUID){
+        this.accUID = accUID;
+    }
 
     public int getAccUID() {
         return accUID;

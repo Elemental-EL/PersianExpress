@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.example.persianexpress.Objects.Card;
 import org.example.persianexpress.Objects.GharzolH;
 import org.example.persianexpress.Objects.Request;
 import org.example.persianexpress.Objects.Sepordeh;
@@ -53,8 +54,16 @@ public class CustomersMoneyTransferController {
         resultSet2 = GharzolH.getAvailableDestsForTransaction(connection);
         amount = Long.valueOf(amountTxt.getText());
         String orgAccNum = originAccNumTxt.getText();
-        orgAcc = Sepordeh.getAccForTransaction(orgAccNum , resultSet1);
         String destAccNum = destAccNumTxt.getText();
+        if (originAccNumTxt.getText().matches("[0-9]{16}") && destAccNumTxt.getText().matches("[0-9]{16}")){
+            orgAccNum = Card.getAccNumOfCard(connection,originAccNumTxt.getText());
+            destAccNum = Card.getAccNumOfCard(connection,destAccNumTxt.getText());
+        } else if (originAccNumTxt.getText().matches("[0-9]{16}")) {
+            orgAccNum = Card.getAccNumOfCard(connection,originAccNumTxt.getText());
+        } else if (destAccNumTxt.getText().matches("[0-9]{16}")){
+            destAccNum = Card.getAccNumOfCard(connection,destAccNumTxt.getText());
+        }
+        orgAcc = Sepordeh.getAccForTransaction(orgAccNum , resultSet1);
         destAcc = Sepordeh.getAccForTransaction(destAccNum , resultSet2);
         confirmed = Sepordeh.transactionIsValid(orgAcc, destAcc, amount, errorText);
         if (confirmed) {
