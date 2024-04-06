@@ -69,4 +69,10 @@ public class Card {
         GharzolH acc = new GharzolH(accID);
         return acc.getAccountNumber(connection);
     }
+
+    public static void suspendCard(int CardID, Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE BankCards SET CardAccess = 0 WHERE CardID=?");
+        statement.setInt(1, CardID);
+        int resN = statement.executeUpdate();
+    }
 }

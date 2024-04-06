@@ -12,14 +12,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import org.example.persianexpress.Objects.GharzolH;
-import org.example.persianexpress.Objects.Sepordeh;
+import org.example.persianexpress.Objects.*;
 
 import java.sql.*;
 
 import java.io.IOException;
 import java.net.ConnectException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -50,6 +50,23 @@ public class HelloController {
             ResultSet resultSet = Sepordeh.getAccsForInterest(connection);
             while (resultSet.next()){
                 GharzolH.updateBalance(Sepordeh.applyInterest(resultSet.getInt("AccountProfit"),resultSet.getLong("AccountStock")),resultSet,connection);
+            }
+        }
+        Connection connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-IQ6LNQ5;database=PersianExpressDB;encrypt=true;trustServerCertificate=true" , "PEDB" , "pedb1234");
+        PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM BankAccounts WHERE AccountType=N'سپرده کوتاه مدت' OR AccountType=N'سپرده مدت دار'");
+        ResultSet resultSet1 = statement1.executeQuery();
+        while (resultSet1.next()){
+            Date dueDate = resultSet1.getDate("AccountTerm");
+            if (LocalDate.now().isAfter(LocalDate.parse((CharSequence) dueDate))){
+                GharzolH.suspendAccount(resultSet1.getInt("AccountID"),connection);
+            }
+        }
+        PreparedStatement statement2 = connection.prepareStatement("SELECT * FROM BankCards");
+        ResultSet resultSet2 = statement2.executeQuery();
+        while (resultSet2.next()){
+            Date dueDate = resultSet2.getDate("CardTerm");
+            if (LocalDate.now().isAfter(LocalDate.parse((CharSequence) dueDate))){
+                Card.suspendCard(resultSet2.getInt("CardID"),connection);
             }
         }
     }
