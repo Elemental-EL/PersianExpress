@@ -1,6 +1,105 @@
+USE [master]
+GO
+/****** Object:  Database [PersianExpressDB]    Script Date: 4/7/2024 23:05:47 ******/
+CREATE DATABASE [PersianExpressDB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'PersianExpressDB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\PersianExpressDB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'PersianExpressDB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\PersianExpressDB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+GO
+ALTER DATABASE [PersianExpressDB] SET COMPATIBILITY_LEVEL = 140
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [PersianExpressDB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [PersianExpressDB] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [PersianExpressDB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [PersianExpressDB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [PersianExpressDB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [PersianExpressDB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET RECOVERY FULL 
+GO
+ALTER DATABASE [PersianExpressDB] SET  MULTI_USER 
+GO
+ALTER DATABASE [PersianExpressDB] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [PersianExpressDB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [PersianExpressDB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [PersianExpressDB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [PersianExpressDB] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'PersianExpressDB', N'ON'
+GO
+ALTER DATABASE [PersianExpressDB] SET QUERY_STORE = OFF
+GO
 USE [PersianExpressDB]
 GO
-/****** Object:  Table [dbo].[BankAccounts]    Script Date: 3/19/2024 10:30:33 PM ******/
+ALTER DATABASE SCOPED CONFIGURATION SET IDENTITY_CACHE = ON;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET LEGACY_CARDINALITY_ESTIMATION = OFF;
+GO
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET LEGACY_CARDINALITY_ESTIMATION = PRIMARY;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 0;
+GO
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET MAXDOP = PRIMARY;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET PARAMETER_SNIFFING = ON;
+GO
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET PARAMETER_SNIFFING = PRIMARY;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET QUERY_OPTIMIZER_HOTFIXES = OFF;
+GO
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET QUERY_OPTIMIZER_HOTFIXES = PRIMARY;
+GO
+USE [PersianExpressDB]
+GO
+/****** Object:  Table [dbo].[BankAccounts]    Script Date: 4/7/2024 23:05:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -20,7 +119,7 @@ CREATE TABLE [dbo].[BankAccounts](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[BankCardREQ]    Script Date: 3/19/2024 10:30:34 PM ******/
+/****** Object:  Table [dbo].[BankCardREQ]    Script Date: 4/7/2024 23:05:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -37,13 +136,13 @@ CREATE TABLE [dbo].[BankCardREQ](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[BankCards]    Script Date: 3/19/2024 10:30:34 PM ******/
+/****** Object:  Table [dbo].[BankCards]    Script Date: 4/7/2024 23:05:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[BankCards](
-	[CardID] [int] NOT NULL,
+	[CardID] [int] IDENTITY(20001,1) NOT NULL,
 	[CustomerID] [int] NOT NULL,
 	[AccountID] [int] NOT NULL,
 	[CardNumber] [nchar](16) NOT NULL,
@@ -56,7 +155,7 @@ CREATE TABLE [dbo].[BankCards](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ChargingHistory]    Script Date: 3/19/2024 10:30:34 PM ******/
+/****** Object:  Table [dbo].[ChargingHistory]    Script Date: 4/7/2024 23:05:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -75,7 +174,7 @@ CREATE TABLE [dbo].[ChargingHistory](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CheckBookREQ]    Script Date: 3/19/2024 10:30:34 PM ******/
+/****** Object:  Table [dbo].[CheckBookREQ]    Script Date: 4/7/2024 23:05:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -93,15 +192,16 @@ CREATE TABLE [dbo].[CheckBookREQ](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ChequeHistory]    Script Date: 3/19/2024 10:30:34 PM ******/
+/****** Object:  Table [dbo].[ChequeHistory]    Script Date: 4/7/2024 23:05:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[ChequeHistory](
-	[ChequeID] [int] NOT NULL,
+	[ChequeID] [int] IDENTITY(2000001,1) NOT NULL,
 	[CustomerID] [int] NOT NULL,
 	[AccountID] [int] NOT NULL,
+	[RecipientID] [int] NOT NULL,
 	[ChequeSerialNum] [bigint] NOT NULL,
 	[ChequeAmount] [bigint] NOT NULL,
 	[ChequeDate] [date] NOT NULL,
@@ -112,7 +212,7 @@ CREATE TABLE [dbo].[ChequeHistory](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CreateAccountREQ]    Script Date: 3/19/2024 10:30:34 PM ******/
+/****** Object:  Table [dbo].[CreateAccountREQ]    Script Date: 4/7/2024 23:05:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -141,7 +241,7 @@ CREATE TABLE [dbo].[CreateAccountREQ](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CustomersInfo]    Script Date: 3/19/2024 10:30:34 PM ******/
+/****** Object:  Table [dbo].[CustomersInfo]    Script Date: 4/7/2024 23:05:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -167,7 +267,7 @@ CREATE TABLE [dbo].[CustomersInfo](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DeleteAccountREQ]    Script Date: 3/19/2024 10:30:34 PM ******/
+/****** Object:  Table [dbo].[DeleteAccountREQ]    Script Date: 4/7/2024 23:05:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -185,7 +285,7 @@ CREATE TABLE [dbo].[DeleteAccountREQ](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[EmployeesInfo]    Script Date: 3/19/2024 10:30:34 PM ******/
+/****** Object:  Table [dbo].[EmployeesInfo]    Script Date: 4/7/2024 23:05:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -211,17 +311,16 @@ CREATE TABLE [dbo].[EmployeesInfo](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LoanREQ]    Script Date: 3/19/2024 10:30:34 PM ******/
+/****** Object:  Table [dbo].[LoanREQ]    Script Date: 4/7/2024 23:05:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[LoanREQ](
 	[RequestID] [int] IDENTITY(400001,1) NOT NULL,
-	[CutomerID] [int] NOT NULL,
+	[CustomerID] [int] NOT NULL,
 	[SelectedAccountID] [int] NOT NULL,
-	[CustomerDiploma] [nvarchar](50) NOT NULL,
-	[CustomerJob] [nvarchar](50) NOT NULL,
+	[RequestText] [nvarchar](max) NULL,
 	[SuretyFirstName] [nvarchar](50) NOT NULL,
 	[SuretyLastName] [nvarchar](50) NOT NULL,
 	[SuretyNationalCode] [char](10) NOT NULL,
@@ -229,8 +328,6 @@ CREATE TABLE [dbo].[LoanREQ](
 	[SuretyBirthPlace] [nvarchar](50) NOT NULL,
 	[SuretyBirthDate] [date] NOT NULL,
 	[SuretyPhoneNumber] [char](11) NOT NULL,
-	[SuretyDiploma] [nvarchar](50) NOT NULL,
-	[SuretyJob] [nvarchar](50) NOT NULL,
 	[LoanType] [nvarchar](50) NOT NULL,
 	[RequestDate] [date] NOT NULL,
 	[RequestStatus] [bit] NOT NULL,
@@ -238,15 +335,15 @@ CREATE TABLE [dbo].[LoanREQ](
 (
 	[RequestID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LoansHistory]    Script Date: 3/19/2024 10:30:34 PM ******/
+/****** Object:  Table [dbo].[LoansHistory]    Script Date: 4/7/2024 23:05:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[LoansHistory](
-	[LoanID] [int] NOT NULL,
+	[LoanID] [int] IDENTITY(4000001,1) NOT NULL,
 	[CustomerID] [int] NOT NULL,
 	[AccountID] [int] NOT NULL,
 	[LoanType] [nvarchar](50) NOT NULL,
@@ -260,13 +357,14 @@ CREATE TABLE [dbo].[LoansHistory](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Messages]    Script Date: 3/19/2024 10:30:34 PM ******/
+/****** Object:  Table [dbo].[Messages]    Script Date: 4/7/2024 23:05:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Messages](
-	[MessageID] [int] NOT NULL,
+	[MessageID] [int] IDENTITY(1000001,1) NOT NULL,
+	[SenderID] [int] NOT NULL,
 	[CustomerID] [int] NOT NULL,
 	[Message] [nvarchar](max) NOT NULL,
 	[PostageDate] [date] NOT NULL,
@@ -277,7 +375,7 @@ CREATE TABLE [dbo].[Messages](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PayingBills]    Script Date: 3/19/2024 10:30:34 PM ******/
+/****** Object:  Table [dbo].[PayingBills]    Script Date: 4/7/2024 23:05:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -296,7 +394,7 @@ CREATE TABLE [dbo].[PayingBills](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ReceiptChequeREQ]    Script Date: 3/19/2024 10:30:35 PM ******/
+/****** Object:  Table [dbo].[ReceiptChequeREQ]    Script Date: 4/7/2024 23:05:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -316,7 +414,7 @@ CREATE TABLE [dbo].[ReceiptChequeREQ](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[RequestsHistory]    Script Date: 3/19/2024 10:30:35 PM ******/
+/****** Object:  Table [dbo].[RequestsHistory]    Script Date: 4/7/2024 23:05:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -328,13 +426,13 @@ CREATE TABLE [dbo].[RequestsHistory](
 	[RequestStatus] [bit] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[StockCheque]    Script Date: 3/19/2024 10:30:35 PM ******/
+/****** Object:  Table [dbo].[StockCheque]    Script Date: 4/7/2024 23:05:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[StockCheque](
-	[StockChequeID] [int] NOT NULL,
+	[StockChequeID] [int] IDENTITY(800001,1) NOT NULL,
 	[CustomerID] [int] NOT NULL,
 	[AccountID] [int] NOT NULL,
 	[StockCheque] [int] NOT NULL,
@@ -344,7 +442,7 @@ CREATE TABLE [dbo].[StockCheque](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Suggestions]    Script Date: 3/19/2024 10:30:35 PM ******/
+/****** Object:  Table [dbo].[Suggestions]    Script Date: 4/7/2024 23:05:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -359,13 +457,13 @@ CREATE TABLE [dbo].[Suggestions](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Transactions]    Script Date: 3/19/2024 10:30:35 PM ******/
+/****** Object:  Table [dbo].[Transactions]    Script Date: 4/7/2024 23:05:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Transactions](
-	[TransactionID] [int] NOT NULL,
+	[TransactionID] [int] IDENTITY(700001,1) NOT NULL,
 	[CustomerID] [int] NOT NULL,
 	[TransactionType] [nvarchar](50) NOT NULL,
 	[SenderAccountNum] [nchar](8) NOT NULL,
@@ -380,7 +478,7 @@ CREATE TABLE [dbo].[Transactions](
 GO
 SET IDENTITY_INSERT [dbo].[BankAccounts] ON 
 GO
-INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10001, 1001, N'38911001', N'قرض الحسنه جاری', 20000000, NULL, NULL, 1)
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10001, 1001, N'38911001', N'قرض الحسنه جاری', 20020000, NULL, NULL, 1)
 GO
 INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10002, 1001, N'38922501', N'قرض الحسنه سپرده', 150000000, NULL, NULL, 1)
 GO
@@ -388,7 +486,7 @@ INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [Accoun
 GO
 INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10004, 1001, N'38947501', N'سپرده بلند مدت', 100000000, 23, CAST(N'2025-03-16' AS Date), 1)
 GO
-INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10005, 1002, N'38911002', N'قرض الحسنه جاری', 50000000, NULL, NULL, 1)
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10005, 1002, N'38911002', N'قرض الحسنه جاری', 49990000, NULL, NULL, 1)
 GO
 INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10006, 1002, N'38922502', N'قرض الحسنه سپرده', 200000000, NULL, NULL, 1)
 GO
@@ -396,7 +494,7 @@ INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [Accoun
 GO
 INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10008, 1002, N'38947502', N'سپرده بلند مدت', 250000000, 23, CAST(N'2025-08-19' AS Date), 1)
 GO
-INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10009, 1003, N'38911003', N'قرض الحسنه جاری', 1000000000, NULL, NULL, 1)
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10009, 1003, N'38911003', N'قرض الحسنه جاری', 1000090000, NULL, NULL, 1)
 GO
 INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10010, 1003, N'38922503', N'قرض الحسنه سپرده', 2000000000, NULL, NULL, 1)
 GO
@@ -404,13 +502,41 @@ INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [Accoun
 GO
 INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10012, 1003, N'38947503', N'سپرده بلند مدت', 5000000000, 23, CAST(N'2025-05-25' AS Date), 1)
 GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10017, 1002, N'38925412', N'قرض الحسنه سپرده', 10000000, 0, NULL, 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10018, 1001, N'38922770', N'قرض الحسنه سپرده', 10000000, 0, NULL, 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10020, 1006, N'38914451', N'قرض الحسنه جاری', 9900000, 0, NULL, 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10025, 1006, N'38922887', N'قرض الحسنه سپرده', 10000000, 0, NULL, 1)
+GO
+INSERT [dbo].[BankAccounts] ([AccountID], [CustomerID], [AccountNumber], [AccountType], [AccountStock], [AccountProfit], [AccountTerm], [AccountAccess]) VALUES (10026, 1006, N'38939966', N'سپرده کوتاه مدت', 10000000, 5, CAST(N'2028-03-30' AS Date), 1)
+GO
 SET IDENTITY_INSERT [dbo].[BankAccounts] OFF
+GO
+SET IDENTITY_INSERT [dbo].[BankCards] ON 
+GO
+INSERT [dbo].[BankCards] ([CardID], [CustomerID], [AccountID], [CardNumber], [CVV2], [CardTerm], [CardAccess]) VALUES (20001, 1002, 10005, N'6394838475752912', N'638', CAST(N'2028-03-24' AS Date), 1)
+GO
+INSERT [dbo].[BankCards] ([CardID], [CustomerID], [AccountID], [CardNumber], [CVV2], [CardTerm], [CardAccess]) VALUES (20003, 1006, 10026, N'6394838461339252', N'142', CAST(N'2028-03-30' AS Date), 1)
+GO
+SET IDENTITY_INSERT [dbo].[BankCards] OFF
+GO
+SET IDENTITY_INSERT [dbo].[ChequeHistory] ON 
+GO
+INSERT [dbo].[ChequeHistory] ([ChequeID], [CustomerID], [AccountID], [RecipientID], [ChequeSerialNum], [ChequeAmount], [ChequeDate], [ChequeStatus]) VALUES (2000001, 1002, 10005, 1001, 207734778, 100000, CAST(N'2025-03-13' AS Date), N'0')
+GO
+INSERT [dbo].[ChequeHistory] ([ChequeID], [CustomerID], [AccountID], [RecipientID], [ChequeSerialNum], [ChequeAmount], [ChequeDate], [ChequeStatus]) VALUES (2000002, 1002, 10005, 1001, 207756864, 10000, CAST(N'2024-03-27' AS Date), N'وصول شده')
+GO
+INSERT [dbo].[ChequeHistory] ([ChequeID], [CustomerID], [AccountID], [RecipientID], [ChequeSerialNum], [ChequeAmount], [ChequeDate], [ChequeStatus]) VALUES (2000003, 1002, 10005, 1001, 207720946, 89900000, CAST(N'2024-03-27' AS Date), N'برگشت خورده')
+GO
+INSERT [dbo].[ChequeHistory] ([ChequeID], [CustomerID], [AccountID], [RecipientID], [ChequeSerialNum], [ChequeAmount], [ChequeDate], [ChequeStatus]) VALUES (2000004, 1006, 10020, 1002, 207774518, 100000, CAST(N'2024-03-30' AS Date), N'وصول شده')
+GO
+SET IDENTITY_INSERT [dbo].[ChequeHistory] OFF
 GO
 SET IDENTITY_INSERT [dbo].[CreateAccountREQ] ON 
 GO
 INSERT [dbo].[CreateAccountREQ] ([RequestID], [CustomerID], [AccountType], [CustomerUN], [CustomerPassword], [FirstName], [LastName], [NationalCode], [FatherName], [BirthDate], [BirthPlace], [PhoneNumber], [HomePhoneNumber], [HomeAddress], [PostCode], [RequestDate], [RequestStatus]) VALUES (100001, 1001, N'قرض الحسنه جاری', N'Hamed_nxt', N'hmnxt005', N'حامد', N'نوبخت', N'1363922874', N'حسن', CAST(N'2005-05-28' AS Date), N'تبریز', N'09054335214', N'04136584925', N'توانیر', N'5514236987', CAST(N'2024-03-17' AS Date), 0)
-GO
-INSERT [dbo].[CreateAccountREQ] ([RequestID], [CustomerID], [AccountType], [CustomerUN], [CustomerPassword], [FirstName], [LastName], [NationalCode], [FatherName], [BirthDate], [BirthPlace], [PhoneNumber], [HomePhoneNumber], [HomeAddress], [PostCode], [RequestDate], [RequestStatus]) VALUES (100002, 1001, N'قرض الحسنه سپرده', N'Hamed_nxt', N'hmnxt005', N'حامد', N'نوبخت', N'1363922874', N'حسن', CAST(N'2005-05-28' AS Date), N'تبریز', N'09054335214', N'04136584925', N'توانیر', N'5514236987', CAST(N'2024-03-17' AS Date), 0)
 GO
 SET IDENTITY_INSERT [dbo].[CreateAccountREQ] OFF
 GO
@@ -418,11 +544,19 @@ SET IDENTITY_INSERT [dbo].[CustomersInfo] ON
 GO
 INSERT [dbo].[CustomersInfo] ([CustomerID], [CustomerUN], [CustomerPassword], [FirstName], [LastName], [NationalCode], [FatherName], [BirthDate], [BirthPlace], [PhoneNumber], [HomePhoneNumber], [HomeAddress], [PostCode], [Access]) VALUES (1001, N'Hamed_nxt', N'hmnxt005', N'حامد', N'نوبخت', N'1363922874', N'حسن', CAST(N'2005-05-28' AS Date), N'تبریز', N'09054335214', N'04136584925', N'توانیر', N'5514236987', 1)
 GO
-INSERT [dbo].[CustomersInfo] ([CustomerID], [CustomerUN], [CustomerPassword], [FirstName], [LastName], [NationalCode], [FatherName], [BirthDate], [BirthPlace], [PhoneNumber], [HomePhoneNumber], [HomeAddress], [PostCode], [Access]) VALUES (1002, N'Elemental_EL', N'elyar1234', N'الیار', N'کردکتول', N'1363564132', N'هومن', CAST(N'2004-09-28' AS Date), N'تبریز', N'09391838573', N'04133568749', N'هفده شهریور', N'5585963217', 1)
+INSERT [dbo].[CustomersInfo] ([CustomerID], [CustomerUN], [CustomerPassword], [FirstName], [LastName], [NationalCode], [FatherName], [BirthDate], [BirthPlace], [PhoneNumber], [HomePhoneNumber], [HomeAddress], [PostCode], [Access]) VALUES (1002, N'Elemental_EL', N'elyar1234', N'الیار', N'کردکتول', N'1363774174', N'هومن', CAST(N'2004-09-28' AS Date), N'تبریز', N'09391838573', N'04133568749', N'هفده شهریور', N'5585963217', 1)
 GO
 INSERT [dbo].[CustomersInfo] ([CustomerID], [CustomerUN], [CustomerPassword], [FirstName], [LastName], [NationalCode], [FatherName], [BirthDate], [BirthPlace], [PhoneNumber], [HomePhoneNumber], [HomeAddress], [PostCode], [Access]) VALUES (1003, N'Helia_nm', N'12345678', N'هلیا', N'نسیمی', N'4275678941', N'ابراهیم', CAST(N'2004-09-25' AS Date), N'زنجان', N'09195471712', N'04133256987', N'هفده شهریور', N'5874963215', 1)
 GO
+INSERT [dbo].[CustomersInfo] ([CustomerID], [CustomerUN], [CustomerPassword], [FirstName], [LastName], [NationalCode], [FatherName], [BirthDate], [BirthPlace], [PhoneNumber], [HomePhoneNumber], [HomeAddress], [PostCode], [Access]) VALUES (1006, N'hooman.k', N'hmk12345', N'هومن', N'کردکتول', N'2269276752', N'مسیب', CAST(N'1973-05-31' AS Date), N'علی آباد', N'09144067113', N'04135568046', N'تبریز-خیابان 17 شهریور	', N'5183456789', 1)
+GO
 SET IDENTITY_INSERT [dbo].[CustomersInfo] OFF
+GO
+SET IDENTITY_INSERT [dbo].[DeleteAccountREQ] ON 
+GO
+INSERT [dbo].[DeleteAccountREQ] ([RequestID], [CustomerID], [AccountID], [SubstituteAccount], [RequestDate], [RequestStatus]) VALUES (200001, 1001, 10018, N'38922501', CAST(N'2024-03-24' AS Date), 0)
+GO
+SET IDENTITY_INSERT [dbo].[DeleteAccountREQ] OFF
 GO
 SET IDENTITY_INSERT [dbo].[EmployeesInfo] ON 
 GO
@@ -432,138 +566,138 @@ INSERT [dbo].[EmployeesInfo] ([EmployeeID], [EmployeeUN], [EmployeePassword], [F
 GO
 SET IDENTITY_INSERT [dbo].[EmployeesInfo] OFF
 GO
-ALTER TABLE [dbo].[BankAccounts]  WITH CHECK ADD  CONSTRAINT [FK_BankAccounts_CustomersInfo] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+SET IDENTITY_INSERT [dbo].[LoansHistory] ON 
 GO
-ALTER TABLE [dbo].[BankAccounts] CHECK CONSTRAINT [FK_BankAccounts_CustomersInfo]
+INSERT [dbo].[LoansHistory] ([LoanID], [CustomerID], [AccountID], [LoanType], [LoanAmount], [LoanDate], [LoanInstalments], [RemainingAmount]) VALUES (4000001, 1002, 10005, N'وام دانشجویی', 50000000, CAST(N'2024-04-03' AS Date), 12, 51500000)
 GO
-ALTER TABLE [dbo].[BankCardREQ]  WITH CHECK ADD  CONSTRAINT [FK_BankCardREQ_BankAccounts] FOREIGN KEY([SelectedAccountID])
-REFERENCES [dbo].[BankAccounts] ([AccountID])
+SET IDENTITY_INSERT [dbo].[LoansHistory] OFF
 GO
-ALTER TABLE [dbo].[BankCardREQ] CHECK CONSTRAINT [FK_BankCardREQ_BankAccounts]
+SET IDENTITY_INSERT [dbo].[Messages] ON 
 GO
-ALTER TABLE [dbo].[BankCardREQ]  WITH CHECK ADD  CONSTRAINT [FK_BankCardREQ_CustomersInfo] FOREIGN KEY([CustomerId])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+INSERT [dbo].[Messages] ([MessageID], [SenderID], [CustomerID], [Message], [PostageDate], [MessageStatus]) VALUES (1000001, 102, 1001, N'با سلام
+کاربر گرامی حساب شما به شماره حساب فلان در تاریخ فلان بسته خواهد شد.', CAST(N'2024-03-25' AS Date), 1)
 GO
-ALTER TABLE [dbo].[BankCardREQ] CHECK CONSTRAINT [FK_BankCardREQ_CustomersInfo]
+INSERT [dbo].[Messages] ([MessageID], [SenderID], [CustomerID], [Message], [PostageDate], [MessageStatus]) VALUES (1000002, 102, 1001, N'با سلام
+احوال شما چطوره
+خوبی گلم
+حسابت خیلی راکد مونده
+یه تکونی بخور
+وامی چیزی بگیر', CAST(N'2024-03-25' AS Date), 1)
 GO
-ALTER TABLE [dbo].[BankCards]  WITH CHECK ADD  CONSTRAINT [FK_BankCards_BankAccounts] FOREIGN KEY([AccountID])
-REFERENCES [dbo].[BankAccounts] ([AccountID])
+INSERT [dbo].[Messages] ([MessageID], [SenderID], [CustomerID], [Message], [PostageDate], [MessageStatus]) VALUES (1000003, 102, 1001, N'سلامی دوباره
+عیدتون مبارک باشه عزیزان
+سال جدید با خدمات جدید در خدمتتون هستیم', CAST(N'2024-03-25' AS Date), 1)
 GO
-ALTER TABLE [dbo].[BankCards] CHECK CONSTRAINT [FK_BankCards_BankAccounts]
+INSERT [dbo].[Messages] ([MessageID], [SenderID], [CustomerID], [Message], [PostageDate], [MessageStatus]) VALUES (1000007, 102, 1001, N'با سلام خدمت شما عزیزان
+ضمن عرض تبریک سال نو از سال بعد با خدماتی جدید تر و به روزتر خدمت شما بزگواران هستیم
+با تشکر ', CAST(N'2024-03-25' AS Date), 1)
 GO
-ALTER TABLE [dbo].[BankCards]  WITH CHECK ADD  CONSTRAINT [FK_BankCards_CustomersInfo] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+INSERT [dbo].[Messages] ([MessageID], [SenderID], [CustomerID], [Message], [PostageDate], [MessageStatus]) VALUES (1000008, 102, 1002, N'با سلام خدمت شما عزیزان
+ضمن عرض تبریک سال نو از سال بعد با خدماتی جدید تر و به روزتر خدمت شما بزگواران هستیم
+با تشکر ', CAST(N'2024-03-25' AS Date), 1)
 GO
-ALTER TABLE [dbo].[BankCards] CHECK CONSTRAINT [FK_BankCards_CustomersInfo]
+INSERT [dbo].[Messages] ([MessageID], [SenderID], [CustomerID], [Message], [PostageDate], [MessageStatus]) VALUES (1000009, 102, 1003, N'با سلام خدمت شما عزیزان
+ضمن عرض تبریک سال نو از سال بعد با خدماتی جدید تر و به روزتر خدمت شما بزگواران هستیم
+با تشکر ', CAST(N'2024-03-25' AS Date), 1)
 GO
-ALTER TABLE [dbo].[ChargingHistory]  WITH CHECK ADD  CONSTRAINT [FK_ChargingHistory_BankAccounts] FOREIGN KEY([AccountID])
-REFERENCES [dbo].[BankAccounts] ([AccountID])
+INSERT [dbo].[Messages] ([MessageID], [SenderID], [CustomerID], [Message], [PostageDate], [MessageStatus]) VALUES (1000011, 102, 1001, N'سلام حامد
+حسابت داره مسدود میشه بدو بیا بانک', CAST(N'2024-03-25' AS Date), 1)
 GO
-ALTER TABLE [dbo].[ChargingHistory] CHECK CONSTRAINT [FK_ChargingHistory_BankAccounts]
+INSERT [dbo].[Messages] ([MessageID], [SenderID], [CustomerID], [Message], [PostageDate], [MessageStatus]) VALUES (1000012, 102, 1002, N'سلام مشتری گرامی، شما برنده یک واحد آپارتمان به قید قرعه شده اید.(دو بار)', CAST(N'2024-04-01' AS Date), 1)
 GO
-ALTER TABLE [dbo].[ChargingHistory]  WITH CHECK ADD  CONSTRAINT [FK_ChargingHistory_CustomersInfo] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+SET IDENTITY_INSERT [dbo].[Messages] OFF
 GO
-ALTER TABLE [dbo].[ChargingHistory] CHECK CONSTRAINT [FK_ChargingHistory_CustomersInfo]
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (100008, 1002, CAST(N'2024-03-18' AS Date), 1)
 GO
-ALTER TABLE [dbo].[CheckBookREQ]  WITH CHECK ADD  CONSTRAINT [FK_CheckBookREQ_BankAccounts] FOREIGN KEY([AccountID])
-REFERENCES [dbo].[BankAccounts] ([AccountID])
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (500001, 1002, CAST(N'2024-03-22' AS Date), 1)
 GO
-ALTER TABLE [dbo].[CheckBookREQ] CHECK CONSTRAINT [FK_CheckBookREQ_BankAccounts]
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (100002, 1001, CAST(N'2024-03-17' AS Date), 1)
 GO
-ALTER TABLE [dbo].[CheckBookREQ]  WITH CHECK ADD  CONSTRAINT [FK_CheckBookREQ_CustomersInfo] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (100006, 100, CAST(N'2024-03-18' AS Date), 0)
 GO
-ALTER TABLE [dbo].[CheckBookREQ] CHECK CONSTRAINT [FK_CheckBookREQ_CustomersInfo]
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (300002, 1002, CAST(N'2024-03-23' AS Date), 0)
 GO
-ALTER TABLE [dbo].[ChequeHistory]  WITH CHECK ADD  CONSTRAINT [FK_ChequeHistory_BankAccounts] FOREIGN KEY([AccountID])
-REFERENCES [dbo].[BankAccounts] ([AccountID])
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (300001, 1002, CAST(N'2024-03-23' AS Date), 0)
 GO
-ALTER TABLE [dbo].[ChequeHistory] CHECK CONSTRAINT [FK_ChequeHistory_BankAccounts]
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (300003, 1002, CAST(N'2024-03-24' AS Date), 1)
 GO
-ALTER TABLE [dbo].[ChequeHistory]  WITH CHECK ADD  CONSTRAINT [FK_ChequeHistory_CustomersInfo] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (300004, 1002, CAST(N'2024-03-24' AS Date), 1)
 GO
-ALTER TABLE [dbo].[ChequeHistory] CHECK CONSTRAINT [FK_ChequeHistory_CustomersInfo]
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (500002, 1002, CAST(N'2024-03-24' AS Date), 1)
 GO
-ALTER TABLE [dbo].[CreateAccountREQ]  WITH CHECK ADD  CONSTRAINT [FK_CreateAccountREQ_CustomersInfo] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (200002, 1002, CAST(N'2024-03-24' AS Date), 1)
 GO
-ALTER TABLE [dbo].[CreateAccountREQ] CHECK CONSTRAINT [FK_CreateAccountREQ_CustomersInfo]
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (600002, 1001, CAST(N'2024-03-28' AS Date), 1)
 GO
-ALTER TABLE [dbo].[DeleteAccountREQ]  WITH CHECK ADD  CONSTRAINT [FK_DeleteAccountREQ_BankAccounts] FOREIGN KEY([AccountID])
-REFERENCES [dbo].[BankAccounts] ([AccountID])
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (600003, 1001, CAST(N'2024-03-28' AS Date), 1)
 GO
-ALTER TABLE [dbo].[DeleteAccountREQ] CHECK CONSTRAINT [FK_DeleteAccountREQ_BankAccounts]
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (100010, 100, CAST(N'2024-03-29' AS Date), 1)
 GO
-ALTER TABLE [dbo].[DeleteAccountREQ]  WITH CHECK ADD  CONSTRAINT [FK_DeleteAccountREQ_CustomersInfo] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (100012, 1006, CAST(N'2024-03-30' AS Date), 1)
 GO
-ALTER TABLE [dbo].[DeleteAccountREQ] CHECK CONSTRAINT [FK_DeleteAccountREQ_CustomersInfo]
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (100015, 1006, CAST(N'2024-03-30' AS Date), 1)
 GO
-ALTER TABLE [dbo].[LoanREQ]  WITH CHECK ADD  CONSTRAINT [FK_LoanREQ_BankAccounts] FOREIGN KEY([SelectedAccountID])
-REFERENCES [dbo].[BankAccounts] ([AccountID])
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (100017, 1006, CAST(N'2024-03-30' AS Date), 1)
 GO
-ALTER TABLE [dbo].[LoanREQ] CHECK CONSTRAINT [FK_LoanREQ_BankAccounts]
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (300005, 1006, CAST(N'2024-03-30' AS Date), 1)
 GO
-ALTER TABLE [dbo].[LoanREQ]  WITH CHECK ADD  CONSTRAINT [FK_LoanREQ_CustomersInfo] FOREIGN KEY([CutomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (600004, 1002, CAST(N'2024-03-30' AS Date), 1)
 GO
-ALTER TABLE [dbo].[LoanREQ] CHECK CONSTRAINT [FK_LoanREQ_CustomersInfo]
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (400001, 1002, CAST(N'2024-04-02' AS Date), 1)
 GO
-ALTER TABLE [dbo].[LoansHistory]  WITH CHECK ADD  CONSTRAINT [FK_LoansHistory_BankAccounts] FOREIGN KEY([AccountID])
-REFERENCES [dbo].[BankAccounts] ([AccountID])
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (100009, 1002, CAST(N'2024-03-24' AS Date), 1)
 GO
-ALTER TABLE [dbo].[LoansHistory] CHECK CONSTRAINT [FK_LoansHistory_BankAccounts]
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (200003, 1006, CAST(N'2024-03-30' AS Date), 1)
 GO
-ALTER TABLE [dbo].[LoansHistory]  WITH CHECK ADD  CONSTRAINT [FK_LoansHistory_CustomersInfo] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (500003, 1006, CAST(N'2024-03-30' AS Date), 1)
 GO
-ALTER TABLE [dbo].[LoansHistory] CHECK CONSTRAINT [FK_LoansHistory_CustomersInfo]
+INSERT [dbo].[RequestsHistory] ([RequestID], [CustomerID], [RequestDate], [RequestStatus]) VALUES (100016, 1006, CAST(N'2024-03-30' AS Date), 1)
 GO
-ALTER TABLE [dbo].[Messages]  WITH CHECK ADD  CONSTRAINT [FK_Messages_CustomersInfo] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+SET IDENTITY_INSERT [dbo].[StockCheque] ON 
 GO
-ALTER TABLE [dbo].[Messages] CHECK CONSTRAINT [FK_Messages_CustomersInfo]
+INSERT [dbo].[StockCheque] ([StockChequeID], [CustomerID], [AccountID], [StockCheque]) VALUES (800001, 1002, 10005, 27)
 GO
-ALTER TABLE [dbo].[PayingBills]  WITH CHECK ADD  CONSTRAINT [FK_PayingBills_BankAccounts] FOREIGN KEY([SelectAccountID])
-REFERENCES [dbo].[BankAccounts] ([AccountID])
+INSERT [dbo].[StockCheque] ([StockChequeID], [CustomerID], [AccountID], [StockCheque]) VALUES (800003, 1006, 10020, 49)
 GO
-ALTER TABLE [dbo].[PayingBills] CHECK CONSTRAINT [FK_PayingBills_BankAccounts]
+SET IDENTITY_INSERT [dbo].[StockCheque] OFF
 GO
-ALTER TABLE [dbo].[PayingBills]  WITH CHECK ADD  CONSTRAINT [FK_PayingBills_CustomersInfo] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+SET IDENTITY_INSERT [dbo].[Transactions] ON 
 GO
-ALTER TABLE [dbo].[PayingBills] CHECK CONSTRAINT [FK_PayingBills_CustomersInfo]
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700001, 1002, N'برداشت', N'38911002', N'38911003', 10000, CAST(N'2024-03-21' AS Date))
 GO
-ALTER TABLE [dbo].[ReceiptChequeREQ]  WITH CHECK ADD  CONSTRAINT [FK_ReceiptChequeREQ_BankAccounts] FOREIGN KEY([AccountID])
-REFERENCES [dbo].[BankAccounts] ([AccountID])
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700002, 1003, N'دریافت', N'38911002', N'38911003', 10000, CAST(N'2024-03-21' AS Date))
 GO
-ALTER TABLE [dbo].[ReceiptChequeREQ] CHECK CONSTRAINT [FK_ReceiptChequeREQ_BankAccounts]
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700005, 1002, N'برداشت', N'38911002', N'38911003', 10000, CAST(N'2024-03-21' AS Date))
 GO
-ALTER TABLE [dbo].[ReceiptChequeREQ]  WITH CHECK ADD  CONSTRAINT [FK_ReceiptChequeREQ_CustomersInfo] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700006, 1003, N'دریافت', N'38911002', N'38911003', 10000, CAST(N'2024-03-21' AS Date))
 GO
-ALTER TABLE [dbo].[ReceiptChequeREQ] CHECK CONSTRAINT [FK_ReceiptChequeREQ_CustomersInfo]
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700007, 1002, N'برداشت', N'38911002', N'38911003', 10000, CAST(N'2024-03-21' AS Date))
 GO
-ALTER TABLE [dbo].[RequestsHistory]  WITH CHECK ADD  CONSTRAINT [FK_RequestsHistory_CustomersInfo] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700008, 1003, N'دریافت', N'38911002', N'38911003', 10000, CAST(N'2024-03-21' AS Date))
 GO
-ALTER TABLE [dbo].[RequestsHistory] CHECK CONSTRAINT [FK_RequestsHistory_CustomersInfo]
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700009, 1002, N'برداشت', N'38911002', N'38911003', 10000, CAST(N'2024-03-21' AS Date))
 GO
-ALTER TABLE [dbo].[StockCheque]  WITH CHECK ADD  CONSTRAINT [FK_StockCheque_BankAccounts] FOREIGN KEY([AccountID])
-REFERENCES [dbo].[BankAccounts] ([AccountID])
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700010, 1003, N'دریافت', N'38911002', N'38911003', 10000, CAST(N'2024-03-21' AS Date))
 GO
-ALTER TABLE [dbo].[StockCheque] CHECK CONSTRAINT [FK_StockCheque_BankAccounts]
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700011, 1002, N'برداشت', N'38911002', N'38911003', 10000, CAST(N'2024-03-21' AS Date))
 GO
-ALTER TABLE [dbo].[StockCheque]  WITH CHECK ADD  CONSTRAINT [FK_StockCheque_CustomersInfo] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700012, 1003, N'دریافت', N'38911002', N'38911003', 10000, CAST(N'2024-03-21' AS Date))
 GO
-ALTER TABLE [dbo].[StockCheque] CHECK CONSTRAINT [FK_StockCheque_CustomersInfo]
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700013, 1002, N'برداشت', N'38911002', N'38911003', 10000, CAST(N'2024-03-21' AS Date))
 GO
-ALTER TABLE [dbo].[Transactions]  WITH CHECK ADD  CONSTRAINT [FK_Transactions_CustomersInfo] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CustomersInfo] ([CustomerID])
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700014, 1003, N'دریافت', N'38911002', N'38911003', 10000, CAST(N'2024-03-21' AS Date))
 GO
-ALTER TABLE [dbo].[Transactions] CHECK CONSTRAINT [FK_Transactions_CustomersInfo]
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700015, 1006, N'برداشت', N'38914451', N'38911002', 10000000, CAST(N'2024-03-30' AS Date))
+GO
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700016, 1002, N'دریافت', N'38914451', N'38911002', 10000000, CAST(N'2024-03-30' AS Date))
+GO
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700017, 1002, N'برداشت', N'38911002', N'38911001', 10000, CAST(N'2024-04-06' AS Date))
+GO
+INSERT [dbo].[Transactions] ([TransactionID], [CustomerID], [TransactionType], [SenderAccountNum], [RecipientAccountNum], [TransactionAmount], [TransactionDate]) VALUES (700018, 1001, N'دریافت', N'38911002', N'38911001', 10000, CAST(N'2024-04-06' AS Date))
+GO
+SET IDENTITY_INSERT [dbo].[Transactions] OFF
+GO
+USE [master]
+GO
+ALTER DATABASE [PersianExpressDB] SET  READ_WRITE 
 GO
