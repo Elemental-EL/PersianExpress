@@ -57,7 +57,8 @@ public class HelloController {
         ResultSet resultSet1 = statement1.executeQuery();
         while (resultSet1.next()){
             Date dueDate = resultSet1.getDate("AccountTerm");
-            if (LocalDate.now().isAfter(LocalDate.parse((CharSequence) dueDate))){
+            LocalDate accountTermDate = ((java.sql.Date) dueDate).toLocalDate();
+            if (LocalDate.now().isAfter(accountTermDate)){
                 GharzolH.suspendAccount(resultSet1.getInt("AccountID"),connection);
             }
         }
@@ -65,7 +66,8 @@ public class HelloController {
         ResultSet resultSet2 = statement2.executeQuery();
         while (resultSet2.next()){
             Date dueDate = resultSet2.getDate("CardTerm");
-            if (LocalDate.now().isAfter(LocalDate.parse((CharSequence) dueDate))){
+            LocalDate bankTermDate = ((java.sql.Date) dueDate).toLocalDate();
+            if (LocalDate.now().isAfter(bankTermDate)){
                 Card.suspendCard(resultSet2.getInt("CardID"),connection);
             }
         }
