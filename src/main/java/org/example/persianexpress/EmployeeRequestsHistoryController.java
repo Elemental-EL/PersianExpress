@@ -78,7 +78,7 @@ public class EmployeeRequestsHistoryController {
             } else if (request.getReqID() > 600000 && request.getReqID() < 700000) {
                 reqTypetxt.setText("وصول چک");
             }
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 reqerNametxt.setText(resultSet.getNString("FirstName") + " " + resultSet.getNString("LastName"));
             }
             if (request.isReqStat()){

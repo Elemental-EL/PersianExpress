@@ -34,12 +34,12 @@
             </children></Pane>
         <Pane layoutY="100.0" prefHeight="75.0" prefWidth="500.0" styleClass="gray">
             <children>
-                <Label fx:id="empName" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="301.0" layoutY="24.0" prefHeight="27.0" prefWidth="187.0" textAlignment="RIGHT" textFill="#141313">
+                <Label fx:id="empName" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="261.0" layoutY="10.0" prefHeight="27.0" prefWidth="225.0" textAlignment="RIGHT" textFill="#141313">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
-                <Label fx:id="empRole" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="305.0" layoutY="25.0" prefHeight="27.0" prefWidth="129.0" textAlignment="RIGHT">
+                <Label fx:id="empRole" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="305.0" layoutY="40.0" prefHeight="27.0" prefWidth="129.0" textAlignment="RIGHT">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
@@ -55,7 +55,7 @@
                   <String fx:value="zoom" />
                </styleClass>
                 </Button>
-                <Label layoutX="440.0" layoutY="24.0" text="سمت:">
+                <Label layoutX="440.0" layoutY="39.0" text="سمت:">
                     <font>
                         <Font name="System Bold" size="19.0" />
                     </font>

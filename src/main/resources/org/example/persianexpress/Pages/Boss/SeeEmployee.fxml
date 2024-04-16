@@ -11,15 +11,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.BossSeeEmployeeController">
+<AnchorPane prefHeight="700.0" prefWidth="800.0" stylesheets="@../../Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.persianexpress.BossSeeEmployeeController">
     <children>
-        <Pane prefHeight="100.0" prefWidth="700.0" styleClass="darkblue">
+        <Pane prefHeight="100.0" prefWidth="800.0" styleClass="darkblue">
             <children>
-                <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="594.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="700.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/persian-express-high-resolution-logo-white-transparent.png" />
                </image></ImageView>
-                <Label layoutX="244.0" layoutY="41.0" text="مشاهده کارمندان" textFill="WHITE">
+                <Label layoutX="294.0" layoutY="41.0" text="مشاهده کارمندان" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="30.0" />
                     </font>
@@ -35,18 +35,18 @@
                 </Pane>
             </children>
         </Pane>
-        <Pane layoutY="100.0" prefHeight="500.0" prefWidth="700.0" styleClass="gray">
+        <Pane layoutY="100.0" prefHeight="600.0" prefWidth="800.0" styleClass="gray">
             <children>
-                <ScrollPane layoutX="10.0" layoutY="14.0" prefHeight="422.0" prefWidth="680.0" styleClass="backgroundColor">
+                <ScrollPane layoutX="10.0" layoutY="14.0" prefHeight="520.0" prefWidth="780.0" styleClass="backgroundColor">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="422.0" prefWidth="664.0" styleClass="backgroundColor">
+                        <AnchorPane fx:id="mainPane" minHeight="0.0" minWidth="0.0" prefHeight="520.0" prefWidth="764.0" styleClass="backgroundColor">
                             <children>
-                                <VBox prefHeight="422.0" prefWidth="664.0" />
+                                <VBox fx:id="mainVBox" prefHeight="520.0" prefWidth="764.0" />
                             </children>
                         </AnchorPane>
                     </content>
                 </ScrollPane>
-                <Button fx:id="addEmployee" layoutX="281.0" layoutY="443.0" mnemonicParsing="false" onAction="#onAddEmployeeClicked" text="افزودن کارمند" textFill="WHITE">
+                <Button fx:id="addEmployee" layoutX="331.0" layoutY="543.0" mnemonicParsing="false" onAction="#onAddEmployeeClicked" text="افزودن کارمند" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="20.0" />
                     </font>

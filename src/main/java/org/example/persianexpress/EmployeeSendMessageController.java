@@ -41,11 +41,21 @@ public class EmployeeSendMessageController {
             person.setUserName(resultSet.getNString("CustomerUN"));
             persons.add(person);
         }
+        statement = connection.prepareStatement("select EmployeeID , EmployeeUN , EmployeePost from EmployeesInfo where EmployeeID != ? ");
+        statement.setInt(1 , HelloController.userID);
+        resultSet = statement.executeQuery();
+        while (resultSet.next()){
+            Person person = new Person();
+            person.setuID(resultSet.getInt("EmployeeID"));
+            person.setUserName(resultSet.getNString("EmployeeUN")+ " " + "(" + resultSet.getNString("EmployeePost") + ")");
+            persons.add(person);
+        }
         ChoiceUser.getItems().add("همه کاربران");
         ChoiceUser.setValue("همه کاربران");
         for (Person person: persons) {
             ChoiceUser.getItems().add(person.getUserName());
         }
+
 
     }
     public void onBackClicked(MouseEvent event) throws IOException {

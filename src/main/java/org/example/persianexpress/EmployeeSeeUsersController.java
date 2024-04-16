@@ -162,7 +162,6 @@ public class EmployeeSeeUsersController {
                             statement.setBoolean( 1 , false);
                             statement.setInt(2 , user.getuID());
                             int success = statement.executeUpdate();
-                            System.out.println(success);
                         }else {
                             disableAcc.setText("مسدود کردن");
                             disableAcc.setStyle("-fx-background-color: #11235A");
@@ -170,7 +169,6 @@ public class EmployeeSeeUsersController {
                             statement.setBoolean( 1 , true);
                             statement.setInt(2 , user.getuID());
                             int success = statement.executeUpdate();
-                            System.out.println(success);
                         }
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
