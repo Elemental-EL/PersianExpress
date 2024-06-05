@@ -2,6 +2,7 @@ module org.example.persianexpress {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires slf4j.api;
 
 
     opens org.example.persianexpress to javafx.fxml;

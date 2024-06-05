@@ -13,12 +13,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.example.persianexpress.Objects.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 
 import java.io.IOException;
 import java.net.ConnectException;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
@@ -40,6 +44,7 @@ public class HelloController {
     public static String post = null;
     private Boolean acc;
     public static int userID = 100;
+    private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
 
     public void initialize() throws SQLException {
         String[] role = new String[]{"انتخاب کنید" , "کاربر" , "کارمند" ,"مدیر"};
@@ -95,6 +100,7 @@ public class HelloController {
                     userID = resultSet.getInt("CustomerID");
                 }
                 if (Objects.equals(CustomerPassword, password) && acc){
+                    logger.info("User {} logged in Successfully!" , userID);
                     Parent root = FXMLLoader.load(getClass().getResource("Pages/Customers/CustomersPanel.fxml"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);

@@ -1,0 +1,2 @@
+2024-05-30 11:57:38,580 DEBUG org.example.persianexpress.HelloController [JavaFX Application Thread] User 1002 logged in Successfully!
+2024-05-30 12:00:47,857 INFO org.example.persianexpress.HelloController [JavaFX Application Thread] User 1002 logged in Successfully!
